@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #0b7a3b;
+  --color-primary_dark_active: #096732;
+  --color-primary-content: #ffffff;
+
+  --color-primary-dark: #1a1a1a;
+}
+
+@theme {
+  --color-primary: #0b7a3b;
+
+  --color-primary-content: #ffffff;
+
+  --color-primary_dark: #1a1a1a;
+  --color-primary_dark_active: #096732;
+}
+
+@theme {
+  --font-sans: "Poppins"; /* override default */
+}

@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* FlyonUI plugin */
+@plugin "flyonui";
+@import "flyonui/variants.css";
+@source "flyonui/flyonui.js";
+
+/* Iconify for Tailwind */
+@plugin "@iconify/tailwind4";
+
+
