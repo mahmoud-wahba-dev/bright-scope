@@ -3,18 +3,38 @@
   --color-primary_dark_active: #096732;
   --color-primary-content: #ffffff;
 
-  --color-primary-dark: #1a1a1a;
+  --color-primary_dark: #1a1a1a;
+  --color-primary_light: #fff;
 }
 
 @theme {
-  --color-primary: #0b7a3b;
-
+  --color-primary: #0b7a3b; /* your exact green */
   --color-primary-content: #ffffff;
+  --color-primary-dark: #1a1a1a;
+  --color-primary-dark-active: #096732;
+  --color-primary-dark: #1a1a1a;
+  --color-primary_light: #fff;
 
-  --color-primary_dark: #1a1a1a;
-  --color-primary_dark_active: #096732;
+  --font-sans: "Poppins", sans-serif;
 }
 
 @theme {
   --font-sans: "Poppins"; /* override default */
+}
+
+.btn {
+  line-height: var(--text-sm--line-height); /* direct fallback */
+  line-height: inherit;
+}
+/* Ensure body uses your font globally */
+body {
+  font-family: var(--font-sans);
+}
+
+.footer_bg_gradient {
+  background: linear-gradient(98.22deg, #0c8c43 0%, #2a534a 100%);
+}
+
+.center_flex {
+  @apply flex justify-center items-center;
 }
