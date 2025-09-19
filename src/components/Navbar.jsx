@@ -8,7 +8,7 @@ const Navbar = () => {
     { name: "Contact Us", path: "/contact" },
   ];
   return (
-    <nav class="navbar absolute start-0 top-0 z-1 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
+    <nav class="navbar fixed start-0 top-0 z-1 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
       <div class="navbar-start">
         <Link
           class="link text-base-content link-neutral text-xl font-bold no-underline"

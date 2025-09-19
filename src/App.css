@@ -5,6 +5,10 @@
 
   --color-primary_dark: #1a1a1a;
   --color-primary_light: #fff;
+
+  --color-muted_light: #e0e0e0;
+
+  --color-success: #27ae60;
 }
 
 @theme {
@@ -14,6 +18,8 @@
   --color-primary-dark-active: #096732;
   --color-primary-dark: #1a1a1a;
   --color-primary_light: #fff;
+  --color-muted_light: #e0e0e0;
+  --color-success: #27ae60;
 
   --font-sans: "Poppins", sans-serif;
 }
