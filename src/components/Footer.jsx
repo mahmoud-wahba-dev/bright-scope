@@ -229,113 +229,108 @@ const Footer = () => {
     },
   ];
 
+  const socialMediaItems = [
+    {
+      name: "Facebook",
+      iconClass: "icon-[tabler--brand-facebook]",
+      link: "https://www.facebook.com/",
+    },
+
+    {
+      name: "Instagram",
+      iconClass: "icon-[tabler--brand-instagram]",
+      link: "https://www.instagram.com/",
+    },
+
+    {
+      name: "LinkedIn",
+      iconClass: "icon-[tabler--brand-linkedin]",
+      link: "https://www.linkedin.com/",
+    },
+    {
+      name: "X",
+      iconClass: "icon-[tabler--brand-x]",
+      link: "https://www.x.com/",
+    },
+    {
+      name: "YouTube",
+      iconClass: "icon-[tabler--brand-youtube]",
+      link: "https://www.youtube.com/",
+    },
+  ];
   return (
     <>
-      <div class="w-full footer_bg_gradient">
-        <footer class="footer py-14 px-8 grid-cols-[1fr_1fr_1fr]">
-          <div class="gap-0">
-            <div class="flex items-center gap-2 text-2xl font-semibold text-primary_light mb-4">
-              <img src="./assets/imgs/global/logo_footer.svg" alt="" />
-              <span>Bright Scope UAE</span>
-            </div>
-            <p class="text-sm font-normal text-primary_light mb-8 max-w-sm">
-              Your trusted cleaning and pest control partner in Dubai. 15+ years
-              of excellence from Egypt to the UAE, serving thousands of
-              satisfied customers.
-            </p>
+      <div className="w-full footer_bg_gradient">
+        <footer className="footer py-14 px-8 ">
+          <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            <div className="gap-0">
+              <div className="flex items-center gap-2 text-2xl font-semibold text-primary_light mb-4">
+                <img src="./assets/imgs/global/logo_footer.svg" alt="" />
+                <span>Bright Scope UAE</span>
+              </div>
+              <p className="text-sm font-normal text-primary_light mb-8 max-w-sm">
+                Your trusted cleaning and pest control partner in Dubai. 15+
+                years of excellence from Egypt to the UAE, serving thousands of
+                satisfied customers.
+              </p>
 
-            <div className="bg-[#229E5B] rounded-lg flex items-center gap-3 p-2 pe-4 mb-4">
-              <div className="size-8 rounded-lg bg-[#00C950] center_flex ">
-                <span className="icon-[mingcute--phone-fill] text-white"></span>{" "}
+              <div className="bg-[#229E5B] rounded-lg flex items-center gap-3 p-2 pe-4 mb-4">
+                <div className="size-8 rounded-lg bg-[#00C950] center_flex ">
+                  <span className="icon-[mingcute--phone-fill] text-white"></span>{" "}
+                </div>
+                <div>
+                  <a href="tel:+971554445555">
+                    <p className="text-base font-semibold text-primary_light ">
+                      Call Now
+                    </p>
+                    <p className="text-base font-semibold text-primary_light">
+                      +971 XXX XXX XXX
+                    </p>
+                  </a>
+                </div>
               </div>
-              <div>
-                <a href="tel:+971554445555">
-                  <p className="text-base font-semibold text-primary_light ">
-                    Call Now
-                  </p>
-                  <p className="text-base font-semibold text-primary_light">
-                    +971 XXX XXX XXX
-                  </p>
-                </a>
+
+              <div className="bg-[#229E5B] rounded-lg flex items-center gap-3 p-2 pe-5 mb-4">
+                <div className="size-8 rounded-lg bg-[#00C950] center_flex ">
+                  <span className="icon-[basil--whatsapp-solid] text-white"></span>{" "}
+                </div>
+                <div>
+                  <a
+                    href="https://wa.me/200000000000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <p className="text-base font-semibold text-primary_light ">
+                      WhatsApp Us
+                    </p>
+                    <p className="text-base font-semibold text-primary_light">
+                      Instant Response
+                    </p>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="bg-[#229E5B] rounded-lg flex items-center gap-3 p-2 pe-5 mb-4">
-              <div className="size-8 rounded-lg bg-[#00C950] center_flex ">
-                <span className="icon-[basil--whatsapp-solid] text-white"></span>{" "}
-              </div>
-              <div>
-                <a
-                  href="https://wa.me/200000000000"
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <nav class="text-base-content text-white gap-0">
+              <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-8">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <p className="text-base font-semibold text-primary_light ">
-                    WhatsApp Us
-                  </p>
-                  <p className="text-base font-semibold text-primary_light">
-                    Instant Response
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <nav class="text-base-content text-white gap-0">
-            <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-8">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.1428 7.26384C12.9401 4.9305 16.1641 4.85984 17.1095 7.05184L17.1895 7.26517L18.2655 10.4118C18.5121 11.1335 18.9105 11.7939 19.434 12.3484C19.9575 12.903 20.5939 13.3388 21.3001 13.6265L21.5895 13.7345L24.7361 14.8092C27.0695 15.6065 27.1401 18.8305 24.9495 19.7758L24.7361 19.8558L21.5895 20.9318C20.8676 21.1783 20.207 21.5767 19.6522 22.1002C19.0974 22.6237 18.6613 23.2601 18.3735 23.9665L18.2655 24.2545L17.1908 27.4025C16.3935 29.7358 13.1695 29.8065 12.2255 27.6158L12.1428 27.4025L11.0681 24.2558C10.8217 23.5339 10.4233 22.8733 9.89979 22.3185C9.37629 21.7637 8.73986 21.3277 8.03347 21.0398L7.74547 20.9318L4.59881 19.8572C2.26414 19.0598 2.19347 15.8358 4.38547 14.8918L4.59881 14.8092L7.74547 13.7345C8.46712 13.4879 9.12749 13.0894 9.68204 12.5659C10.2366 12.0424 10.6724 11.4061 10.9601 10.6998L11.0681 10.4118L12.1428 7.26384ZM14.6668 8.12517L13.5921 11.2718C13.2167 12.3722 12.6058 13.3776 11.8022 14.2178C10.9985 15.0581 10.0214 15.7131 8.93881 16.1372L8.60547 16.2585L5.45881 17.3332L8.60547 18.4078C9.70588 18.7833 10.7112 19.3941 11.5515 20.1978C12.3917 21.0014 13.0467 21.9786 13.4708 23.0612L13.5921 23.3945L14.6668 26.5412L15.7415 23.3945C16.117 22.2941 16.7278 21.2888 17.5314 20.4485C18.3351 19.6083 19.3122 18.9533 20.3948 18.5292L20.7281 18.4092L23.8748 17.3332L20.7281 16.2585C19.6277 15.883 18.6224 15.2722 17.7821 14.4686C16.9419 13.6649 16.2869 12.6878 15.8628 11.6052L15.7428 11.2718L14.6668 8.12517ZM25.3335 2.6665C25.5829 2.6665 25.8274 2.73647 26.039 2.86847C26.2507 3.00046 26.4211 3.18917 26.5308 3.41317L26.5948 3.56917L27.0615 4.93717L28.4308 5.40384C28.6808 5.48877 28.8999 5.64599 29.0604 5.85559C29.221 6.06519 29.3157 6.31773 29.3325 6.5812C29.3494 6.84467 29.2876 7.10721 29.1551 7.33555C29.0226 7.5639 28.8253 7.74776 28.5881 7.86384L28.4308 7.92784L27.0628 8.3945L26.5961 9.76384C26.5111 10.0137 26.3537 10.2328 26.144 10.3932C25.9344 10.5536 25.6818 10.6481 25.4183 10.6648C25.1549 10.6815 24.8924 10.6196 24.6641 10.487C24.4359 10.3544 24.2521 10.157 24.1361 9.91984L24.0721 9.76384L23.6055 8.39584L22.2361 7.92917C21.9862 7.84424 21.767 7.68702 21.6065 7.47742C21.446 7.26782 21.3513 7.01528 21.3344 6.75181C21.3176 6.48834 21.3793 6.2258 21.5118 5.99745C21.6444 5.76911 21.8417 5.58525 22.0788 5.46917L22.2361 5.40517L23.6041 4.9385L24.0708 3.56917C24.1607 3.30574 24.3308 3.07705 24.5573 2.91517C24.7837 2.75329 25.0551 2.66634 25.3335 2.6665Z"
-                  fill="#F8F9FA"
-                />
-              </svg>
-              Our Services
-            </h6>
-            {servicesItems.map((item, index) => (
-              <Link
-                to="#"
-                key={index}
-                class="link no-underline text-base font-normal text-white flex items-center gap-2 mb-4 hover:text-white/80"
-              >
-                <span>
-                  {
-                    item.icon /* Use dangerouslySetInnerHTML to render the SVG string as HTML */
-                  }
-                </span>{" "}
-                {item.title}
-              </Link>
-            ))}
-          </nav>
-
-          <nav class="text-base-content text-white gap-0">
-            <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-8">
-              <svg
-                width="32"
-                height="33"
-                viewBox="0 0 32 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M14.592 2.16663H17.408C19.8587 2.16663 21.8 2.16663 23.3187 2.37063C24.8813 2.58129 26.1467 3.02396 27.1453 4.02129C28.1427 5.01996 28.5853 6.28529 28.796 7.84796C29 9.36796 29 11.308 29 13.7586V19.2413C29 21.692 29 23.6333 28.796 25.152C28.5853 26.7146 28.1427 27.98 27.1453 28.9786C26.1467 29.976 24.8813 30.4186 23.3187 30.6293C21.7987 30.8333 19.8587 30.8333 17.408 30.8333H14.592C12.1413 30.8333 10.2 30.8333 8.68133 30.6293C7.11867 30.4186 5.85333 29.976 4.85467 28.9786C3.85733 27.98 3.41467 26.7146 3.204 25.152C3 23.632 3 21.692 3 19.2413V13.7586C3 11.308 3 9.36663 3.204 7.84796C3.41467 6.28529 3.85733 5.01996 4.85467 4.02129C5.85333 3.02396 7.11867 2.58129 8.68133 2.37063C10.2013 2.16663 12.1413 2.16663 14.592 2.16663ZM8.94667 4.35329C7.60533 4.53329 6.832 4.87196 6.26667 5.43596C5.704 5.99996 5.36533 6.77329 5.18533 8.11463C5.00133 9.48529 4.99867 11.2906 4.99867 13.8333V19.1666C4.99867 21.7093 5.00133 23.516 5.18533 24.8866C5.36533 26.2266 5.704 27 6.268 27.564C6.832 28.128 7.60533 28.4666 8.94667 28.6466C10.3173 28.8306 12.1227 28.8333 14.6653 28.8333H17.332C19.8747 28.8333 21.6813 28.8306 23.052 28.6466C24.392 28.4666 25.1653 28.128 25.7293 27.564C26.2933 27 26.632 26.2266 26.812 24.8853C26.996 23.516 26.9987 21.7093 26.9987 19.1666V13.8333C26.9987 11.2906 26.996 9.48529 26.812 8.11329C26.632 6.77329 26.2933 5.99996 25.7293 5.43596C25.1653 4.87196 24.392 4.53329 23.0507 4.35329C21.6813 4.16929 19.8747 4.16663 17.332 4.16663H14.6653C12.1227 4.16663 10.3187 4.16929 8.94667 4.35329ZM9.66667 13.8333C9.66667 13.5681 9.77202 13.3137 9.95956 13.1262C10.1471 12.9387 10.4015 12.8333 10.6667 12.8333H21.3333C21.5986 12.8333 21.8529 12.9387 22.0404 13.1262C22.228 13.3137 22.3333 13.5681 22.3333 13.8333C22.3333 14.0985 22.228 14.3529 22.0404 14.5404C21.8529 14.7279 21.5986 14.8333 21.3333 14.8333H10.6667C10.4015 14.8333 10.1471 14.7279 9.95956 14.5404C9.77202 14.3529 9.66667 14.0985 9.66667 13.8333ZM9.66667 19.1666C9.66667 18.9014 9.77202 18.6471 9.95956 18.4595C10.1471 18.272 10.4015 18.1666 10.6667 18.1666H17.3333C17.5985 18.1666 17.8529 18.272 18.0404 18.4595C18.228 18.6471 18.3333 18.9014 18.3333 19.1666C18.3333 19.4318 18.228 19.6862 18.0404 19.8737C17.8529 20.0613 17.5985 20.1666 17.3333 20.1666H10.6667C10.4015 20.1666 10.1471 20.0613 9.95956 19.8737C9.77202 19.6862 9.66667 19.4318 9.66667 19.1666Z"
-                  fill="#F8F9FA"
-                />
-              </svg>
-              Quick Links
-            </h6>
-            <div className="mb-7">
-              {quickLinksItems.map((item, index) => (
+                  <path
+                    d="M12.1428 7.26384C12.9401 4.9305 16.1641 4.85984 17.1095 7.05184L17.1895 7.26517L18.2655 10.4118C18.5121 11.1335 18.9105 11.7939 19.434 12.3484C19.9575 12.903 20.5939 13.3388 21.3001 13.6265L21.5895 13.7345L24.7361 14.8092C27.0695 15.6065 27.1401 18.8305 24.9495 19.7758L24.7361 19.8558L21.5895 20.9318C20.8676 21.1783 20.207 21.5767 19.6522 22.1002C19.0974 22.6237 18.6613 23.2601 18.3735 23.9665L18.2655 24.2545L17.1908 27.4025C16.3935 29.7358 13.1695 29.8065 12.2255 27.6158L12.1428 27.4025L11.0681 24.2558C10.8217 23.5339 10.4233 22.8733 9.89979 22.3185C9.37629 21.7637 8.73986 21.3277 8.03347 21.0398L7.74547 20.9318L4.59881 19.8572C2.26414 19.0598 2.19347 15.8358 4.38547 14.8918L4.59881 14.8092L7.74547 13.7345C8.46712 13.4879 9.12749 13.0894 9.68204 12.5659C10.2366 12.0424 10.6724 11.4061 10.9601 10.6998L11.0681 10.4118L12.1428 7.26384ZM14.6668 8.12517L13.5921 11.2718C13.2167 12.3722 12.6058 13.3776 11.8022 14.2178C10.9985 15.0581 10.0214 15.7131 8.93881 16.1372L8.60547 16.2585L5.45881 17.3332L8.60547 18.4078C9.70588 18.7833 10.7112 19.3941 11.5515 20.1978C12.3917 21.0014 13.0467 21.9786 13.4708 23.0612L13.5921 23.3945L14.6668 26.5412L15.7415 23.3945C16.117 22.2941 16.7278 21.2888 17.5314 20.4485C18.3351 19.6083 19.3122 18.9533 20.3948 18.5292L20.7281 18.4092L23.8748 17.3332L20.7281 16.2585C19.6277 15.883 18.6224 15.2722 17.7821 14.4686C16.9419 13.6649 16.2869 12.6878 15.8628 11.6052L15.7428 11.2718L14.6668 8.12517ZM25.3335 2.6665C25.5829 2.6665 25.8274 2.73647 26.039 2.86847C26.2507 3.00046 26.4211 3.18917 26.5308 3.41317L26.5948 3.56917L27.0615 4.93717L28.4308 5.40384C28.6808 5.48877 28.8999 5.64599 29.0604 5.85559C29.221 6.06519 29.3157 6.31773 29.3325 6.5812C29.3494 6.84467 29.2876 7.10721 29.1551 7.33555C29.0226 7.5639 28.8253 7.74776 28.5881 7.86384L28.4308 7.92784L27.0628 8.3945L26.5961 9.76384C26.5111 10.0137 26.3537 10.2328 26.144 10.3932C25.9344 10.5536 25.6818 10.6481 25.4183 10.6648C25.1549 10.6815 24.8924 10.6196 24.6641 10.487C24.4359 10.3544 24.2521 10.157 24.1361 9.91984L24.0721 9.76384L23.6055 8.39584L22.2361 7.92917C21.9862 7.84424 21.767 7.68702 21.6065 7.47742C21.446 7.26782 21.3513 7.01528 21.3344 6.75181C21.3176 6.48834 21.3793 6.2258 21.5118 5.99745C21.6444 5.76911 21.8417 5.58525 22.0788 5.46917L22.2361 5.40517L23.6041 4.9385L24.0708 3.56917C24.1607 3.30574 24.3308 3.07705 24.5573 2.91517C24.7837 2.75329 25.0551 2.66634 25.3335 2.6665Z"
+                    fill="#F8F9FA"
+                  />
+                </svg>
+                Our Services
+              </h6>
+              {servicesItems.map((item, index) => (
                 <Link
-                  key={index}
                   to="#"
+                  key={index}
                   class="link no-underline text-base font-normal text-white flex items-center gap-2 mb-4 hover:text-white/80"
                 >
                   <span>
@@ -346,154 +341,202 @@ const Footer = () => {
                   {item.title}
                 </Link>
               ))}
-            </div>
+            </nav>
 
-            <div className="bg-[#4E7770] rounded-[10px] px-4 py-2">
-              <h4 className="footer-title flex items-center gap-2 text-muted_light font-semibold text-xl mb-4">
-                <span>
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_493_141)">
-                      <path
-                        d="M21.701 18.8257L17.2393 15.4795V8.66308C17.2393 7.97771 16.6853 7.42371 15.9999 7.42371C15.3146 7.42371 14.7606 7.97771 14.7606 8.66308V16.0992C14.7606 16.4896 14.944 16.8577 15.2563 17.0907L20.2137 20.8088C20.4276 20.9699 20.6882 21.0569 20.9561 21.0566C21.3341 21.0566 21.7059 20.8868 21.9488 20.5596C22.3604 20.013 22.2488 19.236 21.701 18.8257Z"
-                        fill="#F8F9FA"
-                      />
-                      <path
-                        d="M16 0C7.17706 0 0 7.17706 0 16C0 24.8229 7.17706 32 16 32C24.8229 32 32 24.8229 32 16C32 7.17706 24.8229 0 16 0ZM16 29.5213C8.54531 29.5213 2.47869 23.4547 2.47869 16C2.47869 8.54531 8.54531 2.47869 16 2.47869C23.4559 2.47869 29.5213 8.54531 29.5213 16C29.5213 23.4547 23.4547 29.5213 16 29.5213Z"
-                        fill="#F8F9FA"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_493_141">
-                        <rect width="32" height="32" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </span>
-                Working Hours
-              </h4>
-              <p className="text-lg font-normal text-muted_light mb-4">
-                Monday - Friday: 8:00 AM - 8:00 PM
-                <br />
-                Saturday: 9:00 AM - 6:00 PM
-                <br />
-                Sunday: 10:00 AM - 5:00 PM
-              </p>
-              <p className="text-base font-semibold text-success ">
-                Emergency 24/7
-              </p>
-            </div>
-          </nav>
-          <nav class="text-base-content text-white gap-0">
-            <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-3.5">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.4867 29.0814C14.2947 29.748 15.1373 30.3574 16 30.952C16.8645 30.3653 17.7031 29.7411 18.5133 29.0814C19.864 27.9723 21.1351 26.7698 22.3173 25.4827C25.0427 22.5027 28 18.1827 28 13.3334C28 11.7575 27.6896 10.1971 27.0866 8.74117C26.4835 7.28527 25.5996 5.9624 24.4853 4.84809C23.371 3.73379 22.0481 2.84988 20.5922 2.24682C19.1363 1.64376 17.5759 1.33337 16 1.33337C14.4241 1.33337 12.8637 1.64376 11.4078 2.24682C9.95189 2.84988 8.62902 3.73379 7.51472 4.84809C6.40042 5.9624 5.5165 7.28527 4.91345 8.74117C4.31039 10.1971 4 11.7575 4 13.3334C4 18.1827 6.95733 22.5014 9.68267 25.4827C10.8648 26.7703 12.136 27.9719 13.4867 29.0814ZM16 17.6667C14.8507 17.6667 13.7485 17.2102 12.9359 16.3975C12.1232 15.5848 11.6667 14.4826 11.6667 13.3334C11.6667 12.1841 12.1232 11.0819 12.9359 10.2692C13.7485 9.45659 14.8507 9.00004 16 9.00004C17.1493 9.00004 18.2515 9.45659 19.0641 10.2692C19.8768 11.0819 20.3333 12.1841 20.3333 13.3334C20.3333 14.4826 19.8768 15.5848 19.0641 16.3975C18.2515 17.2102 17.1493 17.6667 16 17.6667Z"
-                  fill="#F8F9FA"
-                />
-              </svg>
-              Dubai Office
-            </h6>
-            <div className="w-full h-[240px] rounded-2xl mb-8 max-w-[326px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28884.310132671646!2d55.25359281442909!3d25.185047260299033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682def25f457%3A0x3dd4c4097970950e!2sBusiness%20Bay%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2seg!4v1758309940387!5m2!1sen!2seg"
-                className="w-full h-full border-0 rounded-2xl"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-            <div>
-              <h6 className="text-base text-white font-semibold mb-2">
-                Office Address
-              </h6>
-              <p className="font-normal text-sm text-white mb-8">
-                Business Bay, Dubai, UAE Building XYZ, Office 123
-              </p>
-            </div>
-
-            <div className="bg-[#4E7770] rounded-[10px] px-4 py-2">
-              <h4 className="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-4">
-                <span>
-                  <svg
-                    width="28"
-                    height="22"
-                    viewBox="0 0 28 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M24.6667 5.66671L14 12.3334L3.33333 5.66671V3.00004L14 9.66671L24.6667 3.00004M24.6667 0.333374H3.33333C1.85333 0.333374 0.666664 1.52004 0.666664 3.00004V19C0.666664 19.7073 0.947616 20.3856 1.44771 20.8857C1.94781 21.3858 2.62609 21.6667 3.33333 21.6667H24.6667C25.3739 21.6667 26.0522 21.3858 26.5523 20.8857C27.0524 20.3856 27.3333 19.7073 27.3333 19V3.00004C27.3333 2.2928 27.0524 1.61452 26.5523 1.11442C26.0522 0.614325 25.3739 0.333374 24.6667 0.333374Z"
-                      fill="#F8F9FA"
-                    />
-                  </svg>
-                </span>
-                News Letter
-              </h4>
-              <p className="text-sx font-semibold text-white mb-4">
-                Get cleaning tips & special offers!
-              </p>
-              <div>
-                <div class="join max-w-sm">
-                  <input
-                    class="input join-item bg-[#738E88] text-white placeholder:text-muted_light placeholder:font-semibold placeholder:text-xs"
-                    placeholder="Enter Email"
+            <nav class="text-base-content text-white gap-0">
+              <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-8">
+                <svg
+                  width="32"
+                  height="33"
+                  viewBox="0 0 32 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.592 2.16663H17.408C19.8587 2.16663 21.8 2.16663 23.3187 2.37063C24.8813 2.58129 26.1467 3.02396 27.1453 4.02129C28.1427 5.01996 28.5853 6.28529 28.796 7.84796C29 9.36796 29 11.308 29 13.7586V19.2413C29 21.692 29 23.6333 28.796 25.152C28.5853 26.7146 28.1427 27.98 27.1453 28.9786C26.1467 29.976 24.8813 30.4186 23.3187 30.6293C21.7987 30.8333 19.8587 30.8333 17.408 30.8333H14.592C12.1413 30.8333 10.2 30.8333 8.68133 30.6293C7.11867 30.4186 5.85333 29.976 4.85467 28.9786C3.85733 27.98 3.41467 26.7146 3.204 25.152C3 23.632 3 21.692 3 19.2413V13.7586C3 11.308 3 9.36663 3.204 7.84796C3.41467 6.28529 3.85733 5.01996 4.85467 4.02129C5.85333 3.02396 7.11867 2.58129 8.68133 2.37063C10.2013 2.16663 12.1413 2.16663 14.592 2.16663ZM8.94667 4.35329C7.60533 4.53329 6.832 4.87196 6.26667 5.43596C5.704 5.99996 5.36533 6.77329 5.18533 8.11463C5.00133 9.48529 4.99867 11.2906 4.99867 13.8333V19.1666C4.99867 21.7093 5.00133 23.516 5.18533 24.8866C5.36533 26.2266 5.704 27 6.268 27.564C6.832 28.128 7.60533 28.4666 8.94667 28.6466C10.3173 28.8306 12.1227 28.8333 14.6653 28.8333H17.332C19.8747 28.8333 21.6813 28.8306 23.052 28.6466C24.392 28.4666 25.1653 28.128 25.7293 27.564C26.2933 27 26.632 26.2266 26.812 24.8853C26.996 23.516 26.9987 21.7093 26.9987 19.1666V13.8333C26.9987 11.2906 26.996 9.48529 26.812 8.11329C26.632 6.77329 26.2933 5.99996 25.7293 5.43596C25.1653 4.87196 24.392 4.53329 23.0507 4.35329C21.6813 4.16929 19.8747 4.16663 17.332 4.16663H14.6653C12.1227 4.16663 10.3187 4.16929 8.94667 4.35329ZM9.66667 13.8333C9.66667 13.5681 9.77202 13.3137 9.95956 13.1262C10.1471 12.9387 10.4015 12.8333 10.6667 12.8333H21.3333C21.5986 12.8333 21.8529 12.9387 22.0404 13.1262C22.228 13.3137 22.3333 13.5681 22.3333 13.8333C22.3333 14.0985 22.228 14.3529 22.0404 14.5404C21.8529 14.7279 21.5986 14.8333 21.3333 14.8333H10.6667C10.4015 14.8333 10.1471 14.7279 9.95956 14.5404C9.77202 14.3529 9.66667 14.0985 9.66667 13.8333ZM9.66667 19.1666C9.66667 18.9014 9.77202 18.6471 9.95956 18.4595C10.1471 18.272 10.4015 18.1666 10.6667 18.1666H17.3333C17.5985 18.1666 17.8529 18.272 18.0404 18.4595C18.228 18.6471 18.3333 18.9014 18.3333 19.1666C18.3333 19.4318 18.228 19.6862 18.0404 19.8737C17.8529 20.0613 17.5985 20.1666 17.3333 20.1666H10.6667C10.4015 20.1666 10.1471 20.0613 9.95956 19.8737C9.77202 19.6862 9.66667 19.4318 9.66667 19.1666Z"
+                    fill="#F8F9FA"
                   />
-                  <button class="btn btn-outline-white bg-white border-0 join-item">
+                </svg>
+                Quick Links
+              </h6>
+              <div className="mb-7">
+                {quickLinksItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to="#"
+                    class="link no-underline text-base font-normal text-white flex items-center gap-2 mb-4 hover:text-white/80"
+                  >
+                    <span>
+                      {
+                        item.icon /* Use dangerouslySetInnerHTML to render the SVG string as HTML */
+                      }
+                    </span>{" "}
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="bg-[#4E7770] rounded-[10px] px-4 py-2">
+                <h4 className="footer-title flex items-center gap-2 text-muted_light font-semibold text-xl mb-4">
+                  <span>
                     <svg
-                      width="21"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_493_141)">
+                        <path
+                          d="M21.701 18.8257L17.2393 15.4795V8.66308C17.2393 7.97771 16.6853 7.42371 15.9999 7.42371C15.3146 7.42371 14.7606 7.97771 14.7606 8.66308V16.0992C14.7606 16.4896 14.944 16.8577 15.2563 17.0907L20.2137 20.8088C20.4276 20.9699 20.6882 21.0569 20.9561 21.0566C21.3341 21.0566 21.7059 20.8868 21.9488 20.5596C22.3604 20.013 22.2488 19.236 21.701 18.8257Z"
+                          fill="#F8F9FA"
+                        />
+                        <path
+                          d="M16 0C7.17706 0 0 7.17706 0 16C0 24.8229 7.17706 32 16 32C24.8229 32 32 24.8229 32 16C32 7.17706 24.8229 0 16 0ZM16 29.5213C8.54531 29.5213 2.47869 23.4547 2.47869 16C2.47869 8.54531 8.54531 2.47869 16 2.47869C23.4559 2.47869 29.5213 8.54531 29.5213 16C29.5213 23.4547 23.4547 29.5213 16 29.5213Z"
+                          fill="#F8F9FA"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_493_141">
+                          <rect width="32" height="32" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </span>
+                  Working Hours
+                </h4>
+                <p className="text-lg font-normal text-muted_light mb-4">
+                  Monday - Friday: 8:00 AM - 8:00 PM
+                  <br />
+                  Saturday: 9:00 AM - 6:00 PM
+                  <br />
+                  Sunday: 10:00 AM - 5:00 PM
+                </p>
+                <p className="text-base font-semibold text-success ">
+                  Emergency 24/7
+                </p>
+              </div>
+            </nav>
+            <nav class="text-base-content text-white gap-0">
+              <h6 class="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-3.5">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.4867 29.0814C14.2947 29.748 15.1373 30.3574 16 30.952C16.8645 30.3653 17.7031 29.7411 18.5133 29.0814C19.864 27.9723 21.1351 26.7698 22.3173 25.4827C25.0427 22.5027 28 18.1827 28 13.3334C28 11.7575 27.6896 10.1971 27.0866 8.74117C26.4835 7.28527 25.5996 5.9624 24.4853 4.84809C23.371 3.73379 22.0481 2.84988 20.5922 2.24682C19.1363 1.64376 17.5759 1.33337 16 1.33337C14.4241 1.33337 12.8637 1.64376 11.4078 2.24682C9.95189 2.84988 8.62902 3.73379 7.51472 4.84809C6.40042 5.9624 5.5165 7.28527 4.91345 8.74117C4.31039 10.1971 4 11.7575 4 13.3334C4 18.1827 6.95733 22.5014 9.68267 25.4827C10.8648 26.7703 12.136 27.9719 13.4867 29.0814ZM16 17.6667C14.8507 17.6667 13.7485 17.2102 12.9359 16.3975C12.1232 15.5848 11.6667 14.4826 11.6667 13.3334C11.6667 12.1841 12.1232 11.0819 12.9359 10.2692C13.7485 9.45659 14.8507 9.00004 16 9.00004C17.1493 9.00004 18.2515 9.45659 19.0641 10.2692C19.8768 11.0819 20.3333 12.1841 20.3333 13.3334C20.3333 14.4826 19.8768 15.5848 19.0641 16.3975C18.2515 17.2102 17.1493 17.6667 16 17.6667Z"
+                    fill="#F8F9FA"
+                  />
+                </svg>
+                Dubai Office
+              </h6>
+              <div className="w-full h-[240px] rounded-2xl mb-8 max-w-[326px]">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28884.310132671646!2d55.25359281442909!3d25.185047260299033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682def25f457%3A0x3dd4c4097970950e!2sBusiness%20Bay%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2seg!4v1758309940387!5m2!1sen!2seg"
+                  className="w-full h-full border-0 rounded-2xl"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <div>
+                <h6 className="text-base text-white font-semibold mb-2">
+                  Office Address
+                </h6>
+                <p className="font-normal text-sm text-white mb-8">
+                  Business Bay, Dubai, UAE Building XYZ, Office 123
+                </p>
+              </div>
+
+              <div className="bg-[#4E7770] rounded-[10px] px-4 py-2">
+                <h4 className="footer-title flex items-center gap-2 text-white font-semibold text-xl mb-4">
+                  <span>
+                    <svg
+                      width="28"
                       height="22"
-                      viewBox="0 0 21 22"
+                      viewBox="0 0 28 22"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M19.551 0.845966L19.657 0.839966L19.787 0.847966L19.877 0.863966L20 0.898966L20.107 0.944966L20.207 1.00197L20.297 1.06897L20.379 1.14397L20.431 1.20297L20.513 1.31897L20.565 1.41497C20.6117 1.51497 20.6417 1.6203 20.655 1.73097L20.66 1.83697C20.66 1.9123 20.652 1.98563 20.636 2.05697L20.601 2.17997L14.069 20.257C13.9452 20.5265 13.7466 20.7549 13.4968 20.915C13.2471 21.075 12.9566 21.1601 12.66 21.16C12.3929 21.1605 12.1302 21.092 11.8973 20.9612C11.6645 20.8303 11.4694 20.6414 11.331 20.413L11.266 20.286L7.914 13.584L1.244 10.248C0.997198 10.1351 0.784359 9.9594 0.626769 9.73846C0.469179 9.51751 0.37236 9.25907 0.345996 8.98897L0.339996 8.83997C0.339996 8.27997 0.640996 7.76797 1.181 7.46997L1.321 7.39997L19.338 0.893966L19.444 0.863966L19.551 0.845966Z"
-                        fill="#0B7A3B"
+                        d="M24.6667 5.66671L14 12.3334L3.33333 5.66671V3.00004L14 9.66671L24.6667 3.00004M24.6667 0.333374H3.33333C1.85333 0.333374 0.666664 1.52004 0.666664 3.00004V19C0.666664 19.7073 0.947616 20.3856 1.44771 20.8857C1.94781 21.3858 2.62609 21.6667 3.33333 21.6667H24.6667C25.3739 21.6667 26.0522 21.3858 26.5523 20.8857C27.0524 20.3856 27.3333 19.7073 27.3333 19V3.00004C27.3333 2.2928 27.0524 1.61452 26.5523 1.11442C26.0522 0.614325 25.3739 0.333374 24.6667 0.333374Z"
+                        fill="#F8F9FA"
                       />
                     </svg>
-                  </button>
+                  </span>
+                  News Letter
+                </h4>
+                <p className="text-sx font-semibold text-white mb-4">
+                  Get cleaning tips & special offers!
+                </p>
+                <div>
+                  <div class="join max-w-sm">
+                    <input
+                      class="input join-item bg-[#738E88] text-white placeholder:text-muted_light placeholder:font-semibold placeholder:text-xs"
+                      placeholder="Enter Email"
+                    />
+                    <button class="btn btn-outline-white bg-white border-0 join-item">
+                      <svg
+                        width="21"
+                        height="22"
+                        viewBox="0 0 21 22"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.551 0.845966L19.657 0.839966L19.787 0.847966L19.877 0.863966L20 0.898966L20.107 0.944966L20.207 1.00197L20.297 1.06897L20.379 1.14397L20.431 1.20297L20.513 1.31897L20.565 1.41497C20.6117 1.51497 20.6417 1.6203 20.655 1.73097L20.66 1.83697C20.66 1.9123 20.652 1.98563 20.636 2.05697L20.601 2.17997L14.069 20.257C13.9452 20.5265 13.7466 20.7549 13.4968 20.915C13.2471 21.075 12.9566 21.1601 12.66 21.16C12.3929 21.1605 12.1302 21.092 11.8973 20.9612C11.6645 20.8303 11.4694 20.6414 11.331 20.413L11.266 20.286L7.914 13.584L1.244 10.248C0.997198 10.1351 0.784359 9.9594 0.626769 9.73846C0.469179 9.51751 0.37236 9.25907 0.345996 8.98897L0.339996 8.83997C0.339996 8.27997 0.640996 7.76797 1.181 7.46997L1.321 7.39997L19.338 0.893966L19.444 0.863966L19.551 0.845966Z"
+                          fill="#0B7A3B"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         </footer>
-        <footer class="footer  px-6 py-4">
-          <div class="flex w-full items-center justify-between">
+        <footer class="footer  px-8 py-4">
+          <div class="flex w-full items-center justify-between flex-wrap">
             <div>
-              <h6>Follow Us</h6>
-              <div class="flex h-5 gap-4">
-                <a href="#" class="link" aria-label="Github Link">
-                  <span class="icon-[tabler--brand-github] size-5"></span>
-                </a>
-                <a href="#" class="link" aria-label="Facebook Link">
-                  <span class="icon-[tabler--brand-facebook] size-5"></span>
-                </a>
-                <a href="#" class="link" aria-label="X Link">
-                  <span class="icon-[tabler--brand-x] size-5"></span>
-                </a>
-                <a href="#" class="link" aria-label="Google Link">
-                  <span class="icon-[tabler--brand-google] size-5"></span>
-                </a>
+              <h6 className="font-semibold text-white text-base mb-4">
+                Follow Us
+              </h6>
+              <div className="flex gap-4 flex-wrap">
+                {socialMediaItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.link}
+                    aria-label={item.name + " Link"}
+                    className="center_flex size-11 rounded-full bg-[#4E7770] hover:bg-success hover:text-white transition-colors"
+                    target="_blank"
+                  >
+                    <span
+                      className={`${item.iconClass} size-6 flex text-white`}
+                    />
+                  </Link>
+                ))}
               </div>
             </div>
             <aside class="grid-flow-col items-center">
-              <p>
-                ©2024{" "}
-                <a class="link link-hover font-medium" href="#">
-                  FlyonUI
-                </a>
+              <p className="text-base font-semibold text-white">
+                &copy; 2024 Bright Scope Dubai. All rights reserved.
+              </p>
+              <p className="text-base font-semibold text-white text-end">
+                Made with
+                <Link
+                  className="link link-hover font-medium px-4 animate-bounce "
+                  to="#"
+                  aria-label="Love"
+                  target="_blank"
+                >
+                  ❤️
+                </Link>
+                in Dubai
               </p>
             </aside>
           </div>

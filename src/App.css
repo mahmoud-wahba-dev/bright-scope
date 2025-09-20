@@ -5,27 +5,45 @@
 
   --color-primary_dark: #1a1a1a;
   --color-primary_light: #fff;
+  --color-primary_light_hover: #0c8c43;
 
   --color-muted_light: #e0e0e0;
 
   --color-success: #27ae60;
+  --color-secondary: #f8f9fa;
 }
 
 @theme {
-  --color-primary: #0b7a3b; /* your exact green */
+  /* Colors */
+  --color-primary: #0b7a3b;
   --color-primary-content: #ffffff;
   --color-primary-dark: #1a1a1a;
   --color-primary-dark-active: #096732;
-  --color-primary-dark: #1a1a1a;
   --color-primary_light: #fff;
+  --color-primary_light_hover: #0c8c43;
+
   --color-muted_light: #e0e0e0;
+
   --color-success: #27ae60;
+  --color-secondary: #f8f9fa;
 
+  /* Fonts */
   --font-sans: "Poppins", sans-serif;
-}
 
-@theme {
-  --font-sans: "Poppins"; /* override default */
+  /* Container */
+  --container-screen: 100%;
+  --container-xs: 640px;
+  --container-sm: 768px;
+  --container-md: 1024px;
+  --container-lg: 1280px;
+  --container-xl: 1440px;
+  --container-padding: 2rem;
+}
+/* 2) Define the container utility at top-level (not inside @theme) */
+@utility container {
+  width: var(--container-screen);
+  padding-inline: var(--container-padding);
+  margin-inline: auto; /* center */
 }
 
 .btn {
