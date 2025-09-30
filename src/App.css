@@ -38,6 +38,27 @@
   --container-lg: 1280px;
   --container-xl: 1440px;
   --container-padding: 2rem;
+
+  /* Custom font sizes */
+  /* Typography scale (8px → 25px in rem) */
+  --text-8: 0.5rem; /* 8px */
+  --text-9: 0.5625rem; /* 9px */
+  --text-10: 0.625rem; /* 10px */
+  --text-11: 0.6875rem; /* 11px */
+  --text-12: 0.75rem; /* 12px */
+  --text-13: 0.8125rem; /* 13px */
+  --text-14: 0.875rem; /* 14px */
+  --text-15: 0.9375rem; /* 15px */
+  --text-16: 1rem; /* 16px */
+  --text-17: 1.0625rem; /* 17px */
+  --text-18: 1.125rem; /* 18px */
+  --text-19: 1.1875rem; /* 19px */
+  --text-20: 1.25rem; /* 20px */
+  --text-21: 1.3125rem; /* 21px */
+  --text-22: 1.375rem; /* 22px */
+  --text-23: 1.4375rem; /* 23px */
+  --text-24: 1.5rem; /* 24px */
+  --text-25: 1.5625rem; /* 25px */
 }
 /* 2) Define the container utility at top-level (not inside @theme) */
 @utility container {

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 const HeroSlider = () => {
   const slide1 = "assets/imgs/home/slide1.webp";
@@ -100,6 +101,18 @@ const HeroSlider = () => {
           <span className="icon-[cil--arrow-right] size-9.5 text-white font-normal"></span>
           <span className="sr-only">Next</span>
         </button>
+        <div className="absolute bottom-10 start-44  flex items-center gap-2 ">
+          <ScrollLink
+            className="w-[92px] h-[88px] btn cursor-pointer animate-bounce transition-all duration-1000 center_flex glass bg-white/10 rounded-full overflow-hidden "
+            to="services"
+            smooth={true}
+            duration={600}
+            offset={-100}
+          >
+            <span className="icon-[fluent--arrow-down-28-regular] text-white text-5xl"></span>
+          </ScrollLink>
+          <p className="text-white  font-normal text-base">See all services</p>
+        </div>
       </div>
     </>
   );

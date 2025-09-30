@@ -1,15 +1,14 @@
 import HeroSlider from "./components/HeroSlider";
+import OurServices from "./components/OurServices";
 
 const Home = () => {
   return (
     <>
       <div className="container">
         <HeroSlider />
+        <OurServices />
       </div>
 
-      <div className="container">
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      </div>
     </>
   );
 };
