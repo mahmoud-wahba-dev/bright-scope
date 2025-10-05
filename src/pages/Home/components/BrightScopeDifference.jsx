@@ -12,6 +12,8 @@ const BrightScopeDifference = () => {
           />
         </div>
 
+
+
         <div>
           <h6 className="font-semibold text-28px mb-3 text-white">
             The Bright Scope Difference– Where Clean Meets Comfort
