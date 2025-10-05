@@ -1,13 +1,13 @@
 :root {
   --color-primary: #0b7a3b;
-  --color-primary_dark_active: #096732;
+  --color-primary-dark-active: #096732;
   --color-primary-content: #ffffff;
 
-  --color-primary_dark: #1a1a1a;
-  --color-primary_light: #fff;
-  --color-primary_light_hover: #0c8c43;
+  --color-primary-dark: #1a1a1a;
+  --color-primary-light: #fff;
+  --color-primary-light_hover: #0c8c43;
 
-  --color-muted_light: #e0e0e0;
+  --color-muted-light: #e0e0e0;
 
   --color-success: #27ae60;
   --color-secondary: #f8f9fa;
@@ -19,13 +19,15 @@
   --color-primary-content: #ffffff;
   --color-primary-dark: #1a1a1a;
   --color-primary-dark-active: #096732;
-  --color-primary_light: #fff;
-  --color-primary_light_hover: #0c8c43;
+  --color-primary-light: #fff;
+  --color-primary-light_hover: #0c8c43;
 
-  --color-muted_light: #e0e0e0;
+  --color-muted-light: #e0e0e0;
+  --color-muted-dark: #828282;
 
   --color-success: #27ae60;
   --color-secondary: #f8f9fa;
+  --color-surface-light: #f8f9fa;
 
   /* Fonts */
   --font-sans: "Poppins", sans-serif;
@@ -38,27 +40,46 @@
   --container-lg: 1280px;
   --container-xl: 1440px;
   --container-padding: 2rem;
+  /* Custom font sizes (px → rem) */
+  --text-8px: 0.5rem; /* 8px */
+  --text-9px: 0.5625rem; /* 9px */
+  --text-10px: 0.625rem; /* 10px */
+  --text-11px: 0.6875rem; /* 11px */
+  --text-12px: 0.75rem; /* 12px */
+  --text-13px: 0.8125rem; /* 13px */
+  --text-14px: 0.875rem; /* 14px */
+  --text-15px: 0.9375rem; /* 15px */
+  --text-16px: 1rem; /* 16px */
+  --text-17px: 1.0625rem; /* 17px */
+  --text-18px: 1.125rem; /* 18px */
+  --text-19px: 1.1875rem; /* 19px */
+  --text-20px: 1.25rem; /* 20px */
+  --text-21px: 1.3125rem; /* 21px */
+  --text-22px: 1.375rem; /* 22px */
+  --text-25px: 1.5625rem; /* 25px */
+  --text-28px: 1.75rem; /* 28px */
+  --text-36px: 2.25rem; /* 36px */
 
-  /* Custom font sizes */
-  /* Typography scale (8px → 25px in rem) */
-  --text-8: 0.5rem; /* 8px */
-  --text-9: 0.5625rem; /* 9px */
-  --text-10: 0.625rem; /* 10px */
-  --text-11: 0.6875rem; /* 11px */
-  --text-12: 0.75rem; /* 12px */
-  --text-13: 0.8125rem; /* 13px */
-  --text-14: 0.875rem; /* 14px */
-  --text-15: 0.9375rem; /* 15px */
-  --text-16: 1rem; /* 16px */
-  --text-17: 1.0625rem; /* 17px */
-  --text-18: 1.125rem; /* 18px */
-  --text-19: 1.1875rem; /* 19px */
-  --text-20: 1.25rem; /* 20px */
-  --text-21: 1.3125rem; /* 21px */
-  --text-22: 1.375rem; /* 22px */
-  --text-23: 1.4375rem; /* 23px */
-  --text-24: 1.5rem; /* 24px */
-  --text-25: 1.5625rem; /* 25px */
+  --text-52px: 3.25rem; /* 52px */
+
+  /* Custom border-radius (px → rem) */
+  --radius-8px: 0.5rem; /* 8px */
+  --radius-9px: 0.5625rem; /* 9px */
+  --radius-10px: 0.625rem; /* 10px */
+  --radius-11px: 0.6875rem; /* 11px */
+  --radius-12px: 0.75rem; /* 12px */
+  --radius-13px: 0.8125rem; /* 13px */
+  --radius-14px: 0.875rem; /* 14px */
+  --radius-15px: 0.9375rem; /* 15px */
+  --radius-16px: 1rem; /* 16px */
+  --radius-17px: 1.0625rem; /* 17px */
+  --radius-18px: 1.125rem; /* 18px */
+  --radius-19px: 1.1875rem; /* 19px */
+  --radius-20px: 1.25rem; /* 20px */
+  --radius-21px: 1.3125rem; /* 21px */
+  --radius-22px: 1.375rem; /* 22px */
+  --radius-30px: 1.875rem; /* 30px */
+  --radius-66px: 4.125rem; /* 66px */
 }
 /* 2) Define the container utility at top-level (not inside @theme) */
 @utility container {

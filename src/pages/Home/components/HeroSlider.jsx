@@ -56,20 +56,20 @@ const HeroSlider = () => {
                       {slide.category}
                     </p>
 
-                    <h1 className="text-primary_light font-bold text-5xl  mb-8 leading-normal">
+                    <h1 className="text-primary-light font-bold text-5xl  mb-8 leading-normal">
                       {slide.title}
                     </h1>
                     <div className="center_flex gap-6  flex-wrap mb-8">
                       <Link
                         to="/services"
-                        className="btn btn-wide btn-primary min-w-[20rem] rounded-[55px] text-white font-semibold text-base px-8 py-6  hover:bg-primary_light_hover hover:border-none transition"
+                        className="btn btn-wide btn-primary min-w-[20rem] rounded-[55px] text-white font-semibold text-base px-8 py-6  hover:bg-primary-light_hover hover:border-none transition"
                         target="_blank"
                       >
                         Book Now
                       </Link>
                       <Link
                         to="/services"
-                        className="btn btn-wide btn-secondary  min-w-[20rem] rounded-[55px] text-primary-dark font-semibold text-base px-8 py-6 hover:text-white hover:border-none  hover:bg-primary_light_hover  transition"
+                        className="btn btn-wide btn-secondary  min-w-[20rem] rounded-[55px] text-primary-dark  font-semibold text-base px-8 py-6 hover:text-white hover:border-none  hover:bg-primary-light_hover  transition"
                       >
                         Our Services
                       </Link>

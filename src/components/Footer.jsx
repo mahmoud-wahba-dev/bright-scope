@@ -264,11 +264,11 @@ const Footer = () => {
         <footer className="footer py-14 px-8 ">
           <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             <div className="gap-0">
-              <div className="flex items-center gap-2 text-2xl font-semibold text-primary_light mb-4">
+              <div className="flex items-center gap-2 text-2xl font-semibold text-primary-light mb-4">
                 <img src="./assets/imgs/global/logo_footer.svg" alt="" />
                 <span>Bright Scope UAE</span>
               </div>
-              <p className="text-sm font-normal text-primary_light mb-8 max-w-sm">
+              <p className="text-sm font-normal text-primary-light mb-8 max-w-sm">
                 Your trusted cleaning and pest control partner in Dubai. 15+
                 years of excellence from Egypt to the UAE, serving thousands of
                 satisfied customers.
@@ -280,10 +280,10 @@ const Footer = () => {
                 </div>
                 <div>
                   <a href="tel:+971554445555">
-                    <p className="text-base font-semibold text-primary_light ">
+                    <p className="text-base font-semibold text-primary-light ">
                       Call Now
                     </p>
-                    <p className="text-base font-semibold text-primary_light">
+                    <p className="text-base font-semibold text-primary-light">
                       +971 XXX XXX XXX
                     </p>
                   </a>
@@ -300,10 +300,10 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <p className="text-base font-semibold text-primary_light ">
+                    <p className="text-base font-semibold text-primary-light ">
                       WhatsApp Us
                     </p>
-                    <p className="text-base font-semibold text-primary_light">
+                    <p className="text-base font-semibold text-primary-light">
                       Instant Response
                     </p>
                   </a>
@@ -379,7 +379,7 @@ const Footer = () => {
               </div>
 
               <div className="bg-[#4E7770] rounded-[10px] px-4 py-2">
-                <h4 className="footer-title flex items-center gap-2 text-muted_light font-semibold text-xl mb-4">
+                <h4 className="footer-title flex items-center gap-2 text-muted-light font-semibold text-xl mb-4">
                   <span>
                     <svg
                       width="32"
@@ -407,7 +407,7 @@ const Footer = () => {
                   </span>
                   Working Hours
                 </h4>
-                <p className="text-lg font-normal text-muted_light mb-4">
+                <p className="text-lg font-normal text-muted-light mb-4">
                   Monday - Friday: 8:00 AM - 8:00 PM
                   <br />
                   Saturday: 9:00 AM - 6:00 PM
@@ -477,7 +477,7 @@ const Footer = () => {
                 <div>
                   <div className="join max-w-sm">
                     <input
-                      className="input join-item bg-[#738E88] text-white placeholder:text-muted_light placeholder:font-semibold placeholder:text-xs"
+                      className="input join-item bg-[#738E88] text-white placeholder:text-muted-light placeholder:font-semibold placeholder:text-xs"
                       placeholder="Enter Email"
                     />
                     <button className="btn btn-outline-white bg-white border-0 join-item">
