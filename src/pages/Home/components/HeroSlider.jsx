@@ -51,31 +51,31 @@ const HeroSlider = () => {
                     className="size-full object-cover"
                     alt={slide.alt}
                   />
-                  <div className="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4 w-[68%] max-md:w-full">
-                    <p className="text-base  font-normal text-white mb-6">
+                  <div className="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4 w-[68%] max-md:w-full ">
+                    <p className="text-base  font-normal text-white mb-6 max-sm:text-sm max-sm:mb-1">
                       {slide.category}
                     </p>
 
-                    <h1 className="text-primary-light font-bold text-5xl  mb-8 leading-normal">
+                    <h1 className="text-primary-light font-bold text-[48px]  mb-8 leading-normal max-md:text-36px max-sm:text-3xl max-lg:text-25px max-[425px]:text-18px max-sm:mb-3 max-[322px]:!text-14px">
                       {slide.title}
                     </h1>
-                    <div className="center_flex gap-6  flex-wrap mb-8">
+                    <div className="center_flex md:gap-6 gap-2 md:flex-wrap flex-nowrap lg:mb-8">
                       <Link
                         to="/services"
-                        className="btn btn-wide btn-primary min-w-[20rem] rounded-[55px] text-white font-semibold text-base px-8 py-6  hover:bg-primary-light_hover hover:border-none transition"
+                        className="btn btn-wide btn-primary md:min-w-[20rem] rounded-[55px] text-white font-semibold text-base md:px-8 md:py-6  hover:bg-primary-light_hover hover:border-none transition max-md:w-fit max-sm:text-10px"
                         target="_blank"
                       >
                         Book Now
                       </Link>
                       <Link
                         to="/services"
-                        className="btn btn-wide btn-secondary  min-w-[20rem] rounded-[55px] text-primary-dark  font-semibold text-base px-8 py-6 hover:text-white hover:border-none  hover:bg-primary-light_hover  transition"
+                        className="btn btn-wide btn-secondary  md:min-w-[20rem] rounded-[55px] text-primary-dark  font-semibold text-base md:px-8 md:py-6 hover:text-white hover:border-none  hover:bg-primary-light_hover  transition max-md:w-fit max-sm:text-10px "
                       >
                         Our Services
                       </Link>
                     </div>
-                    <h3 className=" text-xl font-bold text-[#F1F2F2] mb-4 ">
-                      - <span className="px-5">{slide.sutitle}</span> -
+                    <h3 className=" text-xl font-bold text-[#F1F2F2] lg:mb-4 ">
+                      - <span className="px-5 font-bold text-14px md:text-20px text-surface-light">{slide.sutitle}</span> -
                     </h3>
                   </div>
                 </div>
@@ -101,9 +101,9 @@ const HeroSlider = () => {
           <span className="icon-[cil--arrow-right] size-9.5 text-white font-normal"></span>
           <span className="sr-only">Next</span>
         </button>
-        <div className="absolute bottom-10 start-44  flex items-center gap-2 ">
+        <div className="absolute bottom-10 start-44  flex items-center gap-2 max-lg:bottom-0 max-lg:start-0 max-lg:gap-1 flex-col max-lg:items-start max-lg:ps-4">
           <ScrollLink
-            className="w-[92px] h-[88px] btn cursor-pointer animate-bounce transition-all duration-1000 center_flex glass bg-white/10 rounded-full overflow-hidden "
+            className="w-[92px] h-[88px] btn cursor-pointer animate-bounce transition-all duration-1000 center_flex glass bg-white/10 rounded-full overflow-hidden max-md:size-[40px] "
             to="services"
             smooth={true}
             duration={600}
@@ -111,7 +111,7 @@ const HeroSlider = () => {
           >
             <span className="icon-[fluent--arrow-down-28-regular] text-white text-5xl"></span>
           </ScrollLink>
-          <p className="text-white  font-normal text-base">See all services</p>
+          <p className="text-white  font-normal text-base max-sm:text-10px">See all services</p>
         </div>
       </div>
     </>

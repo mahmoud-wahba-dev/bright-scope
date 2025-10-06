@@ -11,6 +11,8 @@
 
   --color-success: #27ae60;
   --color-secondary: #f8f9fa;
+
+  --color-base-content: black;
 }
 
 @theme {
@@ -27,17 +29,19 @@
 
   --color-success: #27ae60;
   --color-secondary: #f8f9fa;
+  --color-secondary-dark: #4f4f4f;
   --color-surface-light: #f8f9fa;
+  --color-base-content: black;
 
   /* Fonts */
   --font-sans: "Poppins", sans-serif;
 
   /* Container */
   --container-screen: 100%;
-  --container-xs: 640px;
+  /* --container-xs: 640px;
   --container-sm: 768px;
   --container-md: 1024px;
-  --container-lg: 1280px;
+  --container-lg: 1280px; */
   --container-xl: 1440px;
   --container-padding: 2rem;
   /* Custom font sizes (px → rem) */
@@ -60,6 +64,8 @@
   --text-28px: 1.75rem; /* 28px */
   --text-36px: 2.25rem; /* 36px */
 
+  --text-40px: 2.5rem; /* 40px */
+  --text-48px: 3rem; /* 48px */
   --text-52px: 3.25rem; /* 52px */
 
   /* Custom border-radius (px → rem) */
@@ -81,6 +87,15 @@
   --radius-30px: 1.875rem; /* 30px */
   --radius-66px: 4.125rem; /* 66px */
 }
+html {
+  font-size: clamp(12px, 1vw + 0.5rem, 16px);
+}
+
+/* Ensure body uses your font globally */
+body {
+  font-family: var(--font-sans);
+}
+
 /* 2) Define the container utility at top-level (not inside @theme) */
 @utility container {
   width: var(--container-screen);
@@ -91,10 +106,6 @@
 .btn {
   line-height: var(--text-sm--line-height); /* direct fallback */
   line-height: inherit;
-}
-/* Ensure body uses your font globally */
-body {
-  font-family: var(--font-sans);
 }
 
 .footer_bg_gradient {
