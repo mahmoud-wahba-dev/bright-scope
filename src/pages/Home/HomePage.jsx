@@ -3,7 +3,7 @@ import HeroSlider from "./components/HeroSlider";
 import OurServices from "./components/OurServices";
 import WhyChooseUs from "./components/WhyChooseUs";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <div className="container">
@@ -18,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

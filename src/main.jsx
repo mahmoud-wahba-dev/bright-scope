@@ -7,15 +7,14 @@ import MasterLayout from "./layout/MasterLayout.jsx";
 import Services from "./pages/Services.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
-// import Home from "./pages/Home/Home.jsx"; 
-import Home from "./pages/Home/home.jsx"
+import HomePage from "./pages/Home/HomePage.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "/services",
