@@ -75,8 +75,8 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Dropdown"
           >
-            <span className="icon-[tabler--menu-2] dropdown-open:hidden size-5"></span>
-            <span className="icon-[tabler--x] dropdown-open:block hidden size-5"></span>
+            <span className="icon-[tabler--menu-2] text-black dropdown-open:hidden size-5"></span>
+            <span className="icon-[tabler--x] text-black dropdown-open:block hidden size-5"></span>
           </button>
           <ul
             className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
@@ -85,22 +85,22 @@ const Navbar = () => {
             aria-labelledby="dropdown-default"
           >
             <li>
-              <NavLink className="dropdown-item" to="#">
+              <NavLink className="dropdown-item" to="/">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="dropdown-item" to="#">
+              <NavLink className="dropdown-item" to="/services">
                 Services
               </NavLink>
             </li>
             <li>
-              <NavLink className="dropdown-item" to="#">
+              <NavLink className="dropdown-item" to="/about">
                 About Us
               </NavLink>
             </li>
             <li>
-              <NavLink className="dropdown-item" to="#">
+              <NavLink className="dropdown-item" to="/contact">
                 Contact Us
               </NavLink>
             </li>
