@@ -62,11 +62,13 @@
   --text-22px: 1.375rem; /* 22px */
   --text-25px: 1.5625rem; /* 25px */
   --text-28px: 1.75rem; /* 28px */
+  --text-35px: 2.1875rem; /* 35px */
   --text-36px: 2.25rem; /* 36px */
 
   --text-40px: 2.5rem; /* 40px */
   --text-48px: 3rem; /* 48px */
   --text-52px: 3.25rem; /* 52px */
+  --text-62px: 3.875rem; /* 62px */
 
   /* Custom border-radius (px → rem) */
   --radius-8px: 0.5rem; /* 8px */
@@ -85,6 +87,7 @@
   --radius-21px: 1.3125rem; /* 21px */
   --radius-22px: 1.375rem; /* 22px */
   --radius-30px: 1.875rem; /* 30px */
+  --radius-55px: 3.4375rem; /* 55px */
   --radius-66px: 4.125rem; /* 66px */
 }
 html {

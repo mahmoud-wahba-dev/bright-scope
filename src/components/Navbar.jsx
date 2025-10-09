@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -7,8 +8,23 @@ const Navbar = () => {
     { name: "About Us", path: "/about" },
     { name: "Contact Us", path: "/contact" },
   ];
+
+  useEffect(() => {
+    // give the DOM a tick then reinitialize FlyonUI so the dropdown works after client routing
+    const t = setTimeout(() => {
+      if (
+        typeof window !== "undefined" &&
+        window.FlyonUI &&
+        typeof window.FlyonUI.reInit === "function"
+      ) {
+        window.FlyonUI.reInit();
+      }
+    }, 120);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <nav className="navbar px-8 fixed start-0 top-0 z-1 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
+    <nav className="navbar px-8 fixed start-0 top-0 z-10 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
       <div className="navbar-start">
         <Link
           className="link text-base-content link-neutral text-xl font-bold no-underline"
@@ -19,11 +35,9 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
+
       <div className="navbar-center max-lg:hidden">
         <ul className="menu menu-horizontal p-0 font-medium">
-          {/* <li>
-              <NavLink className="font-normal text-base text-primary" to="/">Home</NavLink>
-            </li> */}
           {menuItems.map((item, index) => {
             return (
               <li key={index}>
@@ -42,6 +56,7 @@ const Navbar = () => {
           })}
         </ul>
       </div>
+
       <div className="navbar-end items-center gap-4">
         <Link
           className="btn rounded-[56px] px-6 xxl:px-20 py-6 btn-primary max-md:hidden"
@@ -53,59 +68,47 @@ const Navbar = () => {
 
         <button
           className="btn rounded-[56px] xl:px-20 py-6 bg-transparent border border-primary text-[#1A1A1A] max-sm:hidden"
-          to="#"
+          type="button"
         >
           English | Arabic
         </button>
 
-        
         <button
-          className="btn    bg-transparent border border-primary text-[#1A1A1A] sm:hidden"
-          to="#"
+          className="btn bg-transparent border border-primary text-[#1A1A1A] sm:hidden"
+          type="button"
         >
           Ar
         </button>
 
+        {/* FlyonUI dropdown markup (JS handles open/close) */}
         <div className="dropdown relative inline-flex md:hidden">
           <button
             id="dropdown-default"
             type="button"
-            className="dropdown-toggle btn btn-text btn-secondary btn-square"
+            className="dropdown-toggle btn btn-primary"
             aria-haspopup="menu"
             aria-expanded="false"
             aria-label="Dropdown"
           >
-            <span className="icon-[tabler--menu-2] text-black dropdown-open:hidden size-5"></span>
-            <span className="icon-[tabler--x] text-black dropdown-open:block hidden size-5"></span>
+            Menu
+            <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
           </button>
+
           <ul
             className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="dropdown-default"
           >
-            <li>
-              <NavLink className="dropdown-item" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="dropdown-item" to="/services">
-                Services
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="dropdown-item" to="/about">
-                About Us
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="dropdown-item" to="/contact">
-                Contact Us
-              </NavLink>
-            </li>
-            <div className="mt-4">
-              <Link className="btn  px-6 btn-primary" to="#">
+            {menuItems.map((item, idx) => (
+              <li key={idx}>
+                <NavLink className="dropdown-item" to={item.path}>
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
+            <div className="mt-4 px-4">
+              <Link className="btn px-6 btn-primary w-full text-center" to="#">
                 <span className="">Login</span>
                 <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
               </Link>
@@ -116,5 +119,7 @@ const Navbar = () => {
     </nav>
   );
 };
+
+
 
 export default Navbar;
