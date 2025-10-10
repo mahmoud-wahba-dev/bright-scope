@@ -51,7 +51,7 @@ const OurServices = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {servicesitems.map((item, index) => (
-            <div className="py-8 px-4 border-primary border-[5px] border-s-[3px] rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300">
+            <div key={index} className="py-8 px-4 border-primary border-[5px] border-s-[3px] rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center mb-6 gap-4">
                 <div className="bg-primary text-white rounded-lg p-4 size-[70px] ">
                   <span className={`${item.iconClass}   size-9.5 text-white font-normal`}></span>

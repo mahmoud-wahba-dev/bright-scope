@@ -9,7 +9,7 @@ const Contact = () => {
       <GetInTouch />
       <QuickContact />
       <SocialMedia />
-      <ContactHint />
+        <ContactHint />
     </div>
   );
 };
