@@ -37,7 +37,7 @@ const SocialMedia = () => {
             target="_blank"
             className="group btn btn-circle border-0 p-2.5 btn-outline bg-surface-light hover:bg-primary hover:border-none transition-colors duration-200 ease-in-out"
           >
-            <span className="icon-[garden--twitter-stroke-16t] text-32px text-primary-dark group-hover:text-white transition-colors duration-200 ease-in-out"></span>
+          <span className="icon-[garden--twitter-stroke-16] text-32px text-primary-dark group-hover:text-white transition-colors duration-200 ease-in-out"></span>
           </Link>
           <Link
             to="https://www.youtube.com/@BrightScopePestControlEmirates"
