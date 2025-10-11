@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const MasterLayout = () => {
-    const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     // Ensure Flyon UI is reinitialized on each route change
@@ -13,17 +13,6 @@ const MasterLayout = () => {
     }
   }, [location.pathname]);
 
-    useEffect(() => {
-    // Dynamically load the Iconify runtime
-    const script = document.createElement("script");
-    script.src = "https://code.iconify.design/3/3.1.1/iconify.min.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
   return (
     <>
       <Navbar />
