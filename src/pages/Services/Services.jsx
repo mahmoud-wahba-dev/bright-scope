@@ -1,6 +1,53 @@
 import { Link } from "react-router-dom";
 
 const Services = () => {
+  const servicesCategories = [
+    {
+      id: 1,
+      name: "Home Cleaning",
+      icon: "mdi--office-building",
+    },
+    {
+      id: 2,
+      name: "Pest Control",
+      icon: "mdi--bug",
+    },
+    {
+      id: 3,
+      name: "Office Cleaning",
+      icon: "mdi--office-building",
+    },
+    {
+      id: 4,
+      name: "Carpet Cleaning",
+      icon: "mdi--carpet",
+    },
+    {
+      id: 5,
+      name: "Deep Cleaning",
+      icon: "eos-icons--cleanup",
+    },
+  ];
+
+  const serviceData = {
+    id: 1,
+    name: "Home Cleaning",
+    icon: "ic--round-home",
+    description:
+      "Professional home cleaning services for a spotless living space",
+    serviceFeatures: [
+      "Deep cleaning",
+      "Regular maintenance",
+      "Eco-friendly products",
+      "Trained professionals",
+    ],
+    stats: [
+      { icon: "mingcute--time-fill", label: "Duration", value: "2-4 H" },
+      { icon: "mingcute--star-fill", label: "Rating", value: "4.9" },
+      { icon: "mdi--leaf", label: "Eco-safe", value: "100%" },
+    ],
+  };
+
   return (
     <section className="my-7 md:my-14">
       <div className="container">
@@ -25,18 +72,23 @@ const Services = () => {
             <h4 className="font-semibold text-22px  mb-6">
               Choose Your Service
             </h4>
-            <button
-              type="button"
-              class="btn justify-start gap-2 btn-text rounded-10px h-14 font-normal text-base active-tab:!border  active-tab:bg-[#D2E2D9] active-tab:text-[#0C8C43] active-tab:border-primary   hover:text-primary hover:bg-primary/20 active w-full"
-              id="tabs-pill-vertical-item-1"
-              data-tab="#tabs-pill-vertical-1"
-              aria-controls="tabs-pill-vertical-1"
-              role="tab"
-              aria-selected="true"
-            >
-              <span class="icon-[ic--round-home] size-5 mr-2"></span>
-              Home Cleaning
-            </button>
+            {servicesCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                class={`${
+                  category.id === 1 ? "active" : ""
+                }  btn justify-start gap-2 btn-text rounded-10px h-14 font-normal text-base active-tab:!border  active-tab:bg-[#D2E2D9] active-tab:text-[#0C8C43] active-tab:border-primary   hover:text-primary hover:bg-primary/20  w-full`}
+                id={`tabs-pill-vertical-item-${category.id}`}
+                data-tab={`#tabs-pill-vertical-${category.id}`}
+                aria-controls={`tabs-pill-vertical-${category.id}`}
+                role="tab"
+                aria-selected="true"
+              >
+                <span class={`icon-[${category.icon}] size-5 mr-2`}></span>
+                {category.name}
+              </button>
+            ))}
           </nav>
 
           <div class="ms-3 w-full rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] rounded-10px">
@@ -52,43 +104,22 @@ const Services = () => {
 
                 <div>
                   <h6 className="font-semibold text-22px mb-1">
-                    Home Cleaning
+                    {serviceData.name}
                   </h6>
                   <p className="font-normal text-14px ">
-                    Professional home cleaning services for a spotless living
-                    space
+                    {serviceData.description}
                   </p>
                 </div>
               </div>
               <h5 className="font-semibold text-22px mb-2">What is Included</h5>
               <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
-                <div className="flex items-center gap-2  w-[50%] ">
-                  <span class="icon-[charm--circle-tick] size-6 text-primary"></span>
-                  <p className="font-normal text-18px text-primary-dark">
-                    Deep cleaning
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2  w-[50%]">
-                  <span class="icon-[charm--circle-tick] size-6 text-primary"></span>
-                  <p className="font-normal text-18px text-primary-dark">
-                    Deep cleaning
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2  w-[50%]">
-                  <span class="icon-[charm--circle-tick] size-6 text-primary"></span>
-                  <p className="font-normal text-18px text-primary-dark">
-                    Deep cleaning
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2  w-[50%]">
-                  <span class="icon-[charm--circle-tick] size-6 text-primary"></span>
-                  <p className="font-normal text-18px text-primary-dark">
-                    Deep cleaning
-                  </p>
-                </div>
+                {/* loop here for service features */}
+                {serviceData.serviceFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <span className="icon-[mdi--check-circle] text-primary size-6"></span>
+                    <p className="text-base text-secondary-dark">{feature}</p>
+                  </div>
+                ))}
               </div>
 
               <div class="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
@@ -128,31 +159,6 @@ const Services = () => {
                 Book Now
                 <span class="icon-[mdi--arrow-right] ml-2"></span>
               </Link>
-            </div>
-            <div
-              id="tabs-pill-vertical-2"
-              class="hidden"
-              role="tabpanel"
-              aria-labelledby="tabs-pill-vertical-item-2"
-            >
-              <p class="text-base-content/80">
-                This is your{" "}
-                <span class="text-base-content font-semibold">Profile</span>{" "}
-                tab, where you can update your personal information and manage
-                your account details.
-              </p>
-            </div>
-            <div
-              id="tabs-pill-vertical-3"
-              class="hidden"
-              role="tabpanel"
-              aria-labelledby="tabs-pill-vertical-item-3"
-            >
-              <p class="text-base-content/80">
-                <span class="text-base-content font-semibold">Messages:</span>{" "}
-                View your recent messages, chat with friends, and manage your
-                conversations.
-              </p>
             </div>
           </div>
         </div>

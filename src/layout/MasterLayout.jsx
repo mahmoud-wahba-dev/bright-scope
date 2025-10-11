@@ -12,6 +12,18 @@ const MasterLayout = () => {
       window.HSStaticMethods.autoInit();
     }
   }, [location.pathname]);
+
+    useEffect(() => {
+    // Dynamically load the Iconify runtime
+    const script = document.createElement("script");
+    script.src = "https://code.iconify.design/3/3.1.1/iconify.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <>
       <Navbar />
