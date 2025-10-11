@@ -8,6 +8,7 @@ import Services from "./pages/Services/Services.jsx";
 import About from "./pages/About/About.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
+import ServiceDetails from "./pages/ServiceDetails/ServiceDetails.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         element: <Services />,
       },
       {
+        path: "/services/:id",
+        element: <ServiceDetails />,
+      },
+      {
         path: "/about",
         element: <About />,
       },
@@ -31,7 +36,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
