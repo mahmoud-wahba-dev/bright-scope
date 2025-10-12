@@ -9,6 +9,11 @@ import About from "./pages/About/About.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
 import ServiceDetails from "./pages/ServiceDetails/ServiceDetails.jsx";
+import AuthLayout from "./layout/AuthLayout.jsx";
+import Login from "./pages/Auth/login.jsx";
+import Register from "./pages/Auth/register.jsx";
+import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
+import ConfirmPassword from "./pages/Auth/ConfirmPassword.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -34,6 +39,28 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
     ],
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      { path: "/login", element: <Login /> },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/confirm-password",
+        element: <ConfirmPassword />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <h1 className="text-center mt-20">404 - Page Not Found</h1>,
   },
 ]);
 

@@ -60,7 +60,7 @@ const Navbar = () => {
       <div className="navbar-end items-center gap-4">
         <Link
           className="btn rounded-[56px] px-6 xxl:px-20 py-6 btn-primary max-md:hidden"
-          to="#"
+          to="/login"
         >
           <span className="">Login</span>
           <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
@@ -108,7 +108,7 @@ const Navbar = () => {
               </li>
             ))}
             <div className="mt-4 px-4">
-              <Link className="btn px-6 btn-primary w-full text-center" to="#">
+              <Link to="/login" className="btn px-6 btn-primary w-full text-center">
                 <span className="">Login</span>
                 <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
               </Link>

@@ -95,7 +95,7 @@ rounded-61px"
           >
             <img
               className="w-full rounded-61px"
-              src="/public/assets/imgs/services/service_details_img.webp"
+              src="/assets/imgs/services/service_details_img.webp"
               alt="service"
             />
           </div>

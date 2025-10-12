@@ -61,7 +61,7 @@
   --text-21px: 1.3125rem; /* 21px */
   --text-22px: 1.375rem; /* 22px */
   --text-25px: 1.5625rem; /* 25px */
-  --text-27px:  1.688; /* 27px */
+  --text-27px: 1.688; /* 27px */
   --text-28px: 1.75rem; /* 28px */
   --text-32px: 2rem; /* 32px */
   --text-35px: 2.1875rem; /* 35px */
@@ -107,6 +107,11 @@ body {
   width: var(--container-screen);
   padding-inline: var(--container-padding);
   margin-inline: auto; /* center */
+  max-width: 100%;
+  /* On screens wider than 1440px (90rem) */
+  @media (width >= 90rem) {
+    max-width: 90rem; /* Limit to 1440px */
+  }
 }
 
 .btn {
@@ -130,12 +135,11 @@ body {
   display: block;
 }
 
-
 :is(
-  .input.is-invalid,
-  .input:has(.is-invalid),
-  .validate .input:invalid,
-  .validate .input:has(:invalid)
-):hover {
+    .input.is-invalid,
+    .input:has(.is-invalid),
+    .validate .input:invalid,
+    .validate .input:has(:invalid)
+  ):hover {
   border-color: var(--color-error);
 }
