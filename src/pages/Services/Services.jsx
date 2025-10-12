@@ -5,27 +5,27 @@ const Services = () => {
     {
       id: 1,
       name: "Home Cleaning",
-      icon: "mdi--office-building",
+      iconClass: "icon-[mdi--office-building]",
     },
     {
       id: 2,
       name: "Pest Control",
-      icon: "mdi--bug",
+      iconClass: "icon-[mdi--bug]",
     },
     {
       id: 3,
       name: "Office Cleaning",
-      icon: "mdi--office-building",
+      iconClass: "icon-[mdi--office-building]",
     },
     {
       id: 4,
       name: "Carpet Cleaning",
-      icon: "mdi--carpet",
+      iconClass: "icon-[mdi--carpet]",
     },
     {
       id: 5,
       name: "Deep Cleaning",
-      icon: "eos-icons--cleanup",
+      iconClass: "icon-[eos-icons--cleanup]",
     },
   ];
 
@@ -55,21 +55,22 @@ const Services = () => {
           Comprehensive{" "}
           <span className="text-primary">Cleaning Pest Control</span>
         </h1>
+
         <p className="font-normal text-secondary-dark text-18px text-center mb-8">
           Professional services designed to keep your spaces clean, healthy, and
           pest-free. Experience the difference with our expert team and
           eco-friendly solutions.
         </p>
 
-        <div class="flex gap-6 ">
+        <div class="flex gap-6 max-md:flex-col">
           <nav
-            class="tabs flex-col items-start space-y-1 min-w-[30%] rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] h-fit"
+            class="tabs flex-col max-md:flex-row max-md:flex-wrap items-start space-y-1 min-w-[30%] rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] h-fit"
             aria-label="Tabs"
             role="tablist"
             data-tabs-vertical="true"
             aria-orientation="horizontal"
           >
-            <h4 className="font-semibold text-22px  mb-6">
+            <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
               Choose Your Service
             </h4>
             {servicesCategories.map((category) => (
@@ -78,14 +79,14 @@ const Services = () => {
                 type="button"
                 class={`${
                   category.id === 1 ? "active" : ""
-                }  btn justify-start gap-2 btn-text rounded-10px h-14 font-normal text-base active-tab:!border  active-tab:bg-[#D2E2D9] active-tab:text-[#0C8C43] active-tab:border-primary   hover:text-primary hover:bg-primary/20  w-full`}
+                }  btn justify-start gap-2 btn-text rounded-10px h-14 max-md:w-fit font-normal text-base active-tab:!border  active-tab:bg-[#D2E2D9] active-tab:text-[#0C8C43] active-tab:border-primary   hover:text-primary hover:bg-primary/20  w-full`}
                 id={`tabs-pill-vertical-item-${category.id}`}
                 data-tab={`#tabs-pill-vertical-${category.id}`}
                 aria-controls={`tabs-pill-vertical-${category.id}`}
                 role="tab"
                 aria-selected="true"
               >
-                <span class={`icon-[${category.icon}] size-5 mr-2`}></span>
+                <span className={`${category.iconClass} size-5 mr-2`}></span>
                 {category.name}
               </button>
             ))}
@@ -98,8 +99,8 @@ const Services = () => {
               aria-labelledby="tabs-pill-vertical-item-1"
             >
               <div className="flex items-center gap-9 p-4 mb-4 bg-[#D2E2D9] rounded-10px">
-                <div className="size-20 rounded-full bg-primary center_flex  shadow-[0px_0px_17.8px_0px_#00000040]">
-                  <span className="icon-[ic--round-home] size-10 text-white"></span>
+                <div className="size-20 rounded-full bg-primary center_flex  shadow-[0px_0px_17.8px_0px_#00000040] max-md:size-fit ">
+                  <span className="icon-[ic--round-home] size-10 text-white max-md:scale-75"></span>
                 </div>
 
                 <div>
