@@ -14,6 +14,7 @@ import Login from "./pages/Auth/login.jsx";
 import Register from "./pages/Auth/register.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ConfirmPassword from "./pages/Auth/ConfirmPassword.jsx";
+import PasswordUpdatedSuccess from "./pages/Auth/PasswordUpdatedSuccess.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/confirm-password",
         element: <ConfirmPassword />,
+      },
+        {
+        path: "/password-updated-success",
+        element: <PasswordUpdatedSuccess />,
       },
     ],
   },

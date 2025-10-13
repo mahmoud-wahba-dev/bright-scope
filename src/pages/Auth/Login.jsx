@@ -103,7 +103,7 @@ const Login = () => {
                             className="h-10"
                             id="userPassword"
                             type="password"
-                            placeholder="············"
+                            placeholder="Password"
                             required
                           />
                           <button

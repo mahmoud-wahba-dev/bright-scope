@@ -13,6 +13,7 @@
   --color-secondary: #f8f9fa;
 
   --color-base-content: black;
+  --color-disabled: #d1d1d1;
 }
 
 @theme {
@@ -32,6 +33,7 @@
   --color-secondary-dark: #4f4f4f;
   --color-surface-light: #f8f9fa;
   --color-base-content: black;
+  --color-disabled: #d1d1d1;
 
   /* Fonts */
   --font-sans: "Poppins", sans-serif;
