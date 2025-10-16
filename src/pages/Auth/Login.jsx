@@ -1,6 +1,76 @@
-import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import apiHelper from "../../api/apiHelper";
+import { notyf } from "../../utils/toast";
+// form validation schema
+const schema = z.object({
+  email: z
+    .email({ message: "Invalid email address" })
+    .nonempty("Email is required"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .nonempty("Password is required"),
+});
 const Login = () => {
+  const navigate = useNavigate();
+  // const [loading, setLoading] = useState(false);
+
+  // setup form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+const onSubmit = async (data) => {
+  try {
+    const response = await apiHelper.post("/auth/login/", data);
+    console.log("Login response:", response.data);
+
+    // ✅ Destructure correctly
+    const { tokens, user, message } = response.data;
+    const { access, refresh } = tokens;
+
+    // ✅ Save login info to localStorage
+    localStorage.setItem("accessToken", access);
+    localStorage.setItem("refreshToken", refresh);
+    localStorage.setItem("user", JSON.stringify(user));
+
+    // ✅ Notify success
+    notyf.success(message || "Login successful!");
+
+    // ✅ Redirect to dashboard/home
+    navigate("/");
+  } catch (error) {
+    console.error("Login error:", error);
+
+    // ✅ Handle backend error gracefully
+    notyf.error(
+      error.response?.data?.errors?.non_field_errors?.[0] ||
+        error.response?.data?.message ||
+        "Login failed. Please try again."
+    );
+  }
+};
+
+  const onError = (formErrors) => {
+    Object.values(formErrors).forEach((err) => {
+      if (err?.message) {
+        notyf.error(err.message);
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log("first");
+  });
+
   return (
     <section className="my-7 md:my-14">
       <div className="container ">
@@ -75,7 +145,11 @@ const Login = () => {
                   </div>
 
                   <div class="space-y-4">
-                    <form class="mb-4 space-y-4" onsubmit="return false;">
+                    <form
+                      class="mb-4 space-y-4"
+                      onSubmit={handleSubmit(onSubmit, onError)}
+                      noValidate
+                    >
                       <div>
                         <label
                           class="label-text font-medium mb-1.5"
@@ -88,8 +162,13 @@ const Login = () => {
                           placeholder="Enter your email address"
                           class="input h-10"
                           id="userEmail"
-                          required
+                          {...register("email")}
                         />
+                        {errors.email && (
+                          <p className="text-error text-sm mt-1">
+                            {errors.email.message}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label
@@ -104,8 +183,9 @@ const Login = () => {
                             id="userPassword"
                             type="password"
                             placeholder="Password"
-                            required
+                            {...register("password")}
                           />
+
                           <button
                             type="button"
                             data-toggle-password='{ "target": "#userPassword" }'
@@ -116,6 +196,11 @@ const Login = () => {
                             <span class="icon-[tabler--eye-off] password-active:hidden block size-5 shrink-0"></span>
                           </button>
                         </div>
+                        {errors.password && (
+                          <p className="text-error text-sm mt-1">
+                            {errors.password.message}
+                          </p>
+                        )}
                       </div>
                       <div class="flex items-center justify-between gap-y-2">
                         <div class="flex items-center gap-2">
@@ -132,16 +217,42 @@ const Login = () => {
                           </label>
                         </div>
                         <Link
-                            to="/forgot-password"
+                          to="/forgot-password"
                           class="link link-animated link-primary text-14px font-normal"
                         >
                           Forgot Password?
                         </Link>
                       </div>
-                      <button class="btn btn-lg btn-primary btn-gradient h-14 rounded-55px btn-block uppercase">
-                        Login
-                        <span className="icon-[mdi--arrow-right]"></span>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="btn btn-lg btn-primary btn-gradient h-14 rounded-55px btn-block uppercase "
+                      >
+                        {isSubmitting ? (
+                          <>
+                            Logging in...
+                            <span class="loading loading-spinner loading-sm"></span>
+                          </>
+                        ) : (
+                          <>
+                            Login
+                            <span className="icon-[mdi--arrow-right]"></span>
+                          </>
+                        )}
                       </button>
+
+                      {/* <button
+                        disabled={isSubmitting}
+                        class="btn btn-lg btn-primary  btn-gradient h-14 rounded-55px btn-block uppercase"
+                      >
+                        Login
+                        {loading ? (
+                          <span class="loading loading-spinner loading-sm"></span>
+                        ) : (
+                          <span className="icon-[mdi--arrow-right]"></span>
+                        )}
+                      </button> */}
                     </form>
                     <p class="font-semibold text-14px mt-8 mb-4 text-center ">
                       Don’t have an account?
