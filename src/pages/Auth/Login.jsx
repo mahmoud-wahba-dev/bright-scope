@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import apiHelper from "../../api/apiHelper";
 import { notyf } from "../../utils/toast";
+import { useAuth } from "../../context/AuthContext";
 // form validation schema
 const schema = z.object({
   email: z
@@ -18,7 +19,10 @@ const schema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   // const [loading, setLoading] = useState(false);
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) navigate("/");
+  }, [navigate]);
   // setup form
   const {
     register,
@@ -28,36 +32,46 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
 
-const onSubmit = async (data) => {
-  try {
-    const response = await apiHelper.post("/auth/login/", data);
-    console.log("Login response:", response.data);
+  const { login } = useAuth();
 
-    // ✅ Destructure correctly
-    const { tokens, user, message } = response.data;
-    const { access, refresh } = tokens;
+  const onSubmit = async (data) => {
+    try {
+      // Debug: Check value of rememberMe
+      console.log("Remember Me value:", data.rememberMe);
 
-    // ✅ Save login info to localStorage
-    localStorage.setItem("accessToken", access);
-    localStorage.setItem("refreshToken", refresh);
-    localStorage.setItem("user", JSON.stringify(user));
+      const response = await apiHelper.post("/auth/login/", data);
+      console.log("Login response:", response.data);
 
-    // ✅ Notify success
-    notyf.success(message || "Login successful!");
+      // ✅ Destructure correctly
+      const { tokens, user, message } = response.data;
+      const { access } = tokens;
 
-    // ✅ Redirect to dashboard/home
-    navigate("/");
-  } catch (error) {
-    console.error("Login error:", error);
+      // ✅ Save login info to localStorage
+      // ✅ Save based on rememberMe checkbox
 
-    // ✅ Handle backend error gracefully
-    notyf.error(
-      error.response?.data?.errors?.non_field_errors?.[0] ||
-        error.response?.data?.message ||
-        "Login failed. Please try again."
-    );
-  }
-};
+      login(user, access, data.rememberMe);
+      console.log("Remember Me value:", data.rememberMe);
+
+      // localStorage.setItem("token", access);
+      // localStorage.setItem("refreshToken", refresh);
+      // localStorage.setItem("user", JSON.stringify(user));
+
+      // ✅ Notify success
+      notyf.success(message || "Login successful!");
+
+      // ✅ Redirect to dashboard/home
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error);
+
+      // ✅ Handle backend error gracefully
+      notyf.error(
+        error.response?.data?.errors?.non_field_errors?.[0] ||
+          error.response?.data?.message ||
+          "Login failed. Please try again."
+      );
+    }
+  };
 
   const onError = (formErrors) => {
     Object.values(formErrors).forEach((err) => {
@@ -66,10 +80,6 @@ const onSubmit = async (data) => {
       }
     });
   };
-
-  useEffect(() => {
-    console.log("first");
-  });
 
   return (
     <section className="my-7 md:my-14">
@@ -163,6 +173,7 @@ const onSubmit = async (data) => {
                           class="input h-10"
                           id="userEmail"
                           {...register("email")}
+                          disabled={isSubmitting}
                         />
                         {errors.email && (
                           <p className="text-error text-sm mt-1">
@@ -184,6 +195,7 @@ const onSubmit = async (data) => {
                             type="password"
                             placeholder="Password"
                             {...register("password")}
+                            disabled={isSubmitting}
                           />
 
                           <button
@@ -202,23 +214,26 @@ const onSubmit = async (data) => {
                           </p>
                         )}
                       </div>
-                      <div class="flex items-center justify-between gap-y-2">
-                        <div class="flex items-center gap-2">
+                      <div className="flex items-center justify-between gap-y-2">
+                        <div className="flex items-center gap-2">
                           <input
                             type="checkbox"
-                            class="checkbox checkbox-primary"
+                            className="checkbox checkbox-primary"
                             id="rememberMe"
+                            {...register("rememberMe")}
+
+                              
                           />
                           <label
-                            class="label-text text-14px font-normal"
-                            for="rememberMe"
+                            className="label-text text-14px font-normal"
+                            htmlFor="rememberMe"
                           >
                             Remember Me
                           </label>
                         </div>
                         <Link
                           to="/forgot-password"
-                          class="link link-animated link-primary text-14px font-normal"
+                          className="link link-animated link-primary text-14px font-normal"
                         >
                           Forgot Password?
                         </Link>

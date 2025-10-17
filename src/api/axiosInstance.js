@@ -3,7 +3,7 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-// Create the axios instance
+// Create axios instance
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
   },
 });
 
-// (Optional) Add interceptors for token or error handling
+// Add token to every request
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -23,10 +23,18 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Handle global API errors
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Optionally handle global errors here
+    // Handle 401 Unauthorized
+    if (error.response?.status === 401) {
+      console.warn("Unauthorized. Logging out...");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+
     console.error("API Error:", error.response?.data || error.message);
     return Promise.reject(error);
   }

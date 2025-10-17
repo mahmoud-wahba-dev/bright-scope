@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { AuthProvider } from "../context/AuthContext";
 
 const MasterLayout = () => {
   const location = useLocation();
@@ -15,11 +16,13 @@ const MasterLayout = () => {
 
   return (
     <>
-      <Navbar />
-      <main className="min-h-[calc(75vh-88px)] pt-20">
-        <Outlet />
-      </main>
-      <Footer />
+      <AuthProvider>
+        <Navbar />
+        <main className="min-h-[calc(75vh-88px)] pt-20">
+          <Outlet />
+        </main>
+        <Footer />
+      </AuthProvider>
     </>
   );
 };

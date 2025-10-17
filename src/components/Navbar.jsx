@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
+  const { user, logout, isAuthenticated } = useAuth();
+
+
   const menuItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
@@ -58,13 +62,84 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end items-center gap-4">
-        <Link
-          className="btn rounded-[56px] px-6 xxl:px-20 py-6 btn-primary max-md:hidden"
-          to="/login"
-        >
-          <span className="">Login</span>
-          <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
-        </Link>
+        {isAuthenticated ? (
+          <div className="dropdown relative inline-flex">
+            <button
+              id="dropdown-avatar"
+              type="button"
+              className="dropdown-toggle btn btn-outline btn-primary flex items-center gap-2 rounded-full"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="User menu"
+            >
+              <div className="avatar">
+                <div className="size-6 rounded-full">
+                  <img
+                    src={
+                      user?.avatar ||
+                      "https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png"
+                    }
+                    alt={user?.name || "User Avatar"}
+                  />
+                </div>
+              </div>
+              {user?.name?.split(" ")[0] || "User"}
+              <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+            </button>
+
+            <ul
+              className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="dropdown-avatar"
+            >
+              <li className="dropdown-header gap-3">
+                <div className="avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user?.avatar ||
+                        "https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png"
+                      }
+                      alt={user?.name || "User Avatar"}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h6 className="text-base-content text-base font-semibold">
+                    {user?.name || "User"}
+                  </h6>
+                  <small className="text-base-content/50 text-sm font-normal">
+                    {user?.email || "user@example.com"}
+                  </small>
+                </div>
+              </li>
+
+              <li>
+                <Link className="dropdown-item" to="#">
+                  My Profile
+                </Link>
+              </li>
+
+              <li>
+                <button
+                  className="dropdown-item text-error font-semibold"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link
+            className="btn rounded-[56px] px-6 xxl:px-20 py-6 btn-primary max-md:hidden"
+            to="/login"
+          >
+            <span>Login</span>
+            <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
+          </Link>
+        )}
 
         <button
           className="btn rounded-[56px] xl:px-20 py-6 bg-transparent border border-primary text-[#1A1A1A] max-sm:hidden"
@@ -107,19 +182,22 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
-            <div className="mt-4 px-4">
-              <Link to="/login" className="btn px-6 btn-primary w-full text-center">
-                <span className="">Login</span>
-                <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
-              </Link>
-            </div>
+            {!isAuthenticated ? (
+              <div className="mt-4 px-4">
+                <Link
+                  to="/login"
+                  className="btn px-6 btn-primary w-full text-center"
+                >
+                  <span className="">Login</span>
+                  <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
+                </Link>
+              </div>
+            ) : null}
           </ul>
         </div>
       </div>
     </nav>
   );
 };
-
-
 
 export default Navbar;
