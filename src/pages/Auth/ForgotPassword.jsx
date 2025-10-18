@@ -1,7 +1,68 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import apiHelper from "../../api/apiHelper";
+import { notyf } from "../../utils/toast";
+import { Link, useNavigate } from "react-router-dom";
+
+// ✅ Validation schema
+const schema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+});
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  // ✅ Submit handler
+  const onSubmit = async (data) => {
+    try {
+      const response = await apiHelper.post("auth/reset-password-email/", data);
+      console.log("Forgot :", response);
+
+      notyf.success(
+        response.data?.msg ||
+          "A password reset code has been sent to your email."
+      );
+
+      // ✅ Optional: navigate to verification page
+      // navigate("/verify-reset-code");
+    } catch (error) {
+      console.error("Forgot password error:", error);
+
+      const details = error.response?.data?.details;
+
+      if (details && typeof details === "object") {
+        Object.entries(details).forEach(([field, messages]) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => notyf.error(msg));
+          } else if (typeof messages === "string") {
+            notyf.error(messages);
+          }
+        });
+      } else {
+        notyf.error(
+          error.response?.data?.error ||
+            error.response?.data?.message ||
+            "Failed to send reset code. Please try again."
+        );
+      }
+    }
+  };
+
+  const onError = (formErrors) => {
+    Object.values(formErrors).forEach((err) => {
+      if (err?.message) notyf.error(err.message);
+    });
+  };
+
   return (
     <section className="my-7 md:my-14">
       <div className="container ">
@@ -71,7 +132,10 @@ const ForgotPassword = () => {
                   </div>
 
                   <div class="space-y-4">
-                    <form class="mb-4 space-y-4" onsubmit="return false;">
+                    <form
+                      class="mb-4 space-y-4"
+                      onSubmit={handleSubmit(onSubmit, onError)}
+                    >
                       <div>
                         <label
                           class="label-text font-medium mb-1.5"
@@ -84,16 +148,35 @@ const ForgotPassword = () => {
                           placeholder="Enter your email address"
                           class="input h-10"
                           id="userEmail"
-                          required
+                          {...register("email")}
+                          disabled={isSubmitting}
                         />
+
+                        {errors.email && (
+                          <p className="text-error text-sm mt-1">
+                            {errors.email.message}
+                          </p>
+                        )}
                       </div>
                       <p className="font-normal text-14px text-[#64748B]">
                         We will send a verification code to this address
                       </p>
 
-                      <button class="btn btn-lg btn-primary btn-gradient h-14 rounded-55px btn-block uppercase mt-4">
-                        Send Reset Code
-                        <span className="icon-[mdi--arrow-right]"></span>
+                      <button
+                        class="btn btn-lg btn-primary btn-gradient h-14 rounded-55px btn-block uppercase mt-4"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            Sending...
+                            <span className="loading loading-spinner loading-sm"></span>
+                          </>
+                        ) : (
+                          <>
+                            Send Reset Code
+                            <span className="icon-[mdi--arrow-right]"></span>
+                          </>
+                        )}
                       </button>
                     </form>
                     <div class="font-normal text-base mt-8 mb-4 text-center center_flex ">
