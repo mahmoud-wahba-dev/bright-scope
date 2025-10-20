@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
-      { path: "/services/:category", element: <Services /> }, // ✅ from home to services category
+      { path: "/services/:category?", element: <Services /> }, // ✅ from home to services category
 
       {
         path: "/service/:id",
