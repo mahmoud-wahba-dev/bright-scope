@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useServices } from "../../hooks/useServices";
+import { useEffect } from "react";
 
 const Services = () => {
   const servicesCategories = [
@@ -48,6 +50,13 @@ const Services = () => {
     ],
   };
 
+  const { services, loading } = useServices();
+
+  useEffect(() => {
+    console.log(services);
+    console.log(services.contents);
+  }, [services]);
+
   return (
     <section className="my-7 md:my-14">
       <div className="container">
@@ -73,7 +82,7 @@ const Services = () => {
             <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
               Choose Your Service
             </h4>
-            {servicesCategories.map((category) => (
+            {services.map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -86,81 +95,84 @@ const Services = () => {
                 role="tab"
                 aria-selected="true"
               >
-                <span className={`${category.iconClass} size-5 mr-2`}></span>
+                <span className={`${category.icon} size-5 mr-2`}></span>
                 {category.name}
               </button>
             ))}
           </nav>
 
           <div class="ms-3 w-full rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] rounded-10px">
-            <div
-              id="tabs-pill-vertical-1"
-              role="tabpanel"
-              aria-labelledby="tabs-pill-vertical-item-1"
-            >
-              <div className="flex items-center gap-9 p-4 mb-4 bg-[#D2E2D9] rounded-10px">
-                <div className="size-20 rounded-full bg-primary center_flex  shadow-[0px_0px_17.8px_0px_#00000040] max-md:size-fit ">
-                  <span className="icon-[ic--round-home] size-10 text-white max-md:scale-75"></span>
-                </div>
-
-                <div>
-                  <h6 className="font-semibold text-22px mb-1">
-                    {serviceData.name}
-                  </h6>
-                  <p className="font-normal text-14px ">
-                    {serviceData.description}
-                  </p>
-                </div>
-              </div>
-              <h5 className="font-semibold text-22px mb-2">What is Included</h5>
-              <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
-                {/* loop here for service features */}
-                {serviceData.serviceFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-                    <p className="text-base text-secondary-dark">{feature}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div class="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
-                <div className="px-11">
-                  <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                    <span class="icon-[mingcute--time-fill] size-8 text-white"></span>
-                  </div>
-                  <p className="font-semibold text-18px text-center">2-4 H</p>
-                  <p className="font-normal text-14px text-center text-secondary-dark">
-                    Duration
-                  </p>
-                </div>
-                <div className="px-11">
-                  <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                    <span class="icon-[mingcute--star-fill] size-8 text-white"></span>
-                  </div>
-                  <p className="font-semibold text-18px text-center">4.9</p>
-                  <p className="font-normal text-14px text-center text-secondary-dark">
-                    Rating
-                  </p>
-                </div>
-
-                <div className="px-11">
-                  <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                    <span class="icon-[mdi--leaf] size-8 text-white"></span>
-                  </div>
-                  <p className="font-semibold text-18px text-center">100%</p>
-                  <p className="font-normal text-14px text-center text-secondary-dark">
-                    Eco-safe
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="#"
-                class="btn btn-primary w-full h-14 rounded-55px font-semibold text-base mt-8"
+            {services.map((service) => (
+              <div
+                id={`tabs-pill-vertical-${service.id}`}
+                role="tabpanel"
+                aria-labelledby={`tabs-pill-vertical-item-${service.id}`}
               >
-                Book Now
-                <span class="icon-[mdi--arrow-right] ml-2"></span>
-              </Link>
-            </div>
+                <div className="flex items-center gap-9 p-4 mb-4 bg-[#D2E2D9] rounded-10px">
+                  <div className="size-20 rounded-full bg-primary center_flex  shadow-[0px_0px_17.8px_0px_#00000040] max-md:size-fit ">
+                    <span className="icon-[ic--round-home] size-10 text-white max-md:scale-75"></span>
+                  </div>
+
+                  <div>
+                    <h6 className="font-semibold text-22px mb-1">
+                      {service.name}
+                    </h6>
+                    <p className="font-normal text-14px ">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+                <h5 className="font-semibold text-22px mb-2">
+                  What is Included
+                </h5>
+                <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
+                  {/* loop here for service contents */}
+                  {service.contents && service.contents.length > 0 ? (
+                    service.contents.map((content) => (
+                      <div key={content.id} className="flex items-center gap-3">
+                        <span className="icon-[mdi--check-circle] text-primary size-6"></span>
+                        <p className="text-base text-secondary-dark">
+                          {content.name}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-secondary-dark">No content available.</p>
+                  )}
+                </div>
+
+                <div class="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
+                  {service.features && service.features.length > 0 ? (
+                    service.features.map((feature) => (
+                      <div className="px-11">
+                        <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
+                          <span
+                            className={`${feature.icon} size-8 text-white`}
+                          ></span>
+                        </div>
+                        <p className="font-semibold text-18px text-center">
+                          {feature.description}
+                        </p>
+                        <p className="font-normal text-14px text-center text-secondary-dark">
+                          {feature.name}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-secondary-dark">
+                      No features available.
+                    </p>
+                  )}
+                </div>
+                <Link
+                  to={`/service/${service.id}`} // e.g. /services/home_cleaning
+                  className="btn btn-primary w-full h-14 rounded-55px font-semibold text-base mt-8"
+                >
+                  Book Now
+                  <span className="icon-[mdi--arrow-right] ml-2"></span>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>

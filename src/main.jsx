@@ -27,9 +27,11 @@ const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
+      { path: "/services/:category", element: <Services /> }, // ✅ from home to services category
+
       {
-        path: "/services/:id",
-        element: <ServiceDetails />,
+        path: "/service/:id",
+        element: <ServiceDetails />, // ✅ from services page to service details page
       },
       {
         path: "/about",
@@ -57,7 +59,7 @@ const router = createBrowserRouter([
         path: "/confirm-password",
         element: <ConfirmPassword />,
       },
-        {
+      {
         path: "/password-updated-success",
         element: <PasswordUpdatedSuccess />,
       },
