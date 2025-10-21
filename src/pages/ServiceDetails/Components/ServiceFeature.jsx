@@ -59,7 +59,7 @@ const ServiceFeature = ({ serviceDetails }) => {
           </div>
           <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
             {/* loop here for service features */}
-            {serviceDetails.contents.map((feature) => (
+            {Array.isArray(serviceDetails.contents) && serviceDetails.contents.map((feature) => (
               <div key={feature.id} className="flex items-center gap-3">
                 <span className="icon-[mdi--check-circle] text-primary size-6"></span>
                 <p className="font-normal text-base text-secondary-dark">
