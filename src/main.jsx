@@ -15,6 +15,7 @@ import Register from "./pages/Auth/Register.jsx";
 import ForgotPassword from "./pages/Auth/ForgotPassword.jsx";
 import ConfirmPassword from "./pages/Auth/ConfirmPassword.jsx";
 import PasswordUpdatedSuccess from "./pages/Auth/PasswordUpdatedSuccess.jsx";
+import ErrorBoundary from "./utils/ErrorBoundary.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -73,8 +74,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
   </StrictMode>
 );
-
-
