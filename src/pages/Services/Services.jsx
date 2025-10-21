@@ -3,53 +3,6 @@ import { useServices } from "../../hooks/useServices";
 import { useEffect, useState } from "react";
 
 const Services = () => {
-  // const servicesCategories = [
-  //   {
-  //     id: 1,
-  //     name: "Home Cleaning",
-  //     iconClass: "icon-[mdi--office-building]",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Pest Control",
-  //     iconClass: "icon-[mdi--bug]",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Office Cleaning",
-  //     iconClass: "icon-[mdi--office-building]",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Carpet Cleaning",
-  //     iconClass: "icon-[mdi--carpet]",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Deep Cleaning",
-  //     iconClass: "icon-[eos-icons--cleanup]",
-  //   },
-  // ];
-
-  // const serviceData = {
-  //   id: 1,
-  //   name: "Home Cleaning",
-  //   icon: "ic--round-home",
-  //   description:
-  //     "Professional home cleaning services for a spotless living space",
-  //   serviceFeatures: [
-  //     "Deep cleaning",
-  //     "Regular maintenance",
-  //     "Eco-friendly products",
-  //     "Trained professionals",
-  //   ],
-  //   stats: [
-  //     { icon: "mingcute--time-fill", label: "Duration", value: "2-4 H" },
-  //     { icon: "mingcute--star-fill", label: "Rating", value: "4.9" },
-  //     { icon: "mdi--leaf", label: "Eco-safe", value: "100%" },
-  //   ],
-  // };
-
   const { services, loading } = useServices();
   const [activeTab, setActiveTab] = useState(null);
   const { category } = useParams();
@@ -78,6 +31,23 @@ const Services = () => {
     }
   }, [loading, services, category]);
 
+  // Add: utility to avoid calling .map on non-arrays and log helpful warnings
+  function safeArray(value, path = "unknown") {
+    if (Array.isArray(value)) return value;
+    if (value == null) return [];
+    // warn once for visibility in client console / Vercel logs
+    console.warn(`Expected array at "${path}" but received:`, value);
+    return [];
+  }
+
+  // Add: debug log the services payload after loading to help identify type issues
+  useEffect(() => {
+    if (!loading) {
+      console.info("Services payload:", services);
+      // If services is not an array, this will log the warning from safeArray below during render.
+    }
+  }, [loading, services]);
+
   return (
     <section className="my-7 md:my-14">
       <div className="container">
@@ -103,7 +73,7 @@ const Services = () => {
             <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
               Choose Your Service
             </h4>
-            {(services ?? []).map((category) => (
+            {safeArray(services, "services").map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -127,7 +97,7 @@ const Services = () => {
           </nav>
 
           <div class="ms-3 w-full rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] rounded-10px">
-            {(services ?? []).map((service) =>
+            {safeArray(services, "services").map((service) =>
               activeTab === service.id ? (
                 <div
                   id={`tabs-pill-vertical-${service.id}`}
@@ -155,16 +125,11 @@ const Services = () => {
                   </h5>
                   <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
                     {/* loop here for service contents */}
-                    {service.contents && service.contents.length > 0 ? (
-                      (service.contents ?? []).map((content) => (
-                        <div
-                          key={content.id}
-                          className="flex items-center gap-3"
-                        >
+                    {safeArray(service.contents, `services[${service?.id}].contents`).length > 0 ? (
+                      safeArray(service.contents, `services[${service?.id}].contents`).map((content) => (
+                        <div key={content.id} className="flex items-center gap-3">
                           <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-                          <p className="text-base text-secondary-dark">
-                            {content.name}
-                          </p>
+                          <p className="text-base text-secondary-dark">{content.name}</p>
                         </div>
                       ))
                     ) : (
@@ -175,9 +140,9 @@ const Services = () => {
                   </div>
 
                   <div class="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
-                    {service.features && service.features.length > 0 ? (
-                      (service.features ?? []).map((feature) => (
-                        <div className="px-11">
+                    {safeArray(service.features, `services[${service?.id}].features`).length > 0 ? (
+                      safeArray(service.features, `services[${service?.id}].features`).map((feature) => (
+                        <div className="px-11" key={feature?.id ?? feature?.name}>
                           <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
                             <span
                               className={`${feature.icon} size-8 text-white`}
