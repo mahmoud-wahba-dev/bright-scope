@@ -1,21 +1,26 @@
-const ServiceFeature = () => {
+import { useNavigate } from "react-router-dom";
+
+const ServiceFeature = ({ serviceDetails }) => {
+  const navigate = useNavigate();
   return (
     <section className="my-3 md:my-6 border-b border-[#E0E0E0] pb-4 md:pb-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <div className="flex items-center gap-2.5 mb-8 text-primary ">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2.5 mb-8 text-primary "
+          >
             <span className="icon-[mdi--arrow-left]"></span>
             <span className="font-normal text-base ">Back to Services</span>
-          </div>
+          </button>
           <h1 className="font-bold text-48px text-primary-dark mb-2">
-            Regular Home Cleaning
+            {serviceDetails.description}
           </h1>
           <p className="font-semibold text-22px text-primary-dark mb-2">
-            Keep your home spotless with our regular cleaning service
+            {serviceDetails.hero_description}
           </p>
           <p className="font-normal text-base text-primary-dark mb-8">
-            Maintain a consistently clean and healthy living environment with
-            our professional regular cleaning service.
+            {serviceDetails.hero_description}
           </p>
           <div className="flex items-center gap-6 mb-8">
             <div className="text-center">
@@ -54,37 +59,14 @@ const ServiceFeature = () => {
           </div>
           <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
             {/* loop here for service features */}
-            <div className="flex items-center gap-3">
-              <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-              <p className="font-normal text-base text-secondary-dark">
-                {" "}
-                Regular Cleaning{" "}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-              <p className="font-normal text-base text-secondary-dark">
-                {" "}
-                Regular Cleaning{" "}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-              <p className="font-normal text-base text-secondary-dark">
-                {" "}
-                Regular Cleaning{" "}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span className="icon-[mdi--check-circle] text-primary size-6"></span>
-              <p className="font-normal text-base text-secondary-dark">
-                {" "}
-                Regular Cleaning{" "}
-              </p>
-            </div>
+            {serviceDetails.contents.map((feature) => (
+              <div key={feature.id} className="flex items-center gap-3">
+                <span className="icon-[mdi--check-circle] text-primary size-6"></span>
+                <p className="font-normal text-base text-secondary-dark">
+                  {feature.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 

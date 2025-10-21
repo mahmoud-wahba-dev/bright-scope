@@ -4,6 +4,7 @@ import apiHelper from "../../../api/apiHelper";
 import { set } from "zod";
 import { notyf } from "../../../utils/toast";
 import { useServices } from "../../../hooks/useServices";
+import { useBookingStore } from "../../../store/bookingStore";
 const servicesitems = [
   {
     title: "Home Cleaning",
@@ -44,8 +45,6 @@ const servicesitems = [
   },
 ];
 const OurServices = () => {
-
-
   const { services, loading } = useServices();
 
   return (
