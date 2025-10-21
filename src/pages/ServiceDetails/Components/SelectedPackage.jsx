@@ -20,7 +20,7 @@ const SelectedPackage = ({
           {selectedAddons.length > 0 && (
             <p className="text-base mt-2">
               Add-ons:{" "}
-              <strong> {selectedAddons.map((a) => a.name).join(", ")}</strong>
+              <strong> {Array.isArray(selectedAddons) && selectedAddons.map((a) => a.name).join(", ")}</strong>
             </p>
           )}
           <p className="font-semibold text-22px text-primary-dark mt-4">
