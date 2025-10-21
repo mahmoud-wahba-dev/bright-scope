@@ -126,7 +126,7 @@ const HeroSlider = () => {
             style={{ minHeight: minHeightStyle }}
           >
             {/* Slides (now absolute so they overlap) */}
-            {heroSlides.map((slide, index) => (
+            {Array.isArray(heroSlides) && heroSlides.map((slide, index) => (
               <div
                 className={`carousel-slide absolute inset-0 ${
                   index === currentSlide

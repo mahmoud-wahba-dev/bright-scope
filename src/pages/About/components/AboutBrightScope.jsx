@@ -34,7 +34,7 @@ const AboutBrightScope = () => {
           commitment to excellence.
         </p>
         <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
-          {aboutBrightItems.map((item, index) => (
+          {Array.isArray(aboutBrightItems) && aboutBrightItems.map((item, index) => (
             <div key={index}>
               <div className="size-20  bg-primary text-white rounded-full center_flex mb-4 mx-auto">
                 <span className={`${item.iconClass} text-40px`}></span>

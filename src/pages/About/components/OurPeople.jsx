@@ -32,7 +32,7 @@ const OurPeople = () => {
           team members{" "}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {items.map((item, index) => (
+          {Array.isArray(items) && items.map((item, index) => (
             <div key={index}>
               <div className="size-28 m-auto bg-[linear-gradient(135deg,_#0B7A3B_0%,_#096732_100%)] shadow-[0_4px_4px_0_#00000040] center_flex  rounded-full  mb-6">
                 <span className={`${item.icon} text-62px text-white`}></span>

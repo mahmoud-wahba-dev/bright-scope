@@ -29,7 +29,7 @@ const MissionVision = () => {
     <section className="my-7 md:my-20">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {items.map((item, index) => (
+          {Array.isArray(items) && items.map((item, index) => (
             <div
               key={index}
               className="rounded-10px p-4 shadow-[0_0_10px_0_#00000040]"
@@ -42,7 +42,7 @@ const MissionVision = () => {
               <h4 className="font-semibold text-22px mb-6 "> {item.title} </h4>
               <p className="font-normal text-18px mb-4">{item.description}</p>
 
-              {item.points.map((point, index) => (
+              {Array.isArray(item.points) && item.points.map((point, index) => (
                 <div key={index} className="flex items-center gap-1 mb-1.5">
                   <div className="size-6 center_flex  rounded-8px ">
                     <svg

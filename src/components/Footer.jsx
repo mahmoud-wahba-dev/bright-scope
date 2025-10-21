@@ -327,20 +327,21 @@ const Footer = () => {
                 </svg>
                 Our Services
               </h6>
-              {servicesItems.map((item, index) => (
-                <Link
-                  to="#"
-                  key={index}
-                  className="link no-underline text-base font-normal text-white flex items-center gap-2 mb-4 hover:text-white/80"
-                >
-                  <span>
-                    {
-                      item.icon /* Use dangerouslySetInnerHTML to render the SVG string as HTML */
-                    }
-                  </span>{" "}
-                  {item.title}
-                </Link>
-              ))}
+              {Array.isArray(servicesItems) &&
+                servicesItems.map((item, index) => (
+                  <Link
+                    to="#"
+                    key={index}
+                    className="link no-underline text-base font-normal text-white flex items-center gap-2 mb-4 hover:text-white/80"
+                  >
+                    <span>
+                      {
+                        item.icon /* Use dangerouslySetInnerHTML to render the SVG string as HTML */
+                      }
+                    </span>{" "}
+                    {item.title}
+                  </Link>
+                ))}
             </nav>
 
             <nav className="text-base-content text-white gap-0">
@@ -362,7 +363,7 @@ const Footer = () => {
                 Quick Links
               </h6>
               <div className="mb-7">
-                {quickLinksItems.map((item, index) => (
+                {Array.isArray(quickLinksItems) && quickLinksItems.map((item, index) => (
                   <Link
                     key={index}
                     to="#"
@@ -507,19 +508,20 @@ const Footer = () => {
                 Follow Us
               </h6>
               <div className="flex gap-4 flex-wrap">
-                {socialMediaItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.link}
-                    aria-label={item.name + " Link"}
-                    className="center_flex size-11 rounded-full bg-[#4E7770] hover:bg-success hover:text-white transition-colors"
-                    target="_blank"
-                  >
-                    <span
-                      className={`${item.iconClass} size-6 flex text-white`}
-                    />
-                  </Link>
-                ))}
+                {Array.isArray(socialMediaItems) &&
+                  socialMediaItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={item.link}
+                      aria-label={item.name + " Link"}
+                      className="center_flex size-11 rounded-full bg-[#4E7770] hover:bg-success hover:text-white transition-colors"
+                      target="_blank"
+                    >
+                      <span
+                        className={`${item.iconClass} size-6 flex text-white`}
+                      />
+                    </Link>
+                  ))}
               </div>
             </div>
             <aside className="grid-flow-col items-center">

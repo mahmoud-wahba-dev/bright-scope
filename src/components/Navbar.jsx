@@ -42,7 +42,7 @@ const Navbar = () => {
 
       <div className="navbar-center max-lg:hidden">
         <ul className="menu menu-horizontal p-0 font-medium">
-          {menuItems.map((item, index) => {
+          {Array.isArray(menuItems) && menuItems.map((item, index) => {
             return (
               <li key={index}>
                 <NavLink
@@ -175,7 +175,7 @@ const Navbar = () => {
             aria-orientation="vertical"
             aria-labelledby="dropdown-default"
           >
-            {menuItems.map((item, idx) => (
+            {Array.isArray(menuItems) && menuItems.map((item, idx) => (
               <li key={idx}>
                 <NavLink className="dropdown-item" to={item.path}>
                   {item.name}
