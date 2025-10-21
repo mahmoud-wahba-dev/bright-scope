@@ -12,7 +12,7 @@ const AddsOn = ({ addOns, selectedAddons, onToggleAddon }) => {
         experience
       </p>
       <div class="flex w-full items-start gap-6 flex-wrap sm:flex-nowrap">
-        {addOns.map((addon) => {
+        {(addOns ?? []).map((addon) => {
           const isSelected = selectedAddons.some((a) => a.id === addon.id);
           return (
             <label

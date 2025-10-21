@@ -103,7 +103,7 @@ const Services = () => {
             <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
               Choose Your Service
             </h4>
-            {services.map((category) => (
+            {(services ?? []).map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -127,7 +127,7 @@ const Services = () => {
           </nav>
 
           <div class="ms-3 w-full rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A] rounded-10px">
-            {services.map((service) =>
+            {(services ?? []).map((service) =>
               activeTab === service.id ? (
                 <div
                   id={`tabs-pill-vertical-${service.id}`}
@@ -156,7 +156,7 @@ const Services = () => {
                   <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
                     {/* loop here for service contents */}
                     {service.contents && service.contents.length > 0 ? (
-                      service.contents.map((content) => (
+                      (service.contents ?? []).map((content) => (
                         <div
                           key={content.id}
                           className="flex items-center gap-3"
@@ -176,7 +176,7 @@ const Services = () => {
 
                   <div class="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
                     {service.features && service.features.length > 0 ? (
-                      service.features.map((feature) => (
+                      (service.features ?? []).map((feature) => (
                         <div className="px-11">
                           <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
                             <span

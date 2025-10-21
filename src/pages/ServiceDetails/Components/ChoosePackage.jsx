@@ -41,7 +41,7 @@ const ChoosePackage = ({ packages, selectedPackage, onSelectPackage ,onBookNow }
 
       {/* checkbox */}
       <div class="flex w-full items-start gap-6 flex-wrap sm:flex-nowrap">
-        {packages.map((pkg) => (
+        {(packages ?? []).map((pkg) => (
           <label
             key={pkg.id}
             class="custom-option text-center flex sm:w-1/2 flex-col items-center gap-3 bg-surface-light shadow-[0_4px_10px_0_#0000001A]
