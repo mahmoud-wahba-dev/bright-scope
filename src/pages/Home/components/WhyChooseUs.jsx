@@ -51,7 +51,7 @@ const WhyChooseUs = () => {
         across Dubai and beyond
       </p>
       <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
-        {features.map((item, index) => (
+        {Array.isArray(features) && features.map((item, index) => (
           <div
             key={index}
             className="bg-surface-light rounded-20px shadow-2xl p-4 max-w-[75%] m-auto hover:scale-105 transition-transform duration-300"
