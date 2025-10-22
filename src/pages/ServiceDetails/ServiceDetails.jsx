@@ -66,6 +66,16 @@ const ServiceDetails = () => {
       </div>
     );
   }
+  // helper: persist booking and navigate so Checkout can recover on refresh
+  const goToCheckout = (data) => {
+    try {
+      sessionStorage.setItem("booking_preview", JSON.stringify(data));
+    } catch (e) {
+      console.warn("Failed to persist booking preview:", e);
+    }
+    navigate("/checkout", { state: { booking: data } });
+  };
+
   const handleBookNow = () => {
     if (!selectedPackage) {
       notyf.error("Please select a package before booking.");
@@ -120,9 +130,8 @@ const ServiceDetails = () => {
         title="Book Your Service"
         onConfirm={() => {
           if (!bookingPreview) return;
-          console.log("Finalizing booking:", bookingPreview);
-          notyf.success("Booking confirmed");
-          navigate("/checkout", { state: { booking: bookingPreview } });
+          // persist + navigate
+          goToCheckout(bookingPreview);
         }}
       >
         {/* Use the dedicated BookingPreview component */}
@@ -130,7 +139,7 @@ const ServiceDetails = () => {
           data={bookingPreview}
           onContinue={(data) => {
             if (!data) return;
-            navigate("/checkout", { state: { booking: data } });
+            goToCheckout(data);
           }}
         />
       </Modal>
