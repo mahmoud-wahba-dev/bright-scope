@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AddsOn from "./Components/AddsOn";
 import ChoosePackage from "./Components/ChoosePackage";
 import GlobalFaq from "./Components/GlobalFaq";
@@ -6,21 +6,25 @@ import SelectedPackage from "./Components/SelectedPackage";
 import ServiceFaq from "./Components/ServiceFaq";
 import ServiceFeature from "./Components/ServiceFeature";
 import WhyChooseBright from "./Components/WhyChooseBright";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import apiHelper from "../../api/apiHelper";
 import { notyf } from "../../utils/toast";
-import { useBookingStore } from "../../store/bookingStore";
 import Modal from "../../composable/Modal";
+import BookingPreview from "./Components/BookingPreview"; // added import
 
 const ServiceDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [serviceDetails, setServiceDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [total, setTotal] = useState(0);
-  const { setBookingData, openBookingModal } = useBookingStore();
+
+  // add: modal ref and booking preview
+  const modalRef = useRef(null);
+  const [bookingPreview, setBookingPreview] = useState(null);
 
   // Fetch service details using the id
   useEffect(() => {
@@ -63,29 +67,21 @@ const ServiceDetails = () => {
     );
   }
   const handleBookNow = () => {
-    console.log(selectedPackage, "from booknow");
-
     if (!selectedPackage) {
       notyf.error("Please select a package before booking.");
-
       return;
     }
 
     const bookingData = {
       serviceId: serviceDetails.id,
+      serviceName: serviceDetails.name,
       package: selectedPackage,
       addons: selectedAddons,
       total,
     };
 
-    setBookingData(bookingData);
-    openBookingModal(); // instead of document.querySelector
-
-    // You can save it in localStorage or global state (e.g. Redux, Zustand)
-    // localStorage.setItem("bookingData", JSON.stringify(bookingData));
-
-    console.log("Booking Data:", bookingData);
-    // navigate("/checkout") or proceed to payment
+    setBookingPreview(bookingData);
+    modalRef.current?.open?.();
   };
 
   if (!serviceDetails) {
@@ -117,11 +113,31 @@ const ServiceDetails = () => {
         total={total}
         onBookNow={handleBookNow}
       />
+
+      {/* modal instance used for booking confirmation */}
+      <Modal
+        ref={modalRef}
+        title="Book Your Service"
+        onConfirm={() => {
+          if (!bookingPreview) return;
+          console.log("Finalizing booking:", bookingPreview);
+          notyf.success("Booking confirmed");
+          navigate("/checkout", { state: { booking: bookingPreview } });
+        }}
+      >
+        {/* Use the dedicated BookingPreview component */}
+        <BookingPreview
+          data={bookingPreview}
+          onContinue={(data) => {
+            if (!data) return;
+            navigate("/checkout", { state: { booking: data } });
+          }}
+        />
+      </Modal>
+
       <ServiceFaq />
       <WhyChooseBright />
       <GlobalFaq />
-
-      <Modal />
     </div>
   );
 };
