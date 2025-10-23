@@ -144,7 +144,7 @@ const ServiceDetails = () => {
         />
       </Modal>
 
-      <ServiceFaq />
+      {/* <ServiceFaq /> */}
       <WhyChooseBright />
       <GlobalFaq />
     </div>
