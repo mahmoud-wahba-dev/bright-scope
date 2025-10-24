@@ -21,7 +21,7 @@ const FaqItem = ({ title, children, icon }) => {
         ></span>
       </button>
       <div
-        className={`accordion-content overflow-hidden transition-all transition-[height] duration-300 ${
+        className={`accordion-content overflow-hidden transition-all transition-[height] duration-400 ${
           open ? "max-h-96" : "max-h-0"
         }`}
       >
