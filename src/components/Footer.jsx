@@ -131,7 +131,7 @@ const Footer = () => {
   //     link: "#",
   //   },
   // ];
-
+  
   const quickLinksItems = [
     {
       icon: (
@@ -303,12 +303,12 @@ const Footer = () => {
                   <span className="icon-[mingcute--phone-fill] text-white"></span>{" "}
                 </div>
                 <div>
-                  <a href="tel:+971554445555">
+                  <a href={`tel:${staticData?.phone_number || "+971 55 444 5555"}`}>
                     <p className="text-base font-semibold text-primary-light ">
                       Call Now
                     </p>
                     <p className="text-base font-semibold text-primary-light">
-                      +971 XXX XXX XXX
+                      {staticData?.phone_number || "+971 55 444 5555"}
                     </p>
                   </a>
                 </div>
@@ -430,11 +430,11 @@ const Footer = () => {
                   Working Hours
                 </h4>
                 <p className="text-lg font-normal text-muted-light mb-4">
-                  Monday - Friday: 8:00 AM - 8:00 PM
+                  Monday - Friday: {staticData?.mon_fri_hours || "8:00 AM - 8:00 PM"}
                   <br />
-                  Saturday: 9:00 AM - 6:00 PM
+                  Saturday: {staticData?.saturday_hours || "9:00 AM - 6:00 PM"}
                   <br />
-                  Sunday: 10:00 AM - 5:00 PM
+                  Sunday: {staticData?.sunday_hours || "10:00 AM - 5:00 PM"}
                 </p>
                 <p className="text-base font-semibold text-success ">
                   {staticData?.emergency_available
