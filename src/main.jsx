@@ -17,7 +17,9 @@ import ConfirmPassword from "./pages/Auth/ConfirmPassword.jsx";
 import PasswordUpdatedSuccess from "./pages/Auth/PasswordUpdatedSuccess.jsx";
 import ErrorBoundary from "./utils/ErrorBoundary.jsx";
 import Checkout from "./pages/Checkout/Checkout.jsx";
-import Payment from "./pages/Payment/Payment.jsx";
+import Payment from "./pages/Payment/PaymentSuccess.jsx";
+import PaymentSuccess from "./pages/Payment/PaymentSuccess.jsx";
+import PaymentFailed from "./pages/Payment/PaymentFailed.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -51,6 +53,15 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment-failed",
+        element: <PaymentFailed />,
       },
     ],
   },
