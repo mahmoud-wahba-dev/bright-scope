@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+// i18n must be imported before any component that uses translations
+import "./i18n";
 import "flyonui/flyonui.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MasterLayout from "./layout/MasterLayout.jsx";

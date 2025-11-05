@@ -1,9 +1,11 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useServices } from "../../hooks/useServices";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
   const { services, loading } = useServices();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(null);
   const { category } = useParams();
   const navigate = useNavigate();
@@ -36,20 +38,16 @@ const Services = () => {
       }
     }
   }, [loading, services, category]);
-  console.log(services, "features");
 
   return (
     <section className="my-7 md:my-14">
       <div className="container">
         <h1 className="font-bold text-48px mb-4 text-primary-dark text-center">
-          Comprehensive{" "}
-          <span className="text-primary">Cleaning Pest Control</span>
+          {t("comprehensive_title_part1")} <span className="text-primary">{t("comprehensive_title_part2")}</span>
         </h1>
 
         <p className="font-normal text-secondary-dark text-18px text-center mb-8">
-          Professional services designed to keep your spaces clean, healthy, and
-          pest-free. Experience the difference with our expert team and
-          eco-friendly solutions.
+          {t("services_description")}
         </p>
 
         <div className="flex gap-6 max-md:flex-col">
@@ -61,7 +59,7 @@ const Services = () => {
             aria-orientation="horizontal"
           >
             <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
-              Choose Your Service
+              {t("choose_service")}
             </h4>
             {servicesList.map((svc, idx) => (
               <button
@@ -114,7 +112,7 @@ const Services = () => {
                     </div>
                   </div>
                   <h5 className="font-semibold text-22px mb-2">
-                    What is Included
+                    {t("what_is_included")}
                   </h5>
                   <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
                     {/* loop here for service contents */}
@@ -132,9 +130,7 @@ const Services = () => {
                         </div>
                       ))
                     ) : (
-                      <p className="text-secondary-dark">
-                        No content available.
-                      </p>
+                      <p className="text-secondary-dark">{t("no_content")}</p>
                     )}
                   </div>
 
@@ -184,16 +180,14 @@ const Services = () => {
                         </div>
                       </>
                     ) : (
-                      <p className="text-secondary-dark">
-                        No features available.
-                      </p>
+                      <p className="text-secondary-dark">{t("no_features")}</p>
                     )}
                   </div>
                   <Link
                     to={`/service/${service.id}`}
                     className="btn btn-primary w-full h-14 rounded-55px font-semibold text-base mt-8"
                   >
-                    Book Now
+                    {t("book_now")}
                     <span className="icon-[mdi--arrow-right] ml-2"></span>
                   </Link>
                 </div>

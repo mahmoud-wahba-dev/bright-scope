@@ -4,6 +4,7 @@ import apiHelper from "../../../api/apiHelper";
 import { set } from "zod";
 import { notyf } from "../../../utils/toast";
 import { useServices } from "../../../hooks/useServices";
+import { useTranslation } from "react-i18next";
 const servicesitems = [
   {
     title: "Home Cleaning",
@@ -45,17 +46,16 @@ const servicesitems = [
 ];
 const OurServices = () => {
   const { services, loading } = useServices();
+  const { t } = useTranslation();
 
   return (
     <>
       <section className="my-28">
         <h1 className="text-4xl font-semibold  text-center mb-2 " id="services">
-          Our <span className="text-primary">Premium</span> Services
+          {t("our_premium_services_part1")} <span className="text-primary">{t("our_premium_services_part2")}</span>
         </h1>
         <p className="font-normal text-center text-primary-dark mb-8">
-          Discover our comprehensive range of cleaning and pest control
-          services, each designed to meet your specific needs with professional
-          excellence.
+          {t("our_services_description")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {services.length > 0 ? (
@@ -87,13 +87,13 @@ const OurServices = () => {
                   to={`/services/${item.service_type}`} // e.g. /services/home_cleaning
                   className="btn btn-primary rounded-[55px] p-4 btn-block font-semibold text-base min-h-14 uppercase"
                 >
-                  Book Now
+                  {t("book_now")}
                   <span className="icon-[cil--arrow-right]  ms-3 w-6 h-11 font-bold"></span>
                 </Link>
               </div>
             ))
           ) : (
-            <p>Loading services...</p>
+            <p>{t("loading_services")}</p>
           )}
         </div>
       </section>

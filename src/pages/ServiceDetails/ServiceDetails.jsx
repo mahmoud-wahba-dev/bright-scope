@@ -7,6 +7,7 @@ import ServiceFaq from "./Components/ServiceFaq";
 import ServiceFeature from "./Components/ServiceFeature";
 import WhyChooseBright from "./Components/WhyChooseBright";
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import apiHelper from "../../api/apiHelper";
 import { notyf } from "../../utils/toast";
 import Modal from "../../composable/Modal";
@@ -17,6 +18,7 @@ const ServiceDetails = () => {
   const navigate = useNavigate();
   const [serviceDetails, setServiceDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState([]);
@@ -34,8 +36,8 @@ const ServiceDetails = () => {
         const data = response.data;
         setServiceDetails(data);
       } catch (error) {
-        console.log(error);
-        notyf.error("Failed to load service details.");
+        // Failed to load service details; show user-facing message
+        notyf.error(t("failed_load_service_details"));
       } finally {
         setLoading(false);
       }
@@ -62,7 +64,7 @@ const ServiceDetails = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <p>Loading service details...</p>
+        <p>{t("loading_service_details")}</p>
       </div>
     );
   }
@@ -71,14 +73,14 @@ const ServiceDetails = () => {
     try {
       sessionStorage.setItem("booking_preview", JSON.stringify(data));
     } catch (e) {
-      console.warn("Failed to persist booking preview:", e);
+      // ignore persistence errors silently
     }
     navigate("/checkout", { state: { booking: data } });
   };
 
   const handleBookNow = () => {
     if (!selectedPackage) {
-      notyf.error("Please select a package before booking.");
+      notyf.error(t("please_select_package"));
       return;
     }
 
@@ -95,7 +97,7 @@ const ServiceDetails = () => {
   };
 
   if (!serviceDetails) {
-    return <p className="text-center text-red-500">Service not found.</p>;
+    return <p className="text-center text-red-500">{t("service_not_found")}</p>;
   }
   return (
     <div className="container">
@@ -127,7 +129,7 @@ const ServiceDetails = () => {
       {/* modal instance used for booking confirmation */}
       <Modal
         ref={modalRef}
-        title="Book Your Service"
+        title={t("book_your_service")}
         onConfirm={() => {
           if (!bookingPreview) return;
           // persist + navigate

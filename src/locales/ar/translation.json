@@ -1,0 +1,285 @@
+{
+  "home": "الرئيسية",
+  "services": "الخدمات",
+  "about": "من نحن",
+  "contact": "اتصل بنا",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "choose_language": "العربية | English",
+  "welcome": "مرحبًا بك في برايت سكوب",
+  "comprehensive_title_part1": "شاملة",
+  "comprehensive_title_part2": "خدمات تنظيف ومكافحة الحشرات",
+  "services_description": "خدمات احترافية مصممة للحفاظ على نظافة وسلامة أماكنك وخلوها من الحشرات. اختبر الفرق مع فريقنا الخبير وحلولنا الصديقة للبيئة.",
+  "choose_service": "اختر الخدمة",
+  "what_is_included": "ما الذي يتضمنه",
+  "no_content": "لا توجد محتويات.",
+  "no_features": "لا توجد ميزات.",
+  "book_now": "احجز الآن",
+  "failed_load_service_details": "فشل في تحميل تفاصيل الخدمة.",
+  "loading_service_details": "جارٍ تحميل تفاصيل الخدمة...",
+  "please_select_package": "يرجى اختيار باقة قبل الحجز.",
+  "service_not_found": "الخدمة غير موجودة.",
+  "book_your_service": "احجز خدمتك",
+
+  "our_premium_services_part1": "خدمات",
+  "our_premium_services_part2": "المتميزة",
+  "our_services_description": "اكتشف مجموعتنا الشاملة من خدمات التنظيف ومكافحة الحشرات، مصممة لتلبية احتياجاتك الخاصة مع احترافية عالية.",
+  "loading_services": "جارٍ تحميل الخدمات...",
+  "hero_title": "خبراء التنظيف ومكافحة الحشرات الموثوقين في دبي — منازل نظيفة، أماكن صحية.",
+  "hero_subtitle": "نسمح لمنزلك أن يتنفس بأمان",
+  "home_cleaning": "تنظيف المنازل",
+  "pest_control": "مكافحة الحشرات",
+  "office_cleaning": "تنظيف المكاتب",
+  "our_services": "خدماتنا",
+  "previous": "السابق",
+  "next": "التالي",
+  "see_all_services": "عرض كل الخدمات",
+
+  "feature_pricing_title": "أسعار واضحة",
+  "feature_pricing_subtitle": "بدون رسوم مخفية",
+  "feature_pricing_highlight": "لا رسوم مخفية",
+  "feature_pricing_description": "أسعار واضحة ومباشرة بدون مفاجآت أو رسوم إضافية",
+
+  "feature_staff_title": "طاقم مدرب ومحقق",
+  "feature_staff_subtitle": "فحص الخلفية",
+  "feature_staff_highlight": "محقق 100%",
+  "feature_staff_description": "كل عضو فريق مدرّب مهنيًا ومُحقق من النواحي الأمنية",
+
+  "feature_experience_title": "أكثر من 15 سنة خبرة",
+  "feature_experience_subtitle": "مصر & دبي",
+  "feature_experience_highlight": "2008 - 2024",
+  "feature_experience_description": "خبرة موثوقة تمتد عبر الحدود مع سجل حافل",
+
+  "feature_eco_title": "حلول صديقة للبيئة",
+  "feature_eco_subtitle": "علاجات آمنة",
+  "feature_eco_highlight": "آمنة 100%",
+  "feature_eco_description": "منتجات تنظيف صديقة للبيئة وطرق آمنة لمكافحة الحشرات",
+
+  "feature_booking_title": "حجز سريع",
+  "feature_booking_subtitle": "60 ثانية فقط",
+  "feature_booking_highlight": "< 60 ثانية",
+  "feature_booking_description": "حجز فائق السرعة عبر نموذجنا أو واتساب في غضون دقيقة واحدة",
+
+  "brightscope_difference_heading": "ميزة برايت سكوب – حيث يلتقي النظافة بالراحة",
+  "brightscope_difference_paragraph": "في برايت سكوب، نتجاوز مفهوم التنظيف — نجلب الوضوح والراحة والعناية إلى كل منزل ومكتب. يتم تدريب مهنيينا الموثوقين لتقديم نتائج متقنة مع الاهتمام بالتفاصيل وطرق صديقة للبيئة. من التنظيف اليومي إلى العلاجات المتخصصة، نضمن أن يشعر مكانك بصحة ونقاء واهتمام حقيقي. راحة بالك ليست هدفنا فحسب — بل هي ضماننا.",
+  "company_name": "برايت سكوب UAE",
+  "footer_tagline": "شريكك الموثوق في التنظيف ومكافحة الحشرات في دبي. أكثر من 15 سنة من التميز من مصر إلى الإمارات.",
+  "call_now": "اتصل الآن",
+  "whatsapp_us": "راسلنا عبر واتساب",
+  "instant_response": "استجابة فورية",
+  "working_hours": "ساعات العمل",
+  "emergency_247": "خدمة طوارئ 24/7",
+  "no_emergency_services": "لا توجد خدمات طوارئ متاحة",
+  "newsletter": "النشرة الإخبارية",
+  "newsletter_subtitle": "احصل على نصائح تنظيف وعروض خاصة!",
+  "enter_email": "أدخل البريد الإلكتروني",
+  "follow_us": "تابعنا",
+  "footer_copyright": "© 2024 برايت سكوب دبي. جميع الحقوق محفوظة.",
+
+  "about_page": {
+    "titlePrefix": "من",
+    "titleHighlight": "نحن",
+    "subtitle": "من مصر إلى دبي، قمنا بتحويل المساحات والحياة لأكثر من 15 عامًا. قامت رحلتنا على الثقة والابتكار والالتزام الدائم بالجودة.",
+    "stats": {
+      "0": "سنوات خبرة",
+      "1": "عملاء سعداء",
+      "2": "مدن مخدومة",
+      "3": "معدل رضا"
+    }
+  },
+
+  "footer": {
+    "quick": {
+      "about_us": "من نحن",
+      "get_quote": "احصل على عرض",
+      "privacy_policy": "سياسة الخصوصية",
+      "terms_of_service": "شروط الخدمة",
+      "careers": "وظائف"
+    },
+    "quick_links": "روابط سريعة",
+    "dubai_office": "مكتب دبي",
+    "office_address": "عنوان المكتب",
+    "made_with": "مصنوع بكل",
+    "in_dubai": "في دبي",
+    "default_office_address": "Business Bay، دبي، الإمارات العربية المتحدة مبنى XYZ، مكتب 123"
+  },
+
+  "mission": {
+    "missionTitle": "مهمتنا",
+    "missionDescription": "تقديم خدمات تنظيف ومكافحة حشرات استثنائية تتجاوز التوقعات مع الحفاظ على أعلى معايير السلامة والمسؤولية البيئية.",
+    "missionPoint1": "حلول صديقة للبيئة",
+    "missionPoint2": "احترافية عالية",
+    "missionPoint3": "رضا العملاء",
+    "missionPoint4": "السلامة أولًا",
+    "visionTitle": "رؤيتنا",
+    "visionDescription": "أن نصبح المزود الرائد لخدمات التنظيف ومكافحة الحشرات في منطقة الشرق الأوسط وشمال إفريقيا، مع وضع معايير جديدة للجودة والابتكار ورعاية العملاء.",
+    "visionPoint1": "الريادة الإقليمية",
+    "visionPoint2": "الابتكار",
+    "visionPoint3": "ممارسات مستدامة",
+    "visionPoint4": "تأثير مجتمعي"
+  },
+
+  "journey": {
+    "titlePrefix": "رحلتنا",
+    "titleHighlight": "",
+    "subtitle": "من بدايات متواضعة في مصر إلى أن نصبح اسمًا موثوقًا عبر الحدود",
+    "items": {
+      "0": {
+        "year": "2010",
+        "title": "تأسست في مصر",
+        "desc": "بدأت رحلتنا في القاهرة برؤية لإحداث ثورة في خدمات التنظيف"
+      },
+      "1": {
+        "year": "2015",
+        "title": "توسيع العمليات",
+        "desc": "نما نشاطنا ليخدم أكثر من 50 مدينة مع أكثر من 100 موظف محترف، موسعًا تواجدنا في جميع أنحاء مصر."
+      },
+      "2": {
+        "year": "2020",
+        "title": "الابتكار الرقمي",
+        "desc": "أطلقنا منصتنا الرقمية وقدمنا حلولًا صديقة للبيئة لتحسين كفاءة الخدمة."
+      },
+      "3": {
+        "year": "2025",
+        "title": "التوسع إلى دبي",
+        "desc": "نأتي بخبرة 15 عامًا إلى سوق الإمارات مع خدمات متطورة وفرق محلية."
+      }
+    }
+  },
+
+  "people": {
+    "titlePrefix": "فريق",
+    "titleHighlight": "العمل",
+    "subtitle": "قلب برايت سكوب - فريقنا المحترف والمدرّب والمكرّس",
+    "item1": { "title": "تم التحقق من الخلفية", "description": "كل عضو في الفريق يخضع لفحوصات خلفية دقيقة" },
+    "item2": { "title": "مدرّب مهنيًا", "description": "برامج تدريب مستمرة لضمان الخبرة" },
+    "item3": { "title": "صديق للالبيئة", "description": "ملتزمون بممارسات مستدامة وآمنة" },
+    "item4": { "title": "العميل أولًا", "description": "ملتزمون بتجاوز توقعات العملاء" }
+  },
+
+  "peace": {
+    "title": "راحة بالك هي وعدنا",
+    "paragraph": "عند اختيارك لبرايت سكوب، لن تحصل فقط على خدمة — بل على شريك موثوق ملتزم بخلق أماكن أنظف وأكثر صحة وراحة لك ولمن تحب. من عائلتنا إلى عائلتك، نقدم الاعتمادية والجودة والرعاية في كل عمل نقوم به."
+  },
+
+  "buttons": {
+    "book_now": "احجز الآن",
+    "chat_whatsapp": "الدردشة على واتساب"
+  },
+
+  "contact_page": {
+    "hintTitle": "مساحتك الأنظف والأكثر صحة على بعد مكالمة واحدة",
+    "hintParagraph": "في برايت سكوب، نحن لا ننظف فقط - بل نخلق بيئات أكثر صحة وراحة لك ولمن تحب. تواصل معنا اليوم ودعنا نتولى الباقي.",
+    "getInTouchTitlePrefix": "تواصل",
+    "getInTouchTitleHighlight": "معنا",
+    "getInTouchSubtitle": "نحن هنا لمساعدتك في أي استفسارات أو لجدولة خدمتك التالية. فريقنا الودود جاهز لتقديم دعم استثنائي وحلول مخصصة.",
+    "card": {
+      "call_us": "اتصل بنا",
+      "dubai_office": "مكتب دبي",
+      "call_description": "تحدث مباشرة مع فريق خدمة العملاء",
+      "whatsapp_us": "راسلنا عبر واتساب",
+      "instant_response": "استجابة فورية",
+      "whatsapp_description": "احصل على مساعدة فورية عبر الدردشة",
+      "email_support": "دعم البريد الإلكتروني",
+      "twentyfour_support": "دعم 24/7",
+      "email_description": "أرسل استفساراتك وسنرد عليك بسرعة"
+    },
+    "quick": {
+      "titlePrefix": "تواصل",
+      "titleHighlight": "سريع",
+      "subtitle": "املأ النموذج وسنعاود الاتصال بك خلال 24 ساعة.",
+      "label_full_name": "الاسم الكامل",
+      "placeholder_full_name": "أدخل اسمك الكامل",
+      "error_name_required": "الاسم مطلوب",
+      "label_phone": "رقم الهاتف",
+      "placeholder_phone": "+971 5x xxx xxxx",
+      "label_email": "البريد الإلكتروني",
+      "placeholder_email": "your.email@example.com",
+      "error_email_required": "البريد الإلكتروني مطلوب",
+      "error_email_invalid": "أدخل عنوان بريد إلكتروني صالح",
+      "label_service": "نوع الخدمة",
+      "error_service_required": "يرجى اختيار خدمة",
+      "select_service_placeholder": "اختر خدمة",
+      "service_consulting": "استشارة",
+      "service_support": "دعم",
+      "service_deep_clean": "تنظيف عميق",
+      "label_message": "رسالتك",
+      "placeholder_message": "اكتب رسالتك هنا",
+      "error_message_required": "الرجاء كتابة رسالة",
+      "sending": "جارٍ الإرسال...",
+      "send_message": "إرسال الرسالة"
+    }
+  },
+
+  "social": {
+    "titlePrefix": "تابعنا على",
+    "titleHighlight": "وسائل التواصل"
+  },
+
+  "auth": {
+    "login": {
+      "title_prefix": "مرحباً بعودتك إلى",
+      "title_highlight": "برايت سكوب",
+      "subtitle": "مساحة أنظف وأكثر إشراقًا على بعد نقرة واحدة. سجّل الدخول للوصول إلى خدمات التنظيف المخصصة وإدارة حجوزاتك.",
+      "card_title": "مرحبًا بعودتك",
+      "card_subtitle": "سجّل الدخول إلى حساب برايت سكوب الخاص بك"
+    },
+    "register": {
+      "title": "إنشاء حسابك",
+      "subtitle": "انضم إلى برايت سكوب من أجل مستقبل أنظف",
+      "info_title_prefix": "انضم إلى",
+      "info_title_highlight": "برايت سكوب",
+      "info_title_suffix": "العائلة",
+      "info_subtitle": "مساحة أنظف وأكثر إشراقًا على بعد نقرة واحدة. أنشئ حسابك للوصول إلى خدمات تنظيف متميزة وحلول صديقة للبيئة.",
+      "signing_up": "جارٍ التسجيل...",
+      "sign_up_button": "سجّل الآن"
+    },
+    "forgot": {
+      "title_prefix": "إعادة",
+      "title_highlight": "كلمة المرور",
+      "subtitle": "لا تقلق، يحدث هذا للجميع. أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق لإعادة تعيين كلمة المرور.",
+      "step1": "أدخل بريدك الإلكتروني",
+      "step2": "تحقق من بريدك للحصول على رمز التحقق",
+      "step3": "أنشئ كلمة مرور جديدة",
+      "step4": "سجّل الدخول بكلمة المرور الجديدة",
+      "card_title": "هل نسيت كلمة المرور؟",
+      "card_subtitle": "لا تقلق، سنرسل لك تعليمات إعادة التعيين",
+      "will_send_code_note": "سنرسل رمز التحقق إلى هذا العنوان",
+      "sending": "جارٍ الإرسال...",
+      "send_reset_code": "إرسال رمز إعادة التعيين",
+      "security_note_title": "ملاحظة أمنيّة",
+      "security_note_body": "لأمانك، سينتهي رابط إعادة التعيين بعد 15 دقيقة. إذا لم تستلم البريد، تحقق من صندوق الرسائل غير المرغوب فيها."
+    },
+    "fields": {
+      "email_label": "البريد الإلكتروني*",
+      "password_label": "كلمة المرور*",
+      "full_name": "الاسم الكامل",
+      "phone": "رقم الهاتف",
+      "confirm_password": "تأكيد كلمة المرور"
+    },
+    "placeholders": {
+      "email": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "full_name": "أدخل اسمك الكامل",
+      "phone": "أدخل رقم هاتفك",
+      "confirm_password": "تأكيد كلمة المرور"
+    },
+    "features": {
+      "instant_booking": "حجز فوري وجدولة",
+      "track_history": "تتبع تاريخ الخدمة",
+      "eco_friendly": "حلول تنظيف صديقة للبيئة",
+      "support_247": "دعم 24/7"
+    },
+    "remember_me": "تذكرني",
+    "forgot_password_link": "هل نسيت كلمة المرور؟",
+    "logging_in": "جارٍ تسجيل الدخول...",
+    "login_button": "تسجيل الدخول",
+    "no_account": "ليس لديك حساب؟",
+    "create_account": "أنشئ حساب",
+    "already_have": "هل لديك حساب؟",
+    "sign_in": "تسجيل الدخول",
+    "back_to_login": "العودة لتسجيل الدخول",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور"
+  }
+}

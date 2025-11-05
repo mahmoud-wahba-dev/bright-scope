@@ -10,11 +10,22 @@ export const useServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await apiHelper.get("services/services/");
+        // Call services endpoint but skip automatic 401 redirect so guest users
+        // don't get redirected to /login by the global interceptor. The hook
+        // will handle unauthenticated responses gracefully.
+        const response = await apiHelper.get("services/services/", {
+          skipAuthRedirect: true,
+        });
         setServices(response.data);
       } catch (err) {
         console.error("Error fetching services:", err);
-        notyf.error("Failed to load services. Please try again later.");
+        // If the backend returned 401, show a friendly message to guest users
+        // asking them to sign in instead of the generic error.
+        if (err.response?.status === 401) {
+          notyf.error("Please sign in to view services.");
+        } else {
+          notyf.error("Failed to load services. Please try again later.");
+        }
         setError(err);
       } finally {
         setLoading(false);

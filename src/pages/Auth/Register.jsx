@@ -1,4 +1,6 @@
+
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,7 +9,8 @@ import { notyf } from "../../utils/toast";
 import { useAuth } from "../../context/AuthContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // ✅ Validation schema with Zod
 const schema = z
@@ -35,10 +38,15 @@ const schema = z
 const Register = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) navigate("/");
   }, [navigate]);
   const { login } = useAuth();
+  const { t } = useTranslation();
+
+  // password visibility toggles
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // ✅ setup form
   const {
@@ -60,34 +68,49 @@ const Register = () => {
         password: data.password,
         password2: data.confirmPassword,
       };
-      console.log("Register payload:", payload);
       const response = await apiHelper.post("/auth/register/", payload);
-      console.log("Register response:", response.data);
 
       const { tokens, user, message } = response.data;
-      const { access } = tokens;
+      const access = tokens?.access;
 
-      // ✅ Log user in immediately after registration
+      if (!access) {
+        notyf.error("Registration failed: no access token returned from server.");
+        return;
+      }
+
+      // Log user in immediately after registration (AuthContext will persist using cookies)
       login(user, access);
+
+      // Ensure token stored in cookie
+      const storedToken = Cookies.get("token");
+      if (!storedToken) {
+        notyf.error("Registration failed: unable to store authentication token.");
+        return;
+      }
 
       notyf.success(message || "Registration successful!");
       navigate("/");
     } catch (error) {
-      console.error("Register error:", error.response?.data);
-
+      // في حالة الخطأ من الباك
       const details = error.response?.data?.details;
 
+      // نظهر فقط أول error من كل المدخلات (أو السيرفر)
+      let firstError = null;
       if (details && typeof details === "object") {
-        // ✅ Loop through each field and its error array
-        Object.entries(details).forEach(([field, messages]) => {
-          if (Array.isArray(messages)) {
-            messages.forEach((msg) => notyf.error(msg));
+        Object.entries(details).some(([field, messages]) => {
+          if (Array.isArray(messages) && messages.length > 0) {
+            firstError = messages[0];
+            return true;
           } else if (typeof messages === "string") {
-            notyf.error(messages);
+            firstError = messages;
+            return true;
           }
+          return false;
         });
+      }
+      if (firstError) {
+        notyf.error(firstError);
       } else {
-        // ✅ Fallback general error
         notyf.error(
           error.response?.data?.error ||
             error.response?.data?.message ||
@@ -99,9 +122,12 @@ const Register = () => {
 
   // ✅ error handler for form validation
   const onError = (formErrors) => {
-    Object.values(formErrors).forEach((err) => {
-      if (err?.message) notyf.error(err.message);
-    });
+    // نظهر فقط أول error بدلاً من الطباعة المتسلسلة
+    const firstErrMsg =
+      Object.values(formErrors).map((err) => err?.message).find(Boolean);
+    if (firstErrMsg) {
+      notyf.error(firstErrMsg);
+    }
   };
 
   return (
@@ -113,7 +139,7 @@ const Register = () => {
             <div className="flex h-auto items-center justify-center xl:pt-4 max-md:pt-12">
               <div className="xl:w-[80%] w-[90%] flex items-center justify-center xl:px-6">
                 <div className="w-full bg-surface-light shadow-[0_0_20px_0_#00000040] space-y-6 rounded-30px p-6 lg:p-8">
-                  <div className="text-center">
+                    <div className="text-center">
                     <div className="flex justify-center mb-2">
                       <img
                         src="/assets/imgs/global/logo_auth.svg"
@@ -121,10 +147,10 @@ const Register = () => {
                       />
                     </div>
                     <h2 className="font-semibold text-36px mb-1">
-                      Create Your Account
+                      {t("auth.register.title")}
                     </h2>
                     <p className="font-normal text-12px mb-8 text-primary">
-                      Join Bright Scope for a cleaner future
+                      {t("auth.register.subtitle")}
                     </p>
                   </div>
 
@@ -138,11 +164,11 @@ const Register = () => {
                         className="label-text font-medium mb-1.5"
                         htmlFor="userName"
                       >
-                        Full name
+                        {t("auth.fields.full_name")}
                       </label>
                       <input
                         type="text"
-                        placeholder="Enter Your Full name"
+                        placeholder={t("auth.placeholders.full_name")}
                         className="input h-10"
                         id="userName"
                         {...register("full_name")}
@@ -160,11 +186,11 @@ const Register = () => {
                         className="label-text font-medium mb-1.5"
                         htmlFor="userEmail"
                       >
-                        Email address*
+                        {t("auth.fields.email_label")}
                       </label>
                       <input
                         type="email"
-                        placeholder="Enter your email address"
+                        placeholder={t("auth.placeholders.email")}
                         className="input h-10"
                         id="userEmail"
                         {...register("email")}
@@ -182,7 +208,7 @@ const Register = () => {
                         className="label-text font-medium mb-1.5"
                         htmlFor="userPhone"
                       >
-                        Phone Number
+                        {t("auth.fields.phone")}
                       </label>
                       <Controller
                         name="phone"
@@ -200,8 +226,8 @@ const Register = () => {
                               required: true,
                               autoFocus: false,
                             }}
-                            placeholder="Enter your phone number"
-                            onChange={(value) => field.onChange("+" + value)} // ✅ Ensures +971 format
+                            placeholder={t("auth.placeholders.phone")}
+                            onChange={(value) => field.onChange("+" + value)}
                           />
                         )}
                       />
@@ -217,25 +243,26 @@ const Register = () => {
                         className="label-text font-medium mb-1.5"
                         htmlFor="userPassword"
                       >
-                        Password*
+                        {t("auth.fields.password_label")}
                       </label>
                       <div className="input">
                         <input
                           className="h-10"
                           id="userPassword"
-                          type="password"
-                          placeholder="Password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder={t("auth.placeholders.password")}
+                          autoComplete="new-password"
                           {...register("password")}
                           disabled={isSubmitting}
                         />
                         <button
                           type="button"
-                          data-toggle-password='{ "target": "#userPassword" }'
+                          onClick={() => setShowPassword((s) => !s)}
                           className="block cursor-pointer"
-                          aria-label="userPassword"
+                          aria-label={showPassword ? "Hide password" : "Show password"}
                         >
-                          <span className="icon-[tabler--eye] password-active:block hidden size-5 shrink-0"></span>
-                          <span className="icon-[tabler--eye-off] password-active:hidden block size-5 shrink-0"></span>
+                          <span className={`${showPassword ? "block" : "hidden"} icon-[tabler--eye] size-5 shrink-0`}></span>
+                          <span className={`${showPassword ? "hidden" : "block"} icon-[tabler--eye-off] size-5 shrink-0`}></span>
                         </button>
                       </div>
                       {errors.password && (
@@ -250,25 +277,26 @@ const Register = () => {
                         className="label-text font-medium mb-1.5"
                         htmlFor="confirmPassword"
                       >
-                        Confirm Password
+                        {t("auth.fields.confirm_password")}
                       </label>
                       <div className="input">
                         <input
                           className="h-10"
                           id="confirmPassword"
-                          type="password"
-                          placeholder="Confirm Password"
+                          type={showConfirmPassword ? "text" : "password"}
+                          placeholder={t("auth.placeholders.confirm_password")}
+                          autoComplete="new-password"
                           {...register("confirmPassword")}
                           disabled={isSubmitting}
                         />
                         <button
                           type="button"
-                          data-toggle-password='{ "target": "#confirmPassword" }'
+                          onClick={() => setShowConfirmPassword((s) => !s)}
                           className="block cursor-pointer"
-                          aria-label="confirmPassword"
+                          aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                         >
-                          <span className="icon-[tabler--eye] password-active:block hidden size-5 shrink-0"></span>
-                          <span className="icon-[tabler--eye-off] password-active:hidden block size-5 shrink-0"></span>
+                          <span className={`${showConfirmPassword ? "block" : "hidden"} icon-[tabler--eye] size-5 shrink-0`}></span>
+                          <span className={`${showConfirmPassword ? "hidden" : "block"} icon-[tabler--eye-off] size-5 shrink-0`}></span>
                         </button>
                       </div>
                       {errors.confirmPassword && (
@@ -285,12 +313,12 @@ const Register = () => {
                     >
                       {isSubmitting ? (
                         <>
-                          Signing up...
+                          {t("auth.register.signing_up")}
                           <span className="loading loading-spinner loading-sm"></span>
                         </>
                       ) : (
                         <>
-                          Sign Up Now
+                          {t("auth.register.sign_up_button")}
                           <span className="icon-[mdi--arrow-right]"></span>
                         </>
                       )}
@@ -298,12 +326,12 @@ const Register = () => {
                   </form>
 
                   <p className="font-semibold text-14px mt-8 mb-4 text-center ">
-                    Already have an account?
+                    {t("auth.already_have")}
                     <Link
                       to="/login"
                       className="link link-animated ms-1.5 link-primary font-normal"
                     >
-                      Sign In
+                      {t("auth.sign_in")}
                     </Link>
                   </p>
                 </div>
@@ -314,26 +342,24 @@ const Register = () => {
           {/* Info side */}
           <div className="max-md:order-2">
             <h1 className="font-bold text-48px mb-8">
-              Join The <span className="text-primary">Bright Scope</span> Family
+              {t("auth.register.info_title_prefix")} <span className="text-primary">{t("auth.register.info_title_highlight")}</span> {t("auth.register.info_title_suffix")}
             </h1>
             <p className="font-normal text-18px mb-8 lg:w-[70%]">
-              A brighter, cleaner space is just a click away. Create your
-              account to access premium cleaning services and eco-friendly
-              solutions.
+              {t("auth.register.info_subtitle")}
             </p>
             {[
-              "Instant booking and scheduling",
-              "Track your service history",
-              "Eco-friendly cleaning solutions",
-              "24/7 customer support",
-            ].map((text) => (
-              <div key={text} className="flex items-center gap-2 mb-4">
+              "auth.features.instant_booking",
+              "auth.features.track_history",
+              "auth.features.eco_friendly",
+              "auth.features.support_247",
+            ].map((key) => (
+              <div key={key} className="flex items-center gap-2 mb-4">
                 <div className="size-10 center_flex rounded-full bg-primary text-white">
                   <div className="border-2 border-white rounded-full center_flex ">
                     <span className="icon-[mdi--check] size-5 font-bold"></span>
                   </div>
                 </div>
-                <p className="font-semibold text-base">{text}</p>
+                <p className="font-semibold text-base">{t(key)}</p>
               </div>
             ))}
           </div>

@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { notyf } from "../../../utils/toast";
 import apiHelper from "../../../api/apiHelper";
+import { useTranslation } from "react-i18next";
 
 const QuickContact = () => {
   const {
@@ -55,6 +56,8 @@ const onSubmit = async (data) => {
 };
 
 
+  const { t } = useTranslation();
+
   return (
     <section className="my-7 md:my-14">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -62,10 +65,10 @@ const onSubmit = async (data) => {
         <div className="form_container">
           <div className="bg-surface-light w-full rounded-10px shadow-[0px_0px_9.4px_0px_#00000040] md:p-8 p-4">
             <h5 className="font-semibold text-36px mb-2">
-              Quick <span className="text-primary">Contact</span>
+              {t("contact_page.quick.titlePrefix")} <span className="text-primary">{t("contact_page.quick.titleHighlight")}</span>
             </h5>
             <p className="font-normal text-14px text-secondary-dark mb-8">
-              Fill out the form below and we’ll get back to you within 24 hours.
+              {t("contact_page.quick.subtitle")}
             </p>
 
             <form
@@ -80,14 +83,14 @@ const onSubmit = async (data) => {
                     className="label-text font-medium text-14px mb-1.5"
                     htmlFor="full_name"
                   >
-                    Full Name
+                    {t("contact_page.quick.label_full_name")}
                   </label>
                   <input
                     id="full_name"
                     type="text"
-                    placeholder="Enter Your Full Name"
+                    placeholder={t("contact_page.quick.placeholder_full_name")}
                     className="input border-[#CBD5E1] h-10"
-                    {...register("full_name", { required: "Name is required" })}
+                    {...register("full_name", { required: t("contact_page.quick.error_name_required") })}
                   />
                   {errors.full_name && (
                     <p className="text-error text-sm mt-1">
@@ -101,7 +104,7 @@ const onSubmit = async (data) => {
                     className="label-text font-medium text-14px mb-1.5"
                     htmlFor="phone"
                   >
-                    Phone Number
+                    {t("contact_page.quick.label_phone")}
                   </label>
                   <Controller
                     name="phone_number"
@@ -113,7 +116,7 @@ const onSubmit = async (data) => {
                         country={"ae"}
                         enableSearch={true}
                         inputClass="!w-full !h-10"
-                        placeholder="+971 5x xxx xxxx"
+                        placeholder={t("contact_page.quick.placeholder_phone")}
                         onChange={(value) => field.onChange("+" + value)}
                       />
                     )}
@@ -132,18 +135,18 @@ const onSubmit = async (data) => {
                   className="label-text font-medium text-14px mb-1.5"
                   htmlFor="email"
                 >
-                  Email
+                  {t("contact_page.quick.label_email")}
                 </label>
                 <input
                   id="email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  placeholder={t("contact_page.quick.placeholder_email")}
                   className="input border-[#CBD5E1] h-10"
                   {...register("email", {
-                    required: "Email is required",
+                    required: t("contact_page.quick.error_email_required"),
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Enter a valid email address",
+                      message: t("contact_page.quick.error_email_invalid"),
                     },
                   })}
                 />
@@ -160,19 +163,19 @@ const onSubmit = async (data) => {
                   className="label-text font-medium text-14px mb-1.5"
                   htmlFor="service"
                 >
-                  Service Type
+                  {t("contact_page.quick.label_service")}
                 </label>
                 <select
                   id="service"
                   className="select"
                   {...register("service_type", {
-                    required: "Please select a service",
+                    required: t("contact_page.quick.error_service_required"),
                   })}
                 >
-                  <option value="">Select a service</option>
-                  <option value="consulting">Consulting</option>
-                  <option value="support">Support</option>
-                  <option value="deep_clean">Deep Cleaning</option>
+                  <option value="">{t("contact_page.quick.select_service_placeholder")}</option>
+                  <option value="consulting">{t("contact_page.quick.service_consulting")}</option>
+                  <option value="support">{t("contact_page.quick.service_support")}</option>
+                  <option value="deep_clean">{t("contact_page.quick.service_deep_clean")}</option>
                 </select>
                 {errors.service_type && (
                   <p className="text-error text-sm mt-1">
@@ -187,14 +190,14 @@ const onSubmit = async (data) => {
                   className="label-text font-medium text-14px mb-1.5"
                   htmlFor="message"
                 >
-                  Your Message
+                  {t("contact_page.quick.label_message")}
                 </label>
                 <textarea
                   id="message"
                   className="textarea min-h-24"
-                  placeholder="Type your message here"
+                  placeholder={t("contact_page.quick.placeholder_message")}
                   {...register("message", {
-                    required: "Please write a message",
+                    required: t("contact_page.quick.error_message_required"),
                   })}
                 />
                 {errors.message && (
@@ -212,13 +215,13 @@ const onSubmit = async (data) => {
               >
                 {isSubmitting ? (
                   <>
-                    Sending...
+                    {t("contact_page.quick.sending")}
                     <span className="loading loading-spinner loading-sm ms-2"></span>
                   </>
                 ) : (
                   <>
                     <span className="icon-[tabler--send] me-2"></span>
-                    SEND MESSAGE
+                    {t("contact_page.quick.send_message")}
                     <span className="icon-[tabler--arrow-right] ms-2"></span>
                   </>
                 )}

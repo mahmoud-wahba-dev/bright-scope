@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const AboutBrightScope = () => {
+  const { t } = useTranslation();
   const aboutBrightItems = [
     {
       iconClass: "icon-[mdi--calendar]",
@@ -26,12 +29,10 @@ const AboutBrightScope = () => {
     <section className="py-7 md:py-14 text-center">
       <div className="md:px-28 px-4">
         <h1 className="font-bold text-48px mb-4">
-          About <span className="text-primary">Bright Scope</span>
+          {t("about_page.titlePrefix")} <span className="text-primary">{t("about_page.titleHighlight")}</span>
         </h1>
         <p className="font-normal text-18px text-secondary-dark mb-14">
-          From Egypt to Dubai, we've been transforming spaces and lives for over
-          15 years. Our journey is built on trust, innovation, and an unwavering
-          commitment to excellence.
+          {t("about_page.subtitle")}
         </p>
         <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
           {Array.isArray(aboutBrightItems) && aboutBrightItems.map((item, index) => (
@@ -42,7 +43,7 @@ const AboutBrightScope = () => {
 
               <p className="font-semibold text-36px mb-1">{item.title}</p>
               <p className="font-semibold text-22px text-secondary-dark">
-                {item.subtitle}
+                {t(`about_page.stats.${index}`)}
               </p>
             </div>
           ))}

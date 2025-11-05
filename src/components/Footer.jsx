@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import apiHelper from "../api/apiHelper";
 import { useServices } from "../hooks/useServices";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const [staticData, setStaticData] = useState(null);
   const { services, loading } = useServices();
-  console.log(services);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const fetchStaticData = async () => {
       try {
         const response = await apiHelper.get("settings/contact-info/");
 
-        const data = response.data;
-        setStaticData(data);
-        console.log("Static Data:", response.data);
+  const data = response.data;
+  setStaticData(data);
       } catch (error) {
-        console.log(error);
+        // silently ignore footer errors (or handle via UI if needed)
       }
     };
 
@@ -149,7 +149,7 @@ const Footer = () => {
           />
         </svg>
       ),
-      title: "About Us",
+      titleKey: "footer.quick.about_us",
       link: "#",
     },
 
@@ -170,7 +170,7 @@ const Footer = () => {
           />
         </svg>
       ),
-      title: "Get Quote",
+      titleKey: "footer.quick.get_quote",
       link: "#",
     },
 
@@ -205,7 +205,7 @@ const Footer = () => {
           </defs>
         </svg>
       ),
-      title: "Privacy Policy",
+      titleKey: "footer.quick.privacy_policy",
       link: "#",
     },
 
@@ -226,7 +226,7 @@ const Footer = () => {
           />
         </svg>
       ),
-      title: "Terms of Service",
+      titleKey: "footer.quick.terms_of_service",
       link: "#",
     },
     {
@@ -247,7 +247,7 @@ const Footer = () => {
           />
         </svg>
       ),
-      title: "Careers",
+      titleKey: "footer.quick.careers",
       link: "#",
     },
   ];
@@ -289,13 +289,10 @@ const Footer = () => {
             <div className="gap-0">
               <div className="flex items-center gap-2 text-2xl font-semibold text-primary-light mb-4">
                 <img src="./assets/imgs/global/logo_footer.svg" alt="" />
-                <span> {staticData?.company_name || "Bright Scope UAE"} </span>
+                <span> {staticData?.company_name || t("company_name") } </span>
               </div>
               <p className="text-sm font-normal text-primary-light mb-8 max-w-sm">
-                {staticData?.tagline ||
-                  `Your trusted cleaning and pest control partner in Dubai. 15+
-                years of excellence from Egypt to the UAE, serving thousands of
-                satisfied customers.`}
+                {staticData?.[`tagline_${i18n.language}`] || t("footer_tagline") || staticData?.tagline}
               </p>
 
               <div className="bg-[#229E5B] rounded-lg flex items-center gap-3 p-2 pe-4 mb-4">
@@ -305,7 +302,7 @@ const Footer = () => {
                 <div>
                   <a href={`tel:${staticData?.phone_number || "+971 55 444 5555"}`}>
                     <p className="text-base font-semibold text-primary-light ">
-                      Call Now
+                      {t("call_now")}
                     </p>
                     <p className="text-base font-semibold text-primary-light">
                       {staticData?.phone_number || "+971 55 444 5555"}
@@ -325,10 +322,10 @@ const Footer = () => {
                     rel="noopener noreferrer"
                   >
                     <p className="text-base font-semibold text-primary-light ">
-                      WhatsApp Us
+                      {t("whatsapp_us")}
                     </p>
                     <p className="text-base font-semibold text-primary-light">
-                      Instant Response
+                      {t("instant_response")}
                     </p>
                   </a>
                 </div>
@@ -349,7 +346,7 @@ const Footer = () => {
                     fill="#F8F9FA"
                   />
                 </svg>
-                Our Services
+                {t("our_services")}
               </h6>
               {Array.isArray(services) &&
                 services.map((item) => (
@@ -380,7 +377,7 @@ const Footer = () => {
                     fill="#F8F9FA"
                   />
                 </svg>
-                Quick Links
+                {t("footer.quick_links")}
               </h6>
               <div className="mb-7">
                 {Array.isArray(quickLinksItems) &&
@@ -395,7 +392,7 @@ const Footer = () => {
                           item.icon /* Use dangerouslySetInnerHTML to render the SVG string as HTML */
                         }
                       </span>{" "}
-                      {item.title}
+                      {t(item.titleKey)}
                     </Link>
                   ))}
               </div>
@@ -427,7 +424,7 @@ const Footer = () => {
                       </defs>
                     </svg>
                   </span>
-                  Working Hours
+                  {t("working_hours")}
                 </h4>
                 <p className="text-lg font-normal text-muted-light mb-4">
                   Monday - Friday: {staticData?.mon_fri_hours || "8:00 AM - 8:00 PM"}
@@ -438,8 +435,8 @@ const Footer = () => {
                 </p>
                 <p className="text-base font-semibold text-success ">
                   {staticData?.emergency_available
-                    ? "Emergency 24/7"
-                    : "No Emergency Services Available"}
+                    ? t("emergency_247")
+                    : t("no_emergency_services")}
                 </p>
               </div>
             </nav>
@@ -457,7 +454,7 @@ const Footer = () => {
                     fill="#F8F9FA"
                   />
                 </svg>
-                Dubai Office
+                {t("footer.dubai_office")}
               </h6>
               <div className="w-full h-[240px] rounded-2xl mb-8 max-w-[326px]">
                 <iframe
@@ -470,13 +467,14 @@ const Footer = () => {
               </div>
               <div>
                 <h6 className="text-base text-white font-semibold mb-2">
-                  Office Address
+                  {t("footer.office_address")}
                 </h6>
                 <p className="font-normal text-sm text-white mb-8">
-                  {staticData?.address +
-                    staticData?.building +
-                    staticData?.office ||
-                    "Business Bay, Dubai, UAE Building XYZ, Office 123"}
+                  {(staticData
+                    ? (staticData[`address_${i18n.language}`] || staticData.address || "") +
+                      (staticData.building || "") +
+                      (staticData.office || "")
+                    : "") || t("footer.default_office_address")}
                 </p>
               </div>
 
@@ -496,16 +494,16 @@ const Footer = () => {
                       />
                     </svg>
                   </span>
-                  News Letter
+                  {t("newsletter")}
                 </h4>
                 <p className="text-sx font-semibold text-white mb-4">
-                  Get cleaning tips & special offers!
+                  {t("newsletter_subtitle")}
                 </p>
                 <div>
                   <div className="join max-w-sm">
                     <input
                       className="input join-item bg-[#738E88] text-white placeholder:text-muted-light placeholder:font-semibold placeholder:text-xs"
-                      placeholder="Enter Email"
+                      placeholder={t("enter_email")}
                     />
                     <button className="btn btn-outline-white bg-white border-0 join-item">
                       <svg
@@ -531,7 +529,7 @@ const Footer = () => {
           <div className="flex w-full items-center justify-between flex-wrap">
             <div>
               <h6 className="font-semibold text-white text-base mb-4">
-                Follow Us
+                {t("follow_us")}
               </h6>
               <div className="flex gap-4 flex-wrap">
                 {Array.isArray(socialMediaItems) &&
@@ -550,13 +548,14 @@ const Footer = () => {
                   ))}
               </div>
             </div>
-            <aside className="grid-flow-col items-center">
+              <aside className="grid-flow-col items-center">
               <p className="text-base font-semibold text-white">
-                {staticData?.copyright_text ||
-                  "&copy; 2024 Bright Scope Dubai. All rights reserved."}
+                {staticData?.[`copyright_text_${i18n.language}`] ||
+                  staticData?.copyright_text ||
+                  t("footer_copyright")}
               </p>
               <p className="text-base font-semibold text-white text-end">
-                Made with
+                {t("footer.made_with")} 
                 <Link
                   className="link link-hover font-medium px-4 animate-bounce "
                   to="#"
@@ -565,7 +564,7 @@ const Footer = () => {
                 >
                   ❤️
                 </Link>
-                in Dubai
+                {" "}{t("footer.in_dubai")}
               </p>
             </aside>
           </div>

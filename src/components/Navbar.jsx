@@ -1,16 +1,19 @@
 import { useEffect, useLayoutEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
+  const { t, i18n } = useTranslation();
 
 
+  // Use translation keys for menu items so they can be translated dynamically
   const menuItems = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact Us", path: "/contact" },
+    { key: "home", path: "/" },
+    { key: "services", path: "/services" },
+    { key: "about", path: "/about" },
+    { key: "contact", path: "/contact" },
   ];
 
   useEffect(() => {
@@ -28,20 +31,17 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar px-8 fixed start-0 top-0 z-10 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
+  <nav className="navbar px-4 sm:px-6 md:px-8 fixed left-0 top-0 z-10 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm">
       <div className="navbar-start">
-        <Link
-          className="link text-base-content link-neutral text-xl font-bold no-underline"
-          to="/"
-        >
-          <div className="flex items-center gap-1">
-            <img src="./assets/imgs/global/logo.svg" alt="" />
+        <Link className="link text-base-content link-neutral text-xl font-bold no-underline" to="/">
+          <div className="flex items-center gap-2">
+            <img src="./assets/imgs/global/logo.svg" alt="Bright Scope" className="h-8 sm:h-10 object-contain" />
           </div>
         </Link>
       </div>
 
       <div className="navbar-center max-lg:hidden">
-        <ul className="menu menu-horizontal p-0 font-medium">
+  <ul className="menu menu-horizontal p-0 font-medium items-center">
           {Array.isArray(menuItems) && menuItems.map((item, index) => {
             return (
               <li key={index}>
@@ -53,7 +53,7 @@ const Navbar = () => {
                   }
                   to={item.path}
                 >
-                  {item.name}
+                  {t(item.key)}
                 </NavLink>
               </li>
             );
@@ -62,7 +62,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end items-center gap-4">
-        {isAuthenticated ? (
+              {isAuthenticated ? (
           <div className="dropdown relative inline-flex">
             <button
               id="dropdown-avatar"
@@ -83,7 +83,7 @@ const Navbar = () => {
                   />
                 </div>
               </div>
-              {user?.name?.split(" ")[0] || "User"}
+                  {user?.name?.split(" ")[0] || t("login")}
               <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
             </button>
 
@@ -107,7 +107,7 @@ const Navbar = () => {
                 </div>
                 <div>
                   <h6 className="text-base-content text-base font-semibold">
-                    {user?.name || "User"}
+                    {user?.name || t("login")}
                   </h6>
                   <small className="text-base-content/50 text-sm font-normal">
                     {user?.email || "user@example.com"}
@@ -117,43 +117,56 @@ const Navbar = () => {
 
               <li>
                 <Link className="dropdown-item" to="#">
-                  My Profile
+                  {t("home")}
                 </Link>
               </li>
 
               <li>
-                <button
+                  <button
                   className="dropdown-item text-error font-semibold"
                   onClick={logout}
                 >
-                  Logout
+                  {t("logout")}
                 </button>
               </li>
             </ul>
           </div>
-        ) : (
-          <Link
-            className="btn rounded-[56px] px-6 xxl:px-20 py-6 btn-primary max-md:hidden"
-            to="/login"
+          ) : (
+            <Link
+              className="hidden md:inline-flex btn rounded-full px-4 sm:px-6 py-2 sm:py-3 btn-primary items-center"
+              to="/login"
+            >
+              <span>{t("login")}</span>
+              <span className="icon-[tabler--arrow-right] rtl:rotate-180 ml-2"></span>
+            </Link>
+          )}
+
+        {/* Language buttons: full label on md+, compact on small */}
+        <div className="hidden md:inline-flex items-center gap-2">
+          <button
+            className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
+            type="button"
+            onClick={() => i18n.changeLanguage('en')}
           >
-            <span>Login</span>
-            <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
-          </Link>
-        )}
+            EN
+          </button>
+          <button
+            className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
+            type="button"
+            onClick={() => i18n.changeLanguage('ar')}
+          >
+            AR
+          </button>
+        </div>
 
-        <button
-          className="btn rounded-[56px] xl:px-20 py-6 bg-transparent border border-primary text-[#1A1A1A] max-sm:hidden"
-          type="button"
-        >
-          English | Arabic
-        </button>
-
-        <button
-          className="btn bg-transparent border border-primary text-[#1A1A1A] sm:hidden"
-          type="button"
-        >
-          Ar
-        </button>
+        <div className="inline-flex md:hidden gap-2">
+          <button
+            className="btn bg-transparent border border-primary text-[#1A1A1A] px-3 py-2"
+            onClick={() => i18n.changeLanguage('ar')}
+          >
+            AR
+          </button>
+        </div>
 
         {/* FlyonUI dropdown markup (JS handles open/close) */}
         <div className="dropdown relative inline-flex md:hidden">
@@ -188,7 +201,7 @@ const Navbar = () => {
                   to="/login"
                   className="btn px-6 btn-primary w-full text-center"
                 >
-                  <span className="">Login</span>
+                  <span className="">{t("login")}</span>
                   <span className="icon-[tabler--arrow-right] rtl:rotate-180"></span>
                 </Link>
               </div>

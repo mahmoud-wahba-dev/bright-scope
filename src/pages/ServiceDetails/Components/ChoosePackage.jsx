@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const ChoosePackage = ({ packages, selectedPackage, onSelectPackage ,onBookNow }) => {
-  console.log(selectedPackage, "selectedPackage");
 
   return (
     <section className="my-7 md:my-14">
@@ -40,17 +39,17 @@ const ChoosePackage = ({ packages, selectedPackage, onSelectPackage ,onBookNow }
       </div>
 
       {/* checkbox */}
-      <div class="flex w-full items-start gap-6 flex-wrap sm:flex-nowrap">
+      <div className="flex w-full items-start gap-6 flex-wrap sm:flex-nowrap">
         {(packages ?? []).map((pkg) => (
           <label
             key={pkg.id}
-            class="custom-option text-center flex sm:w-1/2 flex-col items-center gap-3 bg-surface-light shadow-[0_4px_10px_0_#0000001A]
+            className="custom-option text-center flex sm:w-1/2 flex-col items-center gap-3 bg-surface-light shadow-[0_4px_10px_0_#0000001A]
 rounded-10px rounded-tr-none rounded-tl-none border-none [&:has(:checked)]:outline-3
 "
           >
-            <span class="flex flex-col label-text">
-              <span class="text-22px font-semibold  mb-4"> {pkg.name}</span>
-              <p class="font-semibold text-36px mb-2 text-primary">
+            <span className="flex flex-col label-text">
+              <span className="text-22px font-semibold  mb-4"> {pkg.name}</span>
+              <p className="font-semibold text-36px mb-2 text-primary">
                 AED {pkg.price}
               </p>
               <p className="font-normal text-base mb-4">
@@ -66,7 +65,7 @@ rounded-10px rounded-tr-none rounded-tl-none border-none [&:has(:checked)]:outli
             </span>
             <input
               type="radio"
-              class="radio radio-primary rounded-full"
+              className="radio radio-primary rounded-full"
               name="package"
               // checked={selectedPackage?.id === pkg.id}
               onChange={() => onSelectPackage(pkg)}

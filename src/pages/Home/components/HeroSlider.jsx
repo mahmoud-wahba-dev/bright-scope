@@ -1,37 +1,37 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
+import { useTranslation } from "react-i18next";
 
 const HeroSlider = () => {
+  const { t } = useTranslation();
+
   const slide1 = "assets/imgs/home/slide1.webp";
   const slide2 = "assets/imgs/home/slide2.webp";
   const slide3 = "assets/imgs/home/slide3.webp";
   const heroSlides = [
     {
       img: slide1,
-      alt: "Home Cleaning",
-      title:
-        "Dubai’s Trusted Cleaning & Pest Control Experts — Fresh Homes, Healthy Spaces.",
-      sutitle: "WE LET YOUR HOME BREATHE SAFETY",
-      category: "Home Cleaning",
+      alt: t("home_cleaning"),
+      title: t("hero_title"),
+      sutitle: t("hero_subtitle"),
+      category: t("home_cleaning"),
     },
 
     {
       img: slide2,
-      alt: "Pest Control",
-      title:
-        "Dubai’s Trusted Cleaning & Pest Control Experts — Fresh Homes, Healthy Spaces.",
-      sutitle: "WE LET YOUR HOME BREATHE SAFETY",
-      category: "Pest Control",
+      alt: t("pest_control"),
+      title: t("hero_title"),
+      sutitle: t("hero_subtitle"),
+      category: t("pest_control"),
     },
 
     {
       img: slide3,
-      alt: "Office Cleaning",
-      title:
-        "Dubai’s Trusted Cleaning & Pest Control Experts — Fresh Homes, Healthy Spaces.",
-      sutitle: "WE LET YOUR HOME BREATHE SAFETY",
-      category: "Office Cleaning",
+      alt: t("office_cleaning"),
+      title: t("hero_title"),
+      sutitle: t("hero_subtitle"),
+      category: t("office_cleaning"),
     },
   ];
 
@@ -172,13 +172,13 @@ const HeroSlider = () => {
                         className="btn btn-wide btn-primary md:min-w-[20rem] rounded-[55px] text-white font-semibold text-base md:px-8 md:py-6 hover:bg-primary-light_hover hover:border-none transition max-sm:w-full max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                         target="_blank"
                       >
-                        Book Now
+                        {t("book_now")}
                       </Link>
                       <Link
                         to="/services"
                         className="btn btn-wide btn-secondary md:min-w-[20rem] rounded-[55px] text-primary-dark font-semibold text-base md:px-8 md:py-6 hover:text-white hover:border-none hover:bg-primary-light_hover transition max-sm:w-full max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                        >
-                         Our Services
+                         {t("our_services")}
                        </Link>
                      </div>
                     <h3 className="text-lg font-bold text-white lg:mb-4 max-sm:text-sm max-sm:mt-3">
@@ -203,7 +203,7 @@ const HeroSlider = () => {
           aria-label="Previous slide"
         >
           <span className="icon-[cil--arrow-left]  size-9.5 text-white font-normal"></span>
-          <span className="sr-only">Previous</span>
+          <span className="sr-only">{t("previous")}</span>
         </button>
 
         <button
@@ -213,7 +213,7 @@ const HeroSlider = () => {
           aria-label="Next slide"
         >
           <span className="icon-[cil--arrow-right] size-9.5 text-white font-normal"></span>
-          <span className="sr-only">Next</span>
+          <span className="sr-only">{t("next")}</span>
         </button>
 
         {/* ...existing rest of markup (scroll link, etc.) ... */}
@@ -228,7 +228,7 @@ const HeroSlider = () => {
             <span className="icon-[fluent--arrow-down-28-regular] text-white text-5xl"></span>
           </ScrollLink>
           <p className="text-white  font-normal text-base max-sm:text-10px">
-            See all services
+            {t("see_all_services")}
           </p>
         </div>
       </div>

@@ -1,0 +1,287 @@
+{
+  "home": "Home",
+  "services": "Services",
+  "about": "About Us",
+  "contact": "Contact Us",
+  "login": "Login",
+  "logout": "Logout",
+  "choose_language": "English | Arabic",
+  "welcome": "Welcome to Bright Scope",
+  "comprehensive_title_part1": "Comprehensive",
+  "comprehensive_title_part2": "Cleaning & Pest Control",
+  "services_description": "Professional services designed to keep your spaces clean, healthy, and pest-free. Experience the difference with our expert team and eco-friendly solutions.",
+  "choose_service": "Choose Your Service",
+  "what_is_included": "What is Included",
+  "no_content": "No content available.",
+  "no_features": "No features available.",
+  "book_now": "Book Now",
+  "failed_load_service_details": "Failed to load service details.",
+  "loading_service_details": "Loading service details...",
+  "please_select_package": "Please select a package before booking.",
+  "service_not_found": "Service not found.",
+  "book_your_service": "Book Your Service",
+
+  "our_premium_services_part1": "Our",
+  "our_premium_services_part2": "Premium",
+  "our_services_description": "Discover our comprehensive range of cleaning and pest control services, each designed to meet your specific needs with professional excellence.",
+  "loading_services": "Loading services...",
+  "hero_title": "Dubai’s Trusted Cleaning & Pest Control Experts — Fresh Homes, Healthy Spaces.",
+  "hero_subtitle": "WE LET YOUR HOME BREATHE SAFETY",
+
+  "home_cleaning": "Home Cleaning",
+  "pest_control": "Pest Control",
+  "office_cleaning": "Office Cleaning",
+  "our_services": "Our Services",
+  "previous": "Previous",
+  "next": "Next",
+  "see_all_services": "See all services",
+
+  "feature_pricing_title": "Transparent Pricing",
+  "feature_pricing_subtitle": "No Hidden Fees",
+  "feature_pricing_highlight": "0 Hidden Fees",
+  "feature_pricing_description": "Clear upfront pricing with no surprises or additional charges",
+
+  "feature_staff_title": "Trained & Verified Staff",
+  "feature_staff_subtitle": "Background Checked",
+  "feature_staff_highlight": "100% Verified",
+  "feature_staff_description": "Every Team member is professionally trained and security verified",
+
+  "feature_experience_title": "15+ Years Experience",
+  "feature_experience_subtitle": "Egypt & Dubai",
+  "feature_experience_highlight": "2008 - 2024",
+  "feature_experience_description": "Trusted expertise spanning across borders with proven track record",
+
+  "feature_eco_title": "Eco-Friendly Solutions",
+  "feature_eco_subtitle": "Safe Treatments",
+  "feature_eco_highlight": "100% Safe",
+  "feature_eco_description": "Environmental-friendly cleaning products and safe pest control methods",
+
+  "feature_booking_title": "Quick Booking",
+  "feature_booking_subtitle": "60 Seconds Only",
+  "feature_booking_highlight": "< 60 Seconds",
+  "feature_booking_description": "Lightning-fast booking through our form or WhatsApp in just one minute",
+
+  "brightscope_difference_heading": "The Bright Scope Difference– Where Clean Meets Comfort",
+  "brightscope_difference_paragraph": "At Bright Scope, we go beyond cleaning — we bring clarity, comfort, and care into every home and office.",
+  "company_name": "Bright Scope UAE",
+
+  "footer_tagline": "Your trusted cleaning and pest control partner in Dubai. 15+ years of excellence from Egypt to the UAE, serving thousands of satisfied customers.",
+  "call_now": "Call Now",
+  "whatsapp_us": "WhatsApp Us",
+  "instant_response": "Instant Response",
+  "working_hours": "Working Hours",
+  "emergency_247": "Emergency 24/7",
+  "newsletter": "News Letter",
+  "newsletter_subtitle": "Get cleaning tips & special offers!",
+  "enter_email": "Enter Email",
+  "follow_us": "Follow Us",
+  "footer_copyright": "© 2024 Bright Scope Dubai. All rights reserved.",
+
+  "about_page": {
+    "titlePrefix": "About",
+    "titleHighlight": "Bright Scope",
+    "subtitle": "From Egypt to Dubai, we've been transforming spaces and lives for over 15 years. Our journey is built on trust, innovation, and an unwavering commitment to excellence.",
+    "stats": {
+      "0": "Years Experience",
+      "1": "Happy Customers",
+      "2": "Cities Served",
+      "3": "Satisfaction Rate"
+    }
+  },
+
+  "mission": {
+    "missionTitle": "Our Mission",
+    "missionDescription": "To deliver exceptional cleaning and pest control services that exceed expectations while maintaining the highest standards of safety and environmental responsibility.",
+    "missionPoint1": "Eco-friendly solutions",
+    "missionPoint2": "Professional excellence",
+    "missionPoint3": "Customer satisfaction",
+    "missionPoint4": "Safety first approach",
+    "visionTitle": "Our Vision",
+    "visionDescription": "To become the leading provider of cleaning and pest control services in the MENA region, setting new standards for quality, innovation, and customer care.",
+    "visionPoint1": "Regional leadership",
+    "visionPoint2": "Innovation-driven",
+    "visionPoint3": "Sustainable practices",
+    "visionPoint4": "Community impact"
+  },
+
+  "journey": {
+    "titlePrefix": "Our",
+    "titleHighlight": "Journey",
+    "subtitle": "From humble beginnings in Egypt to becoming a trusted name across borders",
+    "items": {
+      "0": {
+        "year": "2010",
+        "title": "Founded in Egypt",
+        "desc": "Started our journey in Cairo with a vision to revolutionize cleaning services"
+      },
+      "1": {
+        "year": "2015",
+        "title": "Expanding Operations",
+        "desc": "Grew to serve over 50 cities with 100+ professional staff, expanding our footprint across Egypt."
+      },
+      "2": {
+        "year": "2020",
+        "title": "Digital Innovation",
+        "desc": "Launched our digital platform and introduced eco-friendly solutions to improve service efficiency."
+      },
+      "3": {
+        "year": "2025",
+        "title": "Dubai Expansion",
+        "desc": "Bringing 15 years of expertise to the UAE market with cutting-edge services and local teams."
+      }
+    }
+  },
+
+  "people": {
+    "titlePrefix": "Our",
+    "titleHighlight": "People",
+    "subtitle": "The heart of Bright Scope - our professional, trained, and dedicated team members",
+    "item1": { "title": "Background Verified", "description": "Every team member undergoes thorough background checks" },
+    "item2": { "title": "Professionally Trained", "description": "Continuous training programs ensure expertise" },
+    "item3": { "title": "Eco-Conscious", "description": "Committed to sustainable and safe practices" },
+    "item4": { "title": "Customer-First", "description": "Dedicated to exceeding customer expectations" }
+  },
+
+  "peace": {
+    "title": "Your Peace of Mind is Our Promise",
+    "paragraph": "When you choose Bright Scope, you're not just getting a service – you're gaining a trusted partner committed to creating cleaner, healthier, and more comfortable spaces for you and your loved ones. From our family to yours, we bring reliability, excellence, and care to every job we do."
+  },
+
+  "buttons": {
+    "book_now": "Book Now",
+    "chat_whatsapp": "Chat On Whatsapp"
+  },
+
+  "contact_page": {
+    "hintTitle": "Your Cleaner, Healthier Space is Just a Call Away",
+    "hintParagraph": "At Bright Scope, we're not just cleaning – we're creating healthier, more comfortable environments for you and your loved ones. Reach out today and let us take care of the rest.",
+    "getInTouchTitlePrefix": "Get",
+    "getInTouchTitleHighlight": "In Touch",
+    "getInTouchSubtitle": "We're here to help you with any questions or to schedule your next cleaning service. Our friendly team is ready to provide you with exceptional support and personalized solutions.",
+    "card": {
+      "call_us": "Call Us",
+      "dubai_office": "Dubai Office",
+      "call_description": "Speak directly to our Customer Service Team",
+      "whatsapp_us": "WhatsApp Us",
+      "instant_response": "Instant Response",
+      "whatsapp_description": "Get immediate assistance through our chat",
+      "email_support": "Email Support",
+      "twentyfour_support": "24/7 Support",
+      "email_description": "Send us your queries and we’ll respond promptly"
+    },
+    "quick": {
+      "titlePrefix": "Quick",
+      "titleHighlight": "Contact",
+      "subtitle": "Fill out the form below and we’ll get back to you within 24 hours.",
+      "label_full_name": "Full Name",
+      "placeholder_full_name": "Enter Your Full Name",
+      "error_name_required": "Name is required",
+      "label_phone": "Phone Number",
+      "placeholder_phone": "+971 5x xxx xxxx",
+      "label_email": "Email",
+      "placeholder_email": "your.email@example.com",
+      "error_email_required": "Email is required",
+      "error_email_invalid": "Enter a valid email address",
+      "label_service": "Service Type",
+      "error_service_required": "Please select a service",
+      "select_service_placeholder": "Select a service",
+      "service_consulting": "Consulting",
+      "service_support": "Support",
+      "service_deep_clean": "Deep Cleaning",
+      "label_message": "Your Message",
+      "placeholder_message": "Type your message here",
+      "error_message_required": "Please write a message",
+      "sending": "Sending...",
+      "send_message": "SEND MESSAGE"
+    }
+  },
+
+  "footer": {
+    "quick": {
+      "about_us": "About Us",
+      "get_quote": "Get Quote",
+      "privacy_policy": "Privacy Policy",
+      "terms_of_service": "Terms of Service",
+      "careers": "Careers"
+    },
+    "quick_links": "Quick Links",
+    "dubai_office": "Dubai Office",
+    "office_address": "Office Address",
+    "made_with": "Made with",
+    "in_dubai": "in Dubai",
+    "default_office_address": "Business Bay, Dubai, UAE Building XYZ, Office 123"
+  },
+
+
+  "social": {
+    "titlePrefix": "Follow Us On",
+    "titleHighlight": "Social Media"
+  }
+  ,
+  "auth": {
+    "login": {
+      "title_prefix": "Welcome Back to",
+      "title_highlight": "Bright Scope",
+      "subtitle": "A brighter, cleaner space is just a click away. Log in to access your personalized cleaning services and manage your bookings.",
+      "card_title": "Welcome Back",
+      "card_subtitle": "Sign in to your Bright Scope account"
+    },
+    "register": {
+      "title": "Create Your Account",
+      "subtitle": "Join Bright Scope for a cleaner future",
+      "info_title_prefix": "Join The",
+      "info_title_highlight": "Bright Scope",
+      "info_title_suffix": "Family",
+      "info_subtitle": "A brighter, cleaner space is just a click away. Create your account to access premium cleaning services and eco-friendly solutions.",
+      "signing_up": "Signing up...",
+      "sign_up_button": "Sign Up Now"
+    },
+    "forgot": {
+      "title_prefix": "Reset Your",
+      "title_highlight": "Password",
+      "subtitle": "Don't worry, it happens to the best of us. Enter your email address and we'll send you a verification code to reset your password.",
+      "step1": "Enter your email address",
+      "step2": "Check your email for verification code",
+      "step3": "Create a new password",
+      "step4": "Log in with your new password",
+      "card_title": "Forgot Password?",
+      "card_subtitle": "No worries, we'll send you reset instructions",
+      "will_send_code_note": "We will send a verification code to this address",
+      "sending": "Sending...",
+      "send_reset_code": "Send Reset Code",
+      "security_note_title": "Security Note",
+      "security_note_body": "For your security, the reset link will expire in 15 minutes. If you don't receive the email, check your spam folder."
+    },
+    "fields": {
+      "email_label": "Email address*",
+      "password_label": "Password*",
+      "full_name": "Full name",
+      "phone": "Phone Number",
+      "confirm_password": "Confirm Password"
+    },
+    "placeholders": {
+      "email": "Enter your email address",
+      "password": "Password",
+      "full_name": "Enter Your Full name",
+      "phone": "Enter your phone number",
+      "confirm_password": "Confirm Password"
+    },
+    "features": {
+      "instant_booking": "Instant booking and scheduling",
+      "track_history": "Track your service history",
+      "eco_friendly": "Eco-friendly cleaning solutions",
+      "support_247": "24/7 customer support"
+    },
+    "remember_me": "Remember Me",
+    "forgot_password_link": "Forgot Password?",
+    "logging_in": "Logging in...",
+    "login_button": "Login",
+    "no_account": "Don’t have an account?",
+    "create_account": "Create an account",
+    "already_have": "Already have an account?",
+    "sign_in": "Sign In",
+    "back_to_login": "Back to Login",
+    "show_password": "Show password",
+    "hide_password": "Hide password"
+  }
+}

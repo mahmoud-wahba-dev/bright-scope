@@ -1,16 +1,18 @@
+import { useTranslation } from "react-i18next";
+
 const OurJourney = () => {
+  const { t } = useTranslation();
   return (
     <section className="mb-14 md:mb-7">
       <div className="md:px-14 px-6">
         <h2 className="font-bold text-48px mb-4 text-center">
-          Our <span className="text-primary">Journey</span>
+          {t("journey.titlePrefix")} <span className="text-primary">{t("journey.titleHighlight")}</span>
         </h2>
         <p className="font-normal text-secondary-dark text-18px text-center mb-6">
-          From humble beginnings in Egypt to becoming a trusted name across
-          borders
+          {t("journey.subtitle")}
         </p>
 
-        <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical timeline-centered">
+  <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical timeline-centered">
           {/* uniform timeline items (left/right alternating) */}
 
           {/* item 1 - left (2010) */}
@@ -27,15 +29,14 @@ const OurJourney = () => {
                       <span className="icon-[tabler--location] text-white size-5"></span>
                     </div>
                     <p className="font-semibold text-22 text-primary-dark">
-                      2010
+                      {t('journey.items.0.year')}
                     </p>
                   </div>
                   <h5 className="card-title font-semibold text-22px text-primary">
-                    Founded in Egypt
+                    {t('journey.items.0.title')}
                   </h5>
                   <p className="text-14px text-black font-normal">
-                    Started our journey in Cairo with a vision to revolutionize
-                    cleaning services
+                    {t('journey.items.0.desc')}
                   </p>
                 </div>
               </div>
@@ -58,15 +59,14 @@ const OurJourney = () => {
                       <span className="icon-[tabler--graph] text-white size-5"></span>
                     </div>
                     <p className="font-semibold text-22 text-primary-dark">
-                      2015
+                      {t('journey.items.1.year')}
                     </p>
                   </div>
                   <h5 className="card-title font-semibold text-22px text-primary">
-                    Expanding Operations
+                    {t('journey.items.1.title')}
                   </h5>
                   <p className="text-14px text-black font-normal">
-                    Grew to serve over 50 cities with 100+ professional staff,
-                    expanding our footprint across Egypt.
+                    {t('journey.items.1.desc')}
                   </p>
                 </div>
               </div>
@@ -90,15 +90,14 @@ const OurJourney = () => {
                       <span className="icon-[tabler--star] text-white size-5"></span>
                     </div>
                     <p className="font-semibold text-22 text-primary-dark">
-                      2020
+                      {t('journey.items.2.year')}
                     </p>
                   </div>
                   <h5 className="card-title font-semibold text-22px text-primary">
-                    Digital Innovation
+                    {t('journey.items.2.title')}
                   </h5>
                   <p className="text-14px text-black font-normal">
-                    Launched our digital platform and introduced eco-friendly
-                    solutions to improve service efficiency.
+                    {t('journey.items.2.desc')}
                   </p>
                 </div>
               </div>
@@ -121,15 +120,14 @@ const OurJourney = () => {
                       <span className="icon-[tabler--star] text-white size-5"></span>
                     </div>
                     <p className="font-semibold text-22 text-primary-dark">
-                      2025
+                      {t('journey.items.3.year')}
                     </p>
                   </div>
                   <h5 className="card-title font-semibold text-22px text-primary">
-                    Dubai Expansion
+                    {t('journey.items.3.title')}
                   </h5>
                   <p className="text-14px text-black font-normal">
-                    Bringing 15 years of expertise to the UAE market with
-                    cutting-edge services and local teams.
+                    {t('journey.items.3.desc')}
                   </p>
                 </div>
               </div>

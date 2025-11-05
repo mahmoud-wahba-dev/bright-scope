@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
 const SocialMedia = () => {
+  const { t } = useTranslation();
   return (
     <section className="my-7 md:my-20">
       <h4 className="font-bold text-48px text-center mb-4">
-        Follow Us On <span className="text-primary">Social Media</span>
+        {t("social.titlePrefix")} <span className="text-primary">{t("social.titleHighlight")}</span>
       </h4>
       <div className="flex flex-wrap gap-4 justify-center items-center">
         <div>

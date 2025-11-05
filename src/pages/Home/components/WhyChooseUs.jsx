@@ -1,44 +1,43 @@
+import { useTranslation } from "react-i18next";
+
 const WhyChooseUs = () => {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: "icon-[mdi--currency-usd]",
-      title: "Transparent Pricing",
-      subtitle: "No Hidden Fees",
-      highlight: "0 Hidden Fees",
-      description:
-        "Clear upfront pricing with no surprises or additional charges",
+      title: t("feature_pricing_title"),
+      subtitle: t("feature_pricing_subtitle"),
+      highlight: t("feature_pricing_highlight"),
+      description: t("feature_pricing_description"),
     },
     {
       icon: "icon-[mdi--shield-check]",
-      title: "Trained & Verified Staff",
-      subtitle: "Background Checked",
-      highlight: "100% Verified",
-      description:
-        "Every Team member is professionally trained and security verified",
+      title: t("feature_staff_title"),
+      subtitle: t("feature_staff_subtitle"),
+      highlight: t("feature_staff_highlight"),
+      description: t("feature_staff_description"),
     },
     {
       icon: "icon-[mdi--star-circle]",
-      title: "15+ Years Experience",
-      subtitle: "Egypt   Dubai",
-      highlight: "2008 - 2024",
-      description:
-        "Trusted expertise spanning across borders with proven track record",
+      title: t("feature_experience_title"),
+      subtitle: t("feature_experience_subtitle"),
+      highlight: t("feature_experience_highlight"),
+      description: t("feature_experience_description"),
     },
     {
       icon: "icon-[mdi--leaf]",
-      title: "Eco-Friendly Solutions",
-      subtitle: "Safe Treatments",
-      highlight: "100% Safe",
-      description:
-        "Environmental-friendly cleaning products and safe pest control methods",
+      title: t("feature_eco_title"),
+      subtitle: t("feature_eco_subtitle"),
+      highlight: t("feature_eco_highlight"),
+      description: t("feature_eco_description"),
     },
     {
       icon: "icon-[mdi--clock]",
-      title: "Quick Booking",
-      subtitle: "60 Seconds Only",
-      highlight: "< 60 Seconds",
-      description:
-        "Lightning-fast booking through our form or WhatsApp in just one minute",
+      title: t("feature_booking_title"),
+      subtitle: t("feature_booking_subtitle"),
+      highlight: t("feature_booking_highlight"),
+      description: t("feature_booking_description"),
     },
   ];
   return (

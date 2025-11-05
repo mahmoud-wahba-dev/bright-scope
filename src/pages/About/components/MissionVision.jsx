@@ -1,27 +1,28 @@
+import { useTranslation } from "react-i18next";
+
 const MissionVision = () => {
+  const { t } = useTranslation();
   const items = [
     {
       iconClass: "icon-[material-symbols--flag-rounded]",
-      title: "Our Mission",
-      description:
-        "To deliver exceptional cleaning and pest control services that exceed expectations while maintaining the highest standards of safety and environmental responsibility.",
+      title: t("mission.missionTitle"),
+      description: t("mission.missionDescription"),
       points: [
-        "Eco-friendly solutions",
-        "Professional excellence",
-        "Customer satisfaction",
-        "Safety first approach",
+        t("mission.missionPoint1"),
+        t("mission.missionPoint2"),
+        t("mission.missionPoint3"),
+        t("mission.missionPoint4"),
       ],
     },
     {
       iconClass: "icon-[material-symbols--other-admission-rounded]",
-      title: "Our Vision",
-      description:
-        "To become the leading provider of cleaning and pest control services in the MENA region, setting new standards for quality, innovation, and customer care.",
+      title: t("mission.visionTitle"),
+      description: t("mission.visionDescription"),
       points: [
-        "Regional leadership",
-        "Innovation-driven",
-        "Sustainable practices",
-        "Community impact",
+        t("mission.visionPoint1"),
+        t("mission.visionPoint2"),
+        t("mission.visionPoint3"),
+        t("mission.visionPoint4"),
       ],
     },
   ];
