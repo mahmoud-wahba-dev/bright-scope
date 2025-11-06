@@ -29,17 +29,21 @@ const ResetPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiHelper.post("auth/reset-password-confirm/", {
-        uid,
-        token,
-        new_password: data.new_password,
+      // ✅ خلى الـ endpoint زي Postman بالظبط
+      const res = await apiHelper.post(`auth/reset-password/${uid}/${token}/`, {
+        // ✅ نفس أسماء الفيلدز اللي في Postman
+        password: data.new_password,
+        password_confirm: data.confirm_password,
       });
+
       notyf.success(res.data?.msg || "Password reset successful!");
       navigate("/login");
     } catch (error) {
       console.error(error);
       notyf.error(
-        error.response?.data?.error || "Failed to reset password. Try again."
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Failed to reset password. Try again."
       );
     }
   };
@@ -61,8 +65,8 @@ const ResetPassword = () => {
             </p>
 
             {[1, 2, 3, 4].map((num) => {
-              const completed = num < 3; // أول خطوتين خلصوا
-              const active = num === 3; // دي الخطوة الحالية
+              const completed = num < 3; // 1 و 2 خلصوا
+              const active = num === 3; // دي الحالية
 
               return (
                 <div key={num} className="flex items-center gap-2 mb-4">
