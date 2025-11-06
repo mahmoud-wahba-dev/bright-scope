@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
@@ -8,6 +8,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const menuItems = [
     { key: "home", path: "/" },
@@ -16,48 +19,16 @@ const Navbar = () => {
     { key: "contact", path: "/contact" },
   ];
 
-  // useEffect(() => {
-  //   // ✅ نعمل إعادة تهيئة FlyonUI أول ما الـ Navbar يتركّب فعليًا
-  //   const initDropdown = () => {
-  //     if (
-  //       typeof window !== "undefined" &&
-  //       window.FlyonUI &&
-  //       typeof window.FlyonUI.reInit === "function"
-  //     ) {
-  //       window.FlyonUI.reInit();
-  //     }
-  //   };
-
-  //   // ✅ استدعاء مباشر بعد أول render
-  //   initDropdown();
-
-  //   // ✅ كمان نرجع نعمل reInit بعد أي reflow بسيط
-  //   const timeout = setTimeout(initDropdown, 300);
-
-  //   return () => clearTimeout(timeout);
-  // }, []);
-
+  // Close dropdown when clicking outside
   useEffect(() => {
-    const init = () => {
-      if (
-        typeof window !== "undefined" &&
-        window.HSStaticMethods &&
-        typeof window.HSStaticMethods.autoInit === "function"
-      ) {
-        window.HSStaticMethods.autoInit(["dropdown"]);
-        console.log("FlyonUI autoInit dropdown called");
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
       }
     };
-
-    init();
-    const unlisten = navigate((location) => {
-      setTimeout(init, 50);
-    });
-
-    return () => {
-      if (typeof unlisten === "function") unlisten();
-    };
-  }, [navigate, i18n.language]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
@@ -67,35 +38,34 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar px-4 sm:px-6 md:px-8 fixed left-0 top-0 z-10 rounded-box flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm bg-white/80 backdrop-blur-md">
+      {/* ✅ Navbar */}
+      <nav className="navbar fixed top-0 left-0 w-full z-30 bg-white/80 backdrop-blur-md shadow-sm px-4 sm:px-6 md:px-10 flex items-center justify-between">
         {/* Left - Logo */}
-        <div className="navbar-start">
+        <div className="flex items-center gap-2">
           <Link
-            className="link text-base-content link-neutral text-xl font-bold no-underline"
+            className="text-xl font-bold text-primary flex items-center gap-2"
             to="/"
           >
-            <div className="flex items-center gap-2">
-              <img
-                src="./assets/imgs/global/logo.svg"
-                alt="Bright Scope"
-                className="h-8 sm:h-10 object-contain"
-              />
-            </div>
+            <img
+              src="/logo.svg"
+              alt="Bright Scope"
+              className="h-8 sm:h-10 object-contain"
+            />
           </Link>
         </div>
 
-        {/* Center - Menu */}
-        <div className="navbar-center max-lg:hidden">
-          <ul className="menu menu-horizontal p-0 font-medium items-center">
+        {/* Center - Menu (Desktop) */}
+        <div className="hidden lg:flex justify-center flex-1">
+          <ul className="flex items-center justify-center gap-12 font-medium">
             {menuItems.map((item) => (
               <li key={item.key}>
                 <NavLink
+                  to={item.path}
                   className={({ isActive }) =>
                     isActive
-                      ? "font-normal text-base text-primary border-s-4 border-primary-dark_active rounded-none"
-                      : "font-normal text-base hover:text-primary"
+                      ? "text-primary font-semibold"
+                      : "text-gray-700 hover:text-primary transition"
                   }
-                  to={item.path}
                 >
                   {t(item.key)}
                 </NavLink>
@@ -104,112 +74,186 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right - User + Language */}
-        <div className="navbar-end items-center gap-4">
+        {/* Right - Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
           {isAuthenticated ? (
-            <div className="dropdown relative inline-flex">
+            <div ref={dropdownRef} className="relative">
               <button
-                id="dropdown-avatar"
-                type="button"
-                className="dropdown-toggle btn btn-outline btn-primary flex items-center gap-2 rounded-full"
-                aria-haspopup="menu"
-                aria-expanded="false"
-                aria-label="User menu"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className="flex items-center gap-2 btn btn-outline btn-primary rounded-full px-4"
               >
                 <div className="avatar">
-                  <div className="size-6 rounded-full">
+                  <div className="w-7 rounded-full">
                     <img
                       src={
                         user?.avatar ||
                         "https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png"
                       }
-                      alt={user?.name || "User Avatar"}
+                      alt="user"
                     />
                   </div>
                 </div>
-                {user?.name?.split(" ")[0] || t("login")}
-                <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                {user?.name?.split(" ")[0]}
+                <span
+                  className={`icon-[tabler--chevron-down] size-4 transition-transform ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                ></span>
               </button>
 
-              <ul
-                className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="dropdown-avatar"
-              >
-                <li className="dropdown-header gap-3">
-                  <div className="avatar">
-                    <div className="w-10 rounded-full">
-                      <img
-                        src={
-                          user?.avatar ||
-                          "https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png"
-                        }
-                        alt={user?.name || "User Avatar"}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h6 className="text-base-content text-base font-semibold">
-                      {user?.name || t("login")}
-                    </h6>
-                    <small className="text-base-content/50 text-sm font-normal">
-                      {user?.email || "user@example.com"}
-                    </small>
-                  </div>
-                </li>
-
-                <li>
-                  <Link className="dropdown-item" to="/">
-                    {t("home")}
-                  </Link>
-                </li>
-
-                <li>
-                  <button
-                    className="dropdown-item text-error font-semibold"
-                    onClick={() => setShowLogoutModal(true)}
-                  >
-                    {t("logout")}
-                  </button>
-                </li>
-              </ul>
+              {isDropdownOpen && (
+                <ul className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-2xl shadow-lg z-50 animate-fadeIn">
+                  <li className="px-4 py-3 border-b border-gray-100">
+                    <p className="font-semibold text-gray-800">{user?.name}</p>
+                    <p className="text-sm text-gray-500">{user?.email}</p>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        setShowLogoutModal(true);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-error hover:bg-red-50 font-medium rounded-b-2xl"
+                    >
+                      {t("logout")}
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           ) : (
             <Link
-              className="hidden md:inline-flex btn rounded-full px-4 sm:px-6 py-2 sm:py-3 btn-primary items-center"
               to="/login"
+              className="btn btn-primary rounded-full px-6 py-2"
             >
-              <span>{t("login")}</span>
-              <span className="icon-[tabler--arrow-right] rtl:rotate-180 ml-2"></span>
+              {t("login")}
             </Link>
           )}
 
-          {/* Language Switch */}
-          {/* Language Switch */}
-          <div className="hidden md:inline-flex items-center gap-2">
-            {i18n.language === "en" ? (
+          <button
+            onClick={() =>
+              i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")
+            }
+            className="btn btn-outline rounded-full px-4"
+          >
+            {i18n.language === "en" ? "AR" : "EN"}
+          </button>
+        </div>
+
+        {/* ✅ Mobile Right Icons */}
+        <div className="flex lg:hidden items-center gap-2">
+          {/* Language Button */}
+          <button
+            onClick={() =>
+              i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")
+            }
+            className="btn btn-outline rounded-full px-3 py-1 text-sm"
+          >
+            {i18n.language === "en" ? "AR" : "EN"}
+          </button>
+
+          {/* Auth (login/logout/user) */}
+          {isAuthenticated ? (
+            <div ref={dropdownRef} className="relative">
               <button
-                className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
-                onClick={() => i18n.changeLanguage("ar")}
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className="flex items-center gap-2 border border-primary text-primary rounded-full px-3 py-1.5"
               >
-                AR
+                <div className="avatar">
+                  <div className="w-6 rounded-full">
+                    <img
+                      src={
+                        user?.avatar ||
+                        "https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png"
+                      }
+                      alt="user"
+                    />
+                  </div>
+                </div>
+                <span className="text-sm font-medium">
+                  {user?.name?.split(" ")[0]}
+                </span>
+                <span
+                  className={`icon-[tabler--chevron-down] size-4 transition-transform ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                ></span>
               </button>
-            ) : (
-              <button
-                className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
-                onClick={() => i18n.changeLanguage("en")}
-              >
-                EN
-              </button>
-            )}
-          </div>
+
+              {isDropdownOpen && (
+                <ul className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-50 animate-fadeIn">
+                  <li>
+                    <button
+                      onClick={() => {
+                        setShowLogoutModal(true);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-error hover:bg-red-50 font-medium rounded-xl"
+                    >
+                      {t("logout")}
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="btn btn-primary rounded-full px-4 py-1.5 text-sm"
+            >
+              {t("login")}
+            </Link>
+          )}
+
+          {/* Menu Icon */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-primary"
+          >
+            <span
+              className={`icon-[tabler--${
+                isMobileMenuOpen ? "x" : "menu-2"
+              }] size-9 transition-all mt-1`}
+            ></span>
+          </button>
         </div>
       </nav>
 
-      {/* ✅ Logout Confirmation Modal */}
+      {/* ✅ Mobile Dropdown Menu Full Width + Overlay */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-20 animate-fadeIn"
+            onClick={() => setIsMobileMenuOpen(false)}
+          ></div>
+
+          {/* Full Width Menu */}
+          <div className="fixed top-[64px] left-0 w-full bg-white rounded-b-2xl shadow-xl z-30 transition-all duration-300 animate-slideDown">
+            <ul className="flex flex-col items-center gap-4 px-6 py-6 text-center">
+              {menuItems.map((item) => (
+                <li key={item.key}>
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-primary font-semibold block py-2 text-lg"
+                        : "text-gray-700 hover:text-primary block py-2 text-lg transition"
+                    }
+                  >
+                    {t(item.key)}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
+      {/* ✅ Logout Modal */}
       {showLogoutModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fadeIn">
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fadeIn">
           <div className="bg-white rounded-2xl shadow-xl p-6 w-[90%] max-w-md text-center transform scale-95 animate-zoomIn">
             <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
               {t("Are you sure you want to log out?")}
