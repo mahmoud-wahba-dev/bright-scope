@@ -48,6 +48,7 @@ const ResetPassword = () => {
     <section className="my-7 md:my-14">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 pt-6 gap-6 min-h-[calc(100vh-88px)]">
+          {/* Left side steps */}
           <div className="max-md:order-2">
             <h1 className="font-bold text-48px mb-8">
               {t("auth.forgot.title_prefix")}{" "}
@@ -60,19 +61,33 @@ const ResetPassword = () => {
             </p>
 
             {[1, 2, 3, 4].map((num) => {
-              const active = num === 3;
+              const completed = num < 3; // أول خطوتين خلصوا
+              const active = num === 3; // دي الخطوة الحالية
+
               return (
                 <div key={num} className="flex items-center gap-2 mb-4">
                   <div
-                    className={`size-10 center_flex rounded-full ${
-                      active ? "bg-primary text-white" : "bg-disabled"
+                    className={`size-10 center_flex rounded-full border transition-all duration-300 ${
+                      completed
+                        ? "bg-green-500 text-white border-green-500"
+                        : active
+                        ? "bg-primary text-white border-primary"
+                        : "bg-disabled text-gray-600 border-gray-300"
                     }`}
                   >
-                    <span>{num}</span>
+                    {completed ? (
+                      <span className="icon-[iconamoon--check-bold] text-white size-4"></span>
+                    ) : (
+                      <span>{num}</span>
+                    )}
                   </div>
                   <p
-                    className={`font-semibold text-base ${
-                      active ? "text-primary" : ""
+                    className={`font-semibold text-base transition-colors ${
+                      completed
+                        ? "text-green-600"
+                        : active
+                        ? "text-primary"
+                        : "text-gray-600"
                     }`}
                   >
                     {t(`auth.forgot.step${num}`)}
@@ -82,6 +97,7 @@ const ResetPassword = () => {
             })}
           </div>
 
+          {/* Right side form */}
           <div className="max-md:order-1">
             <div className="flex items-center justify-center">
               <div className="w-full bg-surface-light shadow-[0_0_20px_0_#00000040] space-y-6 rounded-30px p-6 lg:p-8">
