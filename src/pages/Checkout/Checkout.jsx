@@ -114,7 +114,7 @@ export default function Checkout() {
       const paymentPayload = {
         order_id: `ORD-${bookingData.id}`,
         amount: bookingData.total_price,
-        currency: "AED",
+        currency: "EGP",
         customer_email: bookingData.customer_email,
         customer_name: bookingData.customer_name,
       };
