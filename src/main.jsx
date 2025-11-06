@@ -24,6 +24,7 @@ import PaymentSuccess from "./pages/Payment/PaymentSuccess.jsx";
 import PaymentFailed from "./pages/Payment/PaymentFailed.jsx";
 import PrivateRoute from "./pages/PrivateRoute/PrivateRoute.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import ResetPassword from "./pages/Auth/ResetPassword.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
         path: "/reset-password",
         element: <ForgotPassword />,
       },
+      {
+        path: "/reset-password/:uid/:token",
+        element: <ResetPassword />,
+      },
+
       {
         path: "/confirm-password",
         element: <ConfirmPassword />,
