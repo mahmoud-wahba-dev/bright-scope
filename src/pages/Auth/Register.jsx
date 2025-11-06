@@ -36,7 +36,6 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // ✅ Redirect if already logged in
   useEffect(() => {
     if (!loading && isAuthenticated) navigate("/");
   }, [isAuthenticated, loading, navigate]);
@@ -45,6 +44,7 @@ export default function Register() {
     register,
     handleSubmit,
     control,
+    setError, // ✅ أضفنا ده
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(schema) });
 
@@ -68,20 +68,42 @@ export default function Register() {
       }
 
       login(user, access);
-
       notyf.success(message || "Registration successful!");
       navigate("/");
     } catch (error) {
       const data = error.response?.data;
+
       let errMsg =
         data?.details ||
-           data?.details.phone[0] ||
         data?.detail ||
         data?.message ||
         data?.error ||
         (typeof data === "object"
           ? Object.values(data)?.[0]
           : "Registration failed. Try again.");
+
+      // ✅ معالجة الأخطاء المخصصة من السيرفر
+      if (data?.details?.phone?.[0]) {
+        const phoneError = data.details.phone[0];
+        setError("phone", { type: "server", message: phoneError });
+        errMsg = phoneError;
+      }
+
+      if (
+        typeof data?.details === "string" &&
+        data.details.toLowerCase().includes("email")
+      ) {
+        // ✅ لو السيرفر رجع error عام فيه كلمة email
+        setError("email", { type: "server", message: data.details });
+        errMsg = data.details;
+      }
+
+      if (data?.details?.email?.[0]) {
+        // ✅ لو السيرفر رجع error محدد للإيميل كـ object
+        const emailError = data.details.email[0];
+        setError("email", { type: "server", message: emailError });
+        errMsg = emailError;
+      }
 
       notyf.error(errMsg);
     }

@@ -10,8 +10,8 @@ import { useAuth } from "../../context/AuthContext";
 export default function Checkout() {
   const { state } = useLocation();
   const navigate = useNavigate();
- const {user}=useAuth()
- console.log("user",user)
+  const { user } = useAuth();
+
   // 🧩 Retrieve booking from state or session storage
   const sessionBooking = (() => {
     try {
@@ -29,6 +29,7 @@ export default function Checkout() {
     control,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
@@ -41,6 +42,15 @@ export default function Checkout() {
       special_requests: "",
     },
   });
+
+  // ✅ Fill form automatically if user is logged in
+  useEffect(() => {
+    if (user) {
+      if (user.name) setValue("full_name", user.name);
+      if (user.email) setValue("email", user.email);
+      if (user.phone) setValue("phone_number", user.phone);
+    }
+  }, [user, setValue]);
 
   // 🚨 Redirect back if booking data missing
   useEffect(() => {
@@ -68,15 +78,19 @@ export default function Checkout() {
       return;
     }
 
-    // Validate date/time
     if (!validateDateTime(data.date, data.time)) {
-      setError("date", { type: "manual", message: "Please choose a future date" });
-      setError("time", { type: "manual", message: "Please choose a valid time" });
+      setError("date", {
+        type: "manual",
+        message: "Please choose a future date",
+      });
+      setError("time", {
+        type: "manual",
+        message: "Please choose a valid time",
+      });
       notyf.error("Please select a valid preferred date and time.");
       return;
     }
 
-    // 🧱 Build booking payload
     const payload = {
       service: booking.serviceId,
       package: booking.package?.id,
@@ -90,35 +104,27 @@ export default function Checkout() {
     };
 
     try {
-      // 🟢 1️⃣ Create booking
-      const res = await apiHelper.post("services/bookings/", payload);
+      const res = await apiHelper.post("services/bookings/", payload, {
+        publicRequest: true,
+      });
+
       const bookingData = res.data;
-      console.log("Booking response:", bookingData);
       notyf.success("Booking created successfully.");
 
-      // 🟡 2️⃣ Generate payment payload dynamically
       const paymentPayload = {
         order_id: `ORD-${bookingData.id}`,
         amount: bookingData.total_price,
-        currency: "EGP", // or "EGP"
+        currency: "AED",
         customer_email: bookingData.customer_email,
         customer_name: bookingData.customer_name,
       };
 
-      // 🟠 3️⃣ Call payment endpoint
-      const paymentRes = await apiHelper.post("payments/create/", paymentPayload);
-      console.log("Payment response:", paymentRes.data);
-      // notyf.success("Payment initiated successfully!");
-
-      // 🧹 Clear session booking
+      const paymentRes = await apiHelper.post(
+        "payments/create/",
+        paymentPayload
+      );
       sessionStorage.removeItem("booking_preview");
-
-      // 🟣 4️⃣ Redirect to payment page with response data
-      console.log(paymentRes.data.payment_url);
-      
-        window.location.href = paymentRes.data.payment_url;
-
-
+      window.location.href = paymentRes.data.payment_url;
     } catch (error) {
       handleApiError(error);
     }
@@ -196,10 +202,14 @@ export default function Checkout() {
                 <input
                   type="text"
                   className="input border-[#CBD5E1] h-10"
-                  {...register("full_name", { required: "Full name is required" })}
+                  {...register("full_name", {
+                    required: "Full name is required",
+                  })}
                 />
                 {errors.full_name && (
-                  <p className="text-error text-sm mt-1">{errors.full_name.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.full_name.message}
+                  </p>
                 )}
               </div>
 
@@ -226,7 +236,9 @@ export default function Checkout() {
                   )}
                 />
                 {errors.phone_number && (
-                  <p className="text-error text-sm mt-1">{errors.phone_number.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.phone_number.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -249,7 +261,9 @@ export default function Checkout() {
                   })}
                 />
                 {errors.email && (
-                  <p className="text-error text-sm mt-1">{errors.email.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -263,7 +277,9 @@ export default function Checkout() {
                   {...register("address", { required: "Address is required" })}
                 />
                 {errors.address && (
-                  <p className="text-error text-sm mt-1">{errors.address.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.address.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -281,7 +297,9 @@ export default function Checkout() {
                   min={new Date().toISOString().split("T")[0]}
                 />
                 {errors.date && (
-                  <p className="text-error text-sm mt-1">{errors.date.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.date.message}
+                  </p>
                 )}
               </div>
 
@@ -295,7 +313,9 @@ export default function Checkout() {
                   {...register("time", { required: "Time is required" })}
                 />
                 {errors.time && (
-                  <p className="text-error text-sm mt-1">{errors.time.message}</p>
+                  <p className="text-error text-sm mt-1">
+                    {errors.time.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -305,7 +325,10 @@ export default function Checkout() {
               <label className="label-text font-medium text-14px mb-1.5">
                 Special Requests (optional)
               </label>
-              <textarea className="textarea min-h-24" {...register("special_requests")} />
+              <textarea
+                className="textarea min-h-24"
+                {...register("special_requests")}
+              />
             </div>
 
             {/* Buttons */}
