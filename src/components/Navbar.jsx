@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
@@ -7,10 +7,10 @@ const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const menuItems = [
     { key: "home", path: "/" },
@@ -18,17 +18,6 @@ const Navbar = () => {
     { key: "about", path: "/about" },
     { key: "contact", path: "/contact" },
   ];
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
@@ -40,7 +29,7 @@ const Navbar = () => {
     <>
       {/* ✅ Navbar */}
       <nav className="navbar fixed top-0 left-0 w-full z-30 bg-white/80 backdrop-blur-md shadow-sm px-4 sm:px-6 md:px-10 flex items-center justify-between">
-        {/* Left - Logo */}
+        {/* Logo */}
         <div className="flex items-center gap-2">
           <Link
             className="text-xl font-bold text-primary flex items-center gap-2"
@@ -54,7 +43,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Center - Menu (Desktop) */}
+        {/* Menu - Desktop */}
         <div className="hidden lg:flex justify-center flex-1">
           <ul className="flex items-center justify-center gap-12 font-medium">
             {menuItems.map((item) => (
@@ -74,13 +63,13 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right - Buttons */}
+        {/* Right - Desktop */}
         <div className="hidden lg:flex items-center gap-4">
           {isAuthenticated ? (
-            <div ref={dropdownRef} className="relative">
+            <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-2 btn btn-outline btn-primary rounded-full px-4"
+                className="flex items-center gap-2 border border-primary text-primary rounded-full px-4 py-1.5 hover:bg-primary/5 transition"
               >
                 <div className="avatar">
                   <div className="w-7 rounded-full">
@@ -93,7 +82,7 @@ const Navbar = () => {
                     />
                   </div>
                 </div>
-                {user?.name?.split(" ")[0]}
+                <span>{user?.name?.split(" ")[0]}</span>
                 <span
                   className={`icon-[tabler--chevron-down] size-4 transition-transform ${
                     isDropdownOpen ? "rotate-180" : ""
@@ -103,9 +92,13 @@ const Navbar = () => {
 
               {isDropdownOpen && (
                 <ul className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-2xl shadow-lg z-50 animate-fadeIn">
-                  <li className="px-4 py-3 border-b border-gray-100">
-                    <p className="font-semibold text-gray-800">{user?.name}</p>
-                    <p className="text-sm text-gray-500">{user?.email}</p>
+                  <li className="px-4 py-3 border-b border-gray-100 text-left">
+                    <p className="font-semibold text-gray-800 break-all">
+                      {user?.name || ""}
+                    </p>
+                    <p className="text-sm text-gray-500 break-all max-w-[220px] truncate">
+                      {user?.email || ""}
+                    </p>
                   </li>
                   <li>
                     <button
@@ -140,9 +133,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* ✅ Mobile Right Icons */}
+        {/* Right - Mobile */}
         <div className="flex lg:hidden items-center gap-2">
-          {/* Language Button */}
+          {/* Language */}
           <button
             onClick={() =>
               i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")
@@ -152,9 +145,9 @@ const Navbar = () => {
             {i18n.language === "en" ? "AR" : "EN"}
           </button>
 
-          {/* Auth (login/logout/user) */}
+          {/* Auth - Mobile */}
           {isAuthenticated ? (
-            <div ref={dropdownRef} className="relative">
+            <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
                 className="flex items-center gap-2 border border-primary text-primary rounded-full px-3 py-1.5"
@@ -181,14 +174,22 @@ const Navbar = () => {
               </button>
 
               {isDropdownOpen && (
-                <ul className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-50 animate-fadeIn">
+                <ul className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded-2xl shadow-lg z-50 animate-fadeIn text-left">
+                  <li className="px-4 py-3 border-b border-gray-100">
+                    <p className="font-semibold text-gray-800 break-all">
+                      {user?.name || ""}
+                    </p>
+                    <p className="text-sm text-gray-500 break-all max-w-[230px] truncate">
+                      {user?.email || ""}
+                    </p>
+                  </li>
                   <li>
                     <button
                       onClick={() => {
                         setShowLogoutModal(true);
                         setIsDropdownOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 text-error hover:bg-red-50 font-medium rounded-xl"
+                      className="w-full text-left px-4 py-2 text-error hover:bg-red-50 font-medium rounded-b-2xl"
                     >
                       {t("logout")}
                     </button>
@@ -205,9 +206,12 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Menu Icon */}
+          {/* Menu Toggle */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              setIsDropdownOpen(false);
+            }}
             className="text-primary"
           >
             <span
@@ -219,16 +223,14 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ✅ Mobile Dropdown Menu Full Width + Overlay */}
+      {/* ✅ Mobile Menu */}
       {isMobileMenuOpen && (
         <>
-          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-20 animate-fadeIn"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
 
-          {/* Full Width Menu */}
           <div className="fixed top-[64px] left-0 w-full bg-white rounded-b-2xl shadow-xl z-30 transition-all duration-300 animate-slideDown">
             <ul className="flex flex-col items-center gap-4 px-6 py-6 text-center">
               {menuItems.map((item) => (
