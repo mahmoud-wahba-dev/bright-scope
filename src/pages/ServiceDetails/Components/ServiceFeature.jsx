@@ -3,6 +3,7 @@ const { VITE_IMG_BASE_URL } = import.meta.env;
 
 const ServiceFeature = ({ serviceDetails }) => {
   const navigate = useNavigate();
+
   console.log(serviceDetails, "zz");
 
   return (
@@ -37,7 +38,7 @@ const ServiceFeature = ({ serviceDetails }) => {
                         <span className="icon-[mdi--star] text-[#FFCD29]  size-7"></span>
                       ) : null}
                     </div>
-                    <p className="font-semibold text-22px text-primary">
+                    <p className="font-semibold text-22px text-primary break-words overflow-hidden text-ellipsis whitespace-normal">
                       {rating.description}
                     </p>
                   </div>
@@ -65,7 +66,11 @@ rounded-61px"
           >
             <img
               className="w-full rounded-[61px]"
-              src={`${VITE_IMG_BASE_URL}${serviceDetails.hero_image}`}
+              src={
+                serviceDetails.hero_image
+                  ? `${VITE_IMG_BASE_URL}${serviceDetails.hero_image}`
+                  : "/service_details_img.webp"
+              }
               alt="service"
             />
           </div>

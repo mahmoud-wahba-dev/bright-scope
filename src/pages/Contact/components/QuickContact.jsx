@@ -4,8 +4,11 @@ import "react-phone-input-2/lib/style.css";
 import { notyf } from "../../../utils/toast";
 import apiHelper from "../../../api/apiHelper";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../../context/AuthContext";
 
 const QuickContact = () => {
+  const { user } = useAuth();
+  console.log(user);
   const {
     register,
     control,
@@ -22,39 +25,37 @@ const QuickContact = () => {
     },
   });
 
-const onSubmit = async (data) => {
-  try {
-    console.log("Sending contact data:", data);
+  const onSubmit = async (data) => {
+    try {
+      console.log("Sending contact data:", data);
 
-    // ✅ Send request (make sure to keep the trailing slash)
-    await apiHelper.post("contact/submit/", data);
+      // ✅ Send request (make sure to keep the trailing slash)
+      await apiHelper.post("contact/submit/", data);
 
-    notyf.success("Your message has been sent successfully!");
-    reset();
-  } catch (error) {
-    console.error("Contact form error:", error.response?.data || error);
+      notyf.success("Your message has been sent successfully!");
+      reset();
+    } catch (error) {
+      console.error("Contact form error:", error.response?.data || error);
 
-    const errorData = error.response?.data;
+      const errorData = error.response?.data;
 
-    if (errorData?.errors && typeof errorData.errors === "object") {
-      // ✅ Loop through backend field errors
-      Object.entries(errorData.errors).forEach(([field, messages]) => {
-        if (Array.isArray(messages)) {
-          messages.forEach((msg) => notyf.error(`${field}: ${msg}`));
-        } else if (typeof messages === "string") {
-          notyf.error(`${field}: ${messages}`);
-        }
-      });
-    } else {
-      // ✅ Fallback generic error
-      notyf.error(
-        errorData?.message ||
-          "Something went wrong. Please try again later."
-      );
+      if (errorData?.errors && typeof errorData.errors === "object") {
+        // ✅ Loop through backend field errors
+        Object.entries(errorData.errors).forEach(([field, messages]) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => notyf.error(`${field}: ${msg}`));
+          } else if (typeof messages === "string") {
+            notyf.error(`${field}: ${messages}`);
+          }
+        });
+      } else {
+        // ✅ Fallback generic error
+        notyf.error(
+          errorData?.message || "Something went wrong. Please try again later."
+        );
+      }
     }
-  }
-};
-
+  };
 
   const { t } = useTranslation();
 
@@ -65,7 +66,10 @@ const onSubmit = async (data) => {
         <div className="form_container">
           <div className="bg-surface-light w-full rounded-10px shadow-[0px_0px_9.4px_0px_#00000040] md:p-8 p-4">
             <h5 className="font-semibold text-36px mb-2">
-              {t("contact_page.quick.titlePrefix")} <span className="text-primary">{t("contact_page.quick.titleHighlight")}</span>
+              {t("contact_page.quick.titlePrefix")}{" "}
+              <span className="text-primary">
+                {t("contact_page.quick.titleHighlight")}
+              </span>
             </h5>
             <p className="font-normal text-14px text-secondary-dark mb-8">
               {t("contact_page.quick.subtitle")}
@@ -88,9 +92,13 @@ const onSubmit = async (data) => {
                   <input
                     id="full_name"
                     type="text"
+                    disabled
                     placeholder={t("contact_page.quick.placeholder_full_name")}
+                    value={user?.name}
                     className="input border-[#CBD5E1] h-10"
-                    {...register("full_name", { required: t("contact_page.quick.error_name_required") })}
+                    {...register("full_name", {
+                      required: t("contact_page.quick.error_name_required"),
+                    })}
                   />
                   {errors.full_name && (
                     <p className="text-error text-sm mt-1">
@@ -115,6 +123,8 @@ const onSubmit = async (data) => {
                         {...field}
                         country={"ae"}
                         enableSearch={true}
+                       value={user?.phone}
+                       disabled
                         inputClass="!w-full !h-10"
                         placeholder={t("contact_page.quick.placeholder_phone")}
                         onChange={(value) => field.onChange("+" + value)}
@@ -140,6 +150,8 @@ const onSubmit = async (data) => {
                 <input
                   id="email"
                   type="email"
+                 value={user?.email}
+                 disabled
                   placeholder={t("contact_page.quick.placeholder_email")}
                   className="input border-[#CBD5E1] h-10"
                   {...register("email", {
@@ -172,10 +184,18 @@ const onSubmit = async (data) => {
                     required: t("contact_page.quick.error_service_required"),
                   })}
                 >
-                  <option value="">{t("contact_page.quick.select_service_placeholder")}</option>
-                  <option value="consulting">{t("contact_page.quick.service_consulting")}</option>
-                  <option value="support">{t("contact_page.quick.service_support")}</option>
-                  <option value="deep_clean">{t("contact_page.quick.service_deep_clean")}</option>
+                  <option value="">
+                    {t("contact_page.quick.select_service_placeholder")}
+                  </option>
+                  <option value="consulting">
+                    {t("contact_page.quick.service_consulting")}
+                  </option>
+                  <option value="support">
+                    {t("contact_page.quick.service_support")}
+                  </option>
+                  <option value="deep_clean">
+                    {t("contact_page.quick.service_deep_clean")}
+                  </option>
                 </select>
                 {errors.service_type && (
                   <p className="text-error text-sm mt-1">

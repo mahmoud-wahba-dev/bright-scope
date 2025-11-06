@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
   return (
     <section className="my-28 text-center relative">
       <h2 className="font-semibold text-36px mb-2 text-primary-dark">
-        Why <span className="text-primary"> Choose Us ?</span>
+      Why   <span className="text-primary"> Choose Us ?</span>
       </h2>
       <p className="text-primary-dark font-medium text-18px mb-4">
         Discover what makes us the trusted choice for thousands of customers
