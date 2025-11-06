@@ -186,19 +186,23 @@ const Navbar = () => {
           )}
 
           {/* Language Switch */}
+          {/* Language Switch */}
           <div className="hidden md:inline-flex items-center gap-2">
-            <button
-              className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
-              onClick={() => i18n.changeLanguage("en")}
-            >
-              EN
-            </button>
-            <button
-              className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
-              onClick={() => i18n.changeLanguage("ar")}
-            >
-              AR
-            </button>
+            {i18n.language === "en" ? (
+              <button
+                className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
+                onClick={() => i18n.changeLanguage("ar")}
+              >
+                AR
+              </button>
+            ) : (
+              <button
+                className="btn rounded-full px-4 py-2 bg-transparent border border-primary text-[#1A1A1A]"
+                onClick={() => i18n.changeLanguage("en")}
+              >
+                EN
+              </button>
+            )}
           </div>
         </div>
       </nav>

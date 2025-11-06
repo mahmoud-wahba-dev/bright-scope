@@ -160,7 +160,7 @@ const ForgotPassword = () => {
                       </Link>
                     </div>
 
-                    <div className="bg-[#E9EDED] p-4 rounded-lg rounded-15px">
+                    <div className="bg-[#E9EDED] p-4 rounded-lg ">
                       <div className="flex items-center gap-2 mb-1.5">
                         <span class="icon-[iconamoon--shield-yes] size-6 text-primary"></span>
                         <p className="font-semibold text-12px">{t("auth.forgot.security_note_title")}</p>

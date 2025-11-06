@@ -224,7 +224,8 @@ export default function Login() {
                         </label>
                       </div>
                       <Link
-                        to="/forgot-password"
+                      
+                        to="/reset-password"
                         className="link link-animated link-primary text-14px font-normal"
                       >
                         {t("auth.forgot_password_link")}

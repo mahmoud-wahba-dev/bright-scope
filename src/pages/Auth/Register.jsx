@@ -67,7 +67,6 @@ export default function Register() {
         return;
       }
 
-      // ✅ Register + auto login
       login(user, access);
 
       notyf.success(message || "Registration successful!");
