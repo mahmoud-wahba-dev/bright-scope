@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import apiHelper from "../../../api/apiHelper";
 import { set } from "zod";
 import { notyf } from "../../../utils/toast";
+import { Icon } from "@iconify/react";
 import { useServices } from "../../../hooks/useServices";
 import { useTranslation } from "react-i18next";
 const servicesitems = [
@@ -69,9 +70,13 @@ const OurServices = () => {
               >
                 <div className="flex items-center mb-6 gap-4">
                   <div className="bg-primary text-white rounded-lg p-4 size-[70px] ">
-                    <span
-                      className={`${item.icon} size-9.5 text-white font-normal`}
-                    ></span>
+                    <Icon
+                      icon={item.icon
+                        ?.replace("icon-[", "") 
+                        ?.replace("--", ":") 
+                        ?.replace("]", "")} 
+                      className="text-white text-[38px]" 
+                    />
                   </div>
                   <div>
                     <h3 className="text-black font-semibold text-22">
@@ -82,7 +87,7 @@ const OurServices = () => {
                     </p>
                   </div>
                 </div>
-                <p className="font-normal text-18 text-black mb-14 ">
+                <p className="font-normal text-18 text-black mb-14 break-words overflow-hidden text-ellipsis whitespace-normal">
                   {item.hero_description}
                 </p>
                 <Link

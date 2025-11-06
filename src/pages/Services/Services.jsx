@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useServices } from "../../hooks/useServices";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Icon } from "@iconify/react"; // ✅ استيراد المكتبة الجديدة
 
 const Services = () => {
   const { services, loading } = useServices();
@@ -10,18 +11,15 @@ const Services = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
-  // Normalize services into a safe array to avoid ".map is not a function" in production
   const servicesList = Array.isArray(services)
     ? services
     : services && typeof services === "object"
     ? Object.values(services)
     : [];
 
-  // ✅ useEffect runs AFTER data is fetched
   useEffect(() => {
     if (!loading && servicesList.length > 0) {
       if (category) {
-        // Match route param with backend service_type
         const matchedService = servicesList.find(
           (s) => s.service_type === category
         );
@@ -29,15 +27,17 @@ const Services = () => {
         if (matchedService) {
           setActiveTab(matchedService.id);
         } else {
-          // Fallback to first service if category not found
           setActiveTab(servicesList[0].id);
         }
       } else if (activeTab === null) {
-        // Default: first service
         setActiveTab(servicesList[0].id);
       }
     }
   }, [loading, services, category]);
+
+  // 🔄 helper لتحويل الكلاس القادم من الباك لصيغة iconify
+  const formatIcon = (icon) =>
+    icon?.replace("icon-[", "")?.replace("--", ":")?.replace("]", "")?.trim();
 
   return (
     <section className="my-7 md:my-14">
@@ -59,30 +59,42 @@ const Services = () => {
             data-tabs-vertical="true"
             aria-orientation="horizontal"
           >
-            <h4 className="font-semibold text-22px  mb-6 max-md:w-full">
+            <h4 className="font-semibold text-22px mb-6 max-md:w-full">
               {t("choose_service")}
             </h4>
-            {servicesList.map((svc, idx) => (
-              <button
-                key={svc?.id ?? svc?.service_type ?? idx}
-                type="button"
-                className={`${
-                  activeTab === svc.id ? "active" : ""
-                } btn justify-start gap-2 btn-text rounded-10px h-14 max-md:w-fit font-normal text-base active-tab:!border  active-tab:bg-[#D2E2D9] active-tab:text-[#0C8C43] active-tab:border-primary hover:text-primary hover:bg-primary/20 w-full`}
-                id={`tabs-pill-vertical-item-${svc.id ?? idx}`}
-                data-tab={`#tabs-pill-vertical-${svc.id ?? idx}`}
-                aria-controls={`tabs-pill-vertical-${svc.id ?? idx}`}
-                aria-selected={activeTab === svc.id}
-                role="tab"
-                onClick={() => {
-                  setActiveTab(svc.id);
-                  navigate(`/services/${svc.service_type}`);
-                }}
-              >
-                <span className={`${svc.icon} size-5 mr-2`}></span>
-                {svc.name}
-              </button>
-            ))}
+            {servicesList.map((svc, idx) => {
+              const isActive = activeTab === svc.id;
+              return (
+                <button
+                  key={svc?.id ?? svc?.service_type ?? idx}
+                  type="button"
+                  className={`flex items-center gap-2 w-full justify-start rounded-10px h-14 px-3 font-normal text-base transition-all duration-200
+        ${
+          isActive
+            ? "bg-[#D2E2D9] text-[#0C8C43] border border-primary shadow-sm"
+            : "text-secondary-dark hover:text-primary hover:bg-primary/10"
+        }`}
+                  onClick={() => {
+                    setActiveTab(svc.id);
+                    navigate(`/services/${svc.service_type}`);
+                  }}
+                >
+                  <Icon
+                    icon={svc.icon
+                      ?.replace("icon-[", "")
+                      ?.replace("--", ":")
+                      ?.replace("]", "")
+                      ?.trim()}
+                    className={`size-5 transition-colors ${
+                      isActive
+                        ? "text-[#0C8C43]"
+                        : "text-gray-500 group-hover:text-primary"
+                    }`}
+                  />
+                  <span className="truncate">{svc.name}</span>
+                </button>
+              );
+            })}
           </nav>
 
           <div className="ms-3 w-full rounded-10px p-4 bg-surface-light shadow-[0px_4px_10px_0px_#0000001A]">
@@ -97,26 +109,28 @@ const Services = () => {
                   }`}
                 >
                   <div className="flex items-center gap-9 p-4 mb-4 bg-[#D2E2D9] rounded-10px">
-                    <div className="size-20 rounded-full bg-primary center_flex  shadow-[0px_0px_17.8px_0px_#00000040] max-md:size-auto ">
-                      <span
-                        className={`${service.icon} size-10 text-white max-md:scale-75 max-md:size-auto `}
-                      ></span>
+                    <div className="size-20 rounded-full bg-primary center_flex shadow-[0px_0px_17.8px_0px_#00000040] max-md:size-auto">
+                      <Icon
+                        icon={formatIcon(service.icon)}
+                        className="text-white size-10"
+                      />
                     </div>
 
                     <div>
                       <h6 className="font-semibold text-22px mb-1">
                         {service.name}
                       </h6>
-                      <p className="font-normal text-14px ">
+                      <p className="font-normal text-14px">
                         {service.description}
                       </p>
                     </div>
                   </div>
+
                   <h5 className="font-semibold text-22px mb-2">
                     {t("what_is_included")}
                   </h5>
-                  <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2  mb-8">
-                    {/* loop here for service contents */}
+
+                  <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-2 mb-8">
                     {Array.isArray(service.contents) &&
                     service.contents.length > 0 ? (
                       service.contents.map((content) => (
@@ -124,7 +138,10 @@ const Services = () => {
                           key={content.id ?? content.name}
                           className="flex items-center gap-3"
                         >
-                          <span className="icon-[mdi--check-circle] text-primary size-6"></span>
+                          <Icon
+                            icon="mdi:check-circle"
+                            className="text-primary size-6"
+                          />
                           <p className="text-base text-secondary-dark">
                             {content.name}
                           </p>
@@ -135,61 +152,39 @@ const Services = () => {
                     )}
                   </div>
 
-                  <div className="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8 ">
+                  <div className="bg-[#F2F2F2] p-4 rounded-15px flex items-center flex-wrap justify-center gap-8">
                     {service.features.length > 0 ? (
-                      <>
-                        <div className="px-11">
-                          <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                            <span
-                              className={`icon-[mdi--clock] size-8 text-white`}
-                            ></span>
+                      service.features.slice(0, 3).map((feat, i) => (
+                        <div className="px-11" key={i}>
+                          <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto shadow-[0px_0px_17.8px_0px_#00000040]">
+                            <Icon
+                              icon={
+                                ["mdi:clock", "mingcute:star-fill", "mdi:leaf"][
+                                  i
+                                ]
+                              }
+                              className="text-white size-8"
+                            />
                           </div>
                           <p className="font-semibold text-18px text-center">
-                            {service.features[0]?.name}
+                            {feat.name}
                           </p>
                           <p className="font-normal text-14px text-center text-secondary-dark">
-                            {service.features[0]?.description}
+                            {feat.description}
                           </p>
                         </div>
-
-                        <div className="px-11">
-                          <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                            <span
-                              className={`icon-[mingcute--star-fill] size-8 text-white`}
-                            ></span>
-                          </div>
-                          <p className="font-semibold text-18px text-center">
-                            {service.features[1]?.name}
-                          </p>
-                          <p className="font-normal text-14px text-center text-secondary-dark">
-                            {service.features[1]?.description}
-                          </p>
-                        </div>
-
-                        <div className="px-11">
-                          <div className="size-14 rounded-full bg-primary mb-2 center_flex m-auto  shadow-[0px_0px_17.8px_0px_#00000040]">
-                            <span
-                              className={`icon-[mdi--leaf] size-8 text-white`}
-                            ></span>
-                          </div>
-                          <p className="font-semibold text-18px text-center">
-                            {service.features[2]?.name}
-                          </p>
-                          <p className="font-normal text-14px text-center text-secondary-dark">
-                            {service.features[2]?.description}
-                          </p>
-                        </div>
-                      </>
+                      ))
                     ) : (
                       <p className="text-secondary-dark">{t("no_features")}</p>
                     )}
                   </div>
+
                   <Link
                     to={`/service/${service.id}`}
                     className="btn btn-primary w-full h-14 rounded-55px font-semibold text-base mt-8"
                   >
                     {t("book_now")}
-                    <span className="icon-[mdi--arrow-right] ml-2"></span>
+                    <Icon icon="mdi:arrow-right" className="ml-2" />
                   </Link>
                 </div>
               ) : null
