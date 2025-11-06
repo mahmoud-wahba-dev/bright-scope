@@ -32,8 +32,11 @@ const ServiceDetails = () => {
   useEffect(() => {
     const fetchServiceDetails = async () => {
       try {
-        const response = await apiHelper.get(`services/services/${id}`);
+        const response = await apiHelper.get(`services/services/${id}`, {
+          publicRequest: true,
+        });
         const data = response.data;
+
         setServiceDetails(data);
       } catch (error) {
         // Failed to load service details; show user-facing message
