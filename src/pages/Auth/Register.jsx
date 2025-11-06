@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useForm, Controller } from "react-hook-form";
@@ -12,7 +11,6 @@ import "react-phone-input-2/lib/style.css";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-// ✅ Validation schema with Zod
 const schema = z
   .object({
     full_name: z.string().min(3, "Full name must be at least 3 characters"),
@@ -20,126 +18,91 @@ const schema = z
     phone: z
       .string()
       .optional()
-      .or(z.literal("")) // ✅ Handle undefined/empty
-      .refine((val) => val && val.length >= 8, {
+      .refine((val) => !val || val.replace(/\D/g, "").length >= 9, {
         message: "Phone number must be at least 9 digits",
       }),
-    password: z
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .nonempty("Password is required"),
-    confirmPassword: z.string().nonempty("Confirm Password is required"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Confirm Password is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
-const Register = () => {
+export default function Register() {
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) navigate("/");
-  }, [navigate]);
-  const { login } = useAuth();
+  const { login, isAuthenticated, loading } = useAuth();
   const { t } = useTranslation();
-
-  // password visibility toggles
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // ✅ setup form
+  // ✅ Redirect if already logged in
+  useEffect(() => {
+    if (!loading && isAuthenticated) navigate("/");
+  }, [isAuthenticated, loading, navigate]);
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
+  } = useForm({ resolver: zodResolver(schema) });
 
-  // ✅ form submission handler
   const onSubmit = async (data) => {
     try {
       const payload = {
         name: data.full_name,
         email: data.email,
-        phone: data.phone,
+        phone: data.phone || "",
         password: data.password,
         password2: data.confirmPassword,
       };
-      const response = await apiHelper.post("/auth/register/", payload);
 
+      const response = await apiHelper.post("/auth/register/", payload);
       const { tokens, user, message } = response.data;
       const access = tokens?.access;
 
       if (!access) {
-        notyf.error("Registration failed: no access token returned from server.");
+        notyf.error("Registration failed: missing access token from server.");
         return;
       }
 
-      // Log user in immediately after registration (AuthContext will persist using cookies)
+      // ✅ Register + auto login
       login(user, access);
-
-      // Ensure token stored in cookie
-      const storedToken = Cookies.get("token");
-      if (!storedToken) {
-        notyf.error("Registration failed: unable to store authentication token.");
-        return;
-      }
 
       notyf.success(message || "Registration successful!");
       navigate("/");
     } catch (error) {
-      // في حالة الخطأ من الباك
-      const details = error.response?.data?.details;
+      const data = error.response?.data;
+      let errMsg =
+        data?.details ||
+           data?.details.phone[0] ||
+        data?.detail ||
+        data?.message ||
+        data?.error ||
+        (typeof data === "object"
+          ? Object.values(data)?.[0]
+          : "Registration failed. Try again.");
 
-      // نظهر فقط أول error من كل المدخلات (أو السيرفر)
-      let firstError = null;
-      if (details && typeof details === "object") {
-        Object.entries(details).some(([field, messages]) => {
-          if (Array.isArray(messages) && messages.length > 0) {
-            firstError = messages[0];
-            return true;
-          } else if (typeof messages === "string") {
-            firstError = messages;
-            return true;
-          }
-          return false;
-        });
-      }
-      if (firstError) {
-        notyf.error(firstError);
-      } else {
-        notyf.error(
-          error.response?.data?.error ||
-            error.response?.data?.message ||
-            "Registration failed. Please try again."
-        );
-      }
+      notyf.error(errMsg);
     }
   };
 
-  // ✅ error handler for form validation
   const onError = (formErrors) => {
-    // نظهر فقط أول error بدلاً من الطباعة المتسلسلة
-    const firstErrMsg =
-      Object.values(formErrors).map((err) => err?.message).find(Boolean);
-    if (firstErrMsg) {
-      notyf.error(firstErrMsg);
-    }
+    const firstErr = Object.values(formErrors)[0]?.message;
+    if (firstErr) notyf.error(firstErr);
   };
 
   return (
     <section className="my-7 md:my-14">
-      <div className="container ">
+      <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 pt-6 gap-6 min-h-[calc(100vh-88px)]">
-          {/* Form side */}
+          {/* Left (form) */}
           <div className="max-md:order-1">
             <div className="flex h-auto items-center justify-center xl:pt-4 max-md:pt-12">
               <div className="xl:w-[80%] w-[90%] flex items-center justify-center xl:px-6">
                 <div className="w-full bg-surface-light shadow-[0_0_20px_0_#00000040] space-y-6 rounded-30px p-6 lg:p-8">
-                    <div className="text-center">
+                  <div className="text-center">
                     <div className="flex justify-center mb-2">
                       <img
                         src="/assets/imgs/global/logo_auth.svg"
@@ -159,6 +122,7 @@ const Register = () => {
                     onSubmit={handleSubmit(onSubmit, onError)}
                     noValidate
                   >
+                    {/* Full name */}
                     <div>
                       <label
                         className="label-text font-medium mb-1.5"
@@ -181,6 +145,7 @@ const Register = () => {
                       )}
                     </div>
 
+                    {/* Email */}
                     <div>
                       <label
                         className="label-text font-medium mb-1.5"
@@ -203,6 +168,7 @@ const Register = () => {
                       )}
                     </div>
 
+                    {/* Phone */}
                     <div>
                       <label
                         className="label-text font-medium mb-1.5"
@@ -213,21 +179,17 @@ const Register = () => {
                       <Controller
                         name="phone"
                         control={control}
-                        rules={{ required: "Phone number is required" }}
                         render={({ field }) => (
                           <PhoneInput
                             {...field}
-                            country={"ae"} // 🇦🇪 Default to UAE
-                            enableSearch={true}
-                            disableDropdown={false}
+                            country="ae"
+                            enableSearch
                             inputClass="!w-full !h-10"
-                            inputProps={{
-                              name: "phone",
-                              required: true,
-                              autoFocus: false,
-                            }}
+                            inputProps={{ name: "phone" }}
                             placeholder={t("auth.placeholders.phone")}
-                            onChange={(value) => field.onChange("+" + value)}
+                            onChange={(val) =>
+                              field.onChange(val ? "+" + val : "")
+                            }
                           />
                         )}
                       />
@@ -238,6 +200,7 @@ const Register = () => {
                       )}
                     </div>
 
+                    {/* Password */}
                     <div>
                       <label
                         className="label-text font-medium mb-1.5"
@@ -251,18 +214,24 @@ const Register = () => {
                           id="userPassword"
                           type={showPassword ? "text" : "password"}
                           placeholder={t("auth.placeholders.password")}
-                          autoComplete="new-password"
                           {...register("password")}
                           disabled={isSubmitting}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword((s) => !s)}
-                          className="block cursor-pointer"
-                          aria-label={showPassword ? "Hide password" : "Show password"}
+                          className="cursor-pointer"
                         >
-                          <span className={`${showPassword ? "block" : "hidden"} icon-[tabler--eye] size-5 shrink-0`}></span>
-                          <span className={`${showPassword ? "hidden" : "block"} icon-[tabler--eye-off] size-5 shrink-0`}></span>
+                          <span
+                            className={`${
+                              showPassword ? "block" : "hidden"
+                            } icon-[tabler--eye] size-5 shrink-0`}
+                          ></span>
+                          <span
+                            className={`${
+                              showPassword ? "hidden" : "block"
+                            } icon-[tabler--eye-off] size-5 shrink-0`}
+                          ></span>
                         </button>
                       </div>
                       {errors.password && (
@@ -272,6 +241,7 @@ const Register = () => {
                       )}
                     </div>
 
+                    {/* Confirm Password */}
                     <div>
                       <label
                         className="label-text font-medium mb-1.5"
@@ -285,18 +255,24 @@ const Register = () => {
                           id="confirmPassword"
                           type={showConfirmPassword ? "text" : "password"}
                           placeholder={t("auth.placeholders.confirm_password")}
-                          autoComplete="new-password"
                           {...register("confirmPassword")}
                           disabled={isSubmitting}
                         />
                         <button
                           type="button"
                           onClick={() => setShowConfirmPassword((s) => !s)}
-                          className="block cursor-pointer"
-                          aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                          className="cursor-pointer"
                         >
-                          <span className={`${showConfirmPassword ? "block" : "hidden"} icon-[tabler--eye] size-5 shrink-0`}></span>
-                          <span className={`${showConfirmPassword ? "hidden" : "block"} icon-[tabler--eye-off] size-5 shrink-0`}></span>
+                          <span
+                            className={`${
+                              showConfirmPassword ? "block" : "hidden"
+                            } icon-[tabler--eye] size-5 shrink-0`}
+                          ></span>
+                          <span
+                            className={`${
+                              showConfirmPassword ? "hidden" : "block"
+                            } icon-[tabler--eye-off] size-5 shrink-0`}
+                          ></span>
                         </button>
                       </div>
                       {errors.confirmPassword && (
@@ -325,7 +301,7 @@ const Register = () => {
                     </button>
                   </form>
 
-                  <p className="font-semibold text-14px mt-8 mb-4 text-center ">
+                  <p className="font-semibold text-14px mt-8 mb-4 text-center">
                     {t("auth.already_have")}
                     <Link
                       to="/login"
@@ -339,10 +315,14 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Info side */}
+          {/* Right (info side) */}
           <div className="max-md:order-2">
             <h1 className="font-bold text-48px mb-8">
-              {t("auth.register.info_title_prefix")} <span className="text-primary">{t("auth.register.info_title_highlight")}</span> {t("auth.register.info_title_suffix")}
+              {t("auth.register.info_title_prefix")}{" "}
+              <span className="text-primary">
+                {t("auth.register.info_title_highlight")}
+              </span>{" "}
+              {t("auth.register.info_title_suffix")}
             </h1>
             <p className="font-normal text-18px mb-8 lg:w-[70%]">
               {t("auth.register.info_subtitle")}
@@ -355,7 +335,7 @@ const Register = () => {
             ].map((key) => (
               <div key={key} className="flex items-center gap-2 mb-4">
                 <div className="size-10 center_flex rounded-full bg-primary text-white">
-                  <div className="border-2 border-white rounded-full center_flex ">
+                  <div className="border-2 border-white rounded-full center_flex">
                     <span className="icon-[mdi--check] size-5 font-bold"></span>
                   </div>
                 </div>
@@ -367,6 +347,4 @@ const Register = () => {
       </div>
     </section>
   );
-};
-
-export default Register;
+}

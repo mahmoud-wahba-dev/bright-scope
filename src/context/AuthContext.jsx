@@ -1,16 +1,14 @@
+// src/context/AuthContext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(Cookies.get("token") || null);
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user from localStorage when app starts
   useEffect(() => {
     const storedUserJson = Cookies.get("user");
     const storedUser = storedUserJson ? JSON.parse(storedUserJson) : null;
@@ -19,56 +17,60 @@ export const AuthProvider = ({ children }) => {
     if (storedUser && storedToken) {
       setUser(storedUser);
       setToken(storedToken);
+    } else {
+      setUser(null);
+      setToken(null);
     }
     setLoading(false);
   }, []);
 
-  // Login function
-  // Login function
-  const login = (userData, tokenValue, remember) => {
-    // Use cookies for persistence. If remember is truthy set an expiry (30 days).
-    try {
-      if (remember) {
-        Cookies.set("user", JSON.stringify(userData), { expires: 30 });
-        Cookies.set("token", tokenValue, { expires: 30 });
-      } else {
-        // Session cookie (no expires) will be removed when browser is closed
-        Cookies.set("user", JSON.stringify(userData));
-        Cookies.set("token", tokenValue);
-      }
-    } catch (e) {
-      // If cookies can't be set for some reason, fallback to in-memory only
-      console.warn("Failed to set auth cookies", e);
-    }
 
+  const login = (userData, accessToken, remember = false) => {
+    const baseOptions = {
+      path: "/",
+      sameSite: "Lax",
+      secure: window.location.protocol === "https:",
+    };
+
+    // Remember Me = 30 يوم / غير كده = session cookie
+    const cookieOptions = remember
+      ? { ...baseOptions, expires: 30 }
+      : baseOptions;
+
+    Cookies.set("user", JSON.stringify(userData), cookieOptions);
+    Cookies.set("token", accessToken, cookieOptions);
+
+    console.log("✅ Cookies saved:", Cookies.get());
     setUser(userData);
-    setToken(tokenValue);
+    setToken(accessToken);
   };
 
-  // Logout function
+  // ✅ logout function
   const logout = () => {
-    Cookies.remove("user");
-    Cookies.remove("token");
+    Cookies.remove("user", { path: "/" });
+    Cookies.remove("token", { path: "/" });
     setUser(null);
     setToken(null);
-    navigate("/login");
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        token,
-        login,
-        logout,
-        loading,
-        isAuthenticated: !!token,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    token,
+    login,
+    logout,
+    loading,
+    isAuthenticated: !!token,
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-lg text-gray-600">
+        Loading authentication...
+      </div>
+    );
+  }
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Helper hook to use context easily
 export const useAuth = () => useContext(AuthContext);

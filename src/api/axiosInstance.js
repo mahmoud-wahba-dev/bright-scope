@@ -1,58 +1,64 @@
-// src/api/axiosInstance.js
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// Prefer the Vite env var `VITE_API_BASE_URL`, but also accept `VITE_API_URL`
-// for convenience. If neither is set we fallback to an empty string so
-// requests are relative to the current origin and we warn in console.
 const BASE_URL =
   import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || "";
 
-// If env vars are missing we'll keep baseURL empty (requests will be relative to origin).
-
-// Create axios instance
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { "Content-Type": "application/json" },
 });
 
-// Add token to every request
+// ✅ Intercept requests
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Read token from cookie
+    // ⛔ لو الـ request عام (publicRequest = true) متضيفش Authorization
+    if (config.publicRequest) {
+      console.log("🌍 Public request — skipping token");
+      return config;
+    }
+
     const token = Cookies.get("token");
+    console.log("🔍 Token before request:", token);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log("✅ Authorization header added");
+    } else {
+      console.warn("⚠️ No token found in cookies!");
     }
+
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Handle global API errors
+// ✅ Intercept responses
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle 401 Unauthorized
-    if (error.response?.status === 401) {
-      // Allow disabling automatic redirect via env var while debugging
-      const DISABLE_401_REDIRECT = import.meta.env.VITE_DISABLE_401_REDIRECT === "true";
+    const status = error.response?.status;
+    const token = Cookies.get("token");
 
-      // Per-request flag to skip automatic 401 redirect (useful for public endpoints
-      // that intentionally return 401 for unauthenticated users). Consumers can set
-      // `skipAuthRedirect: true` in the request config to avoid redirecting.
-      const skipAuthRedirect = error.config?.skipAuthRedirect === true;
-
-      if (!DISABLE_401_REDIRECT && !skipAuthRedirect) {
-        // Remove token/user from both storages to be safe
-        Cookies.remove("token");
-        Cookies.remove("user");
-        window.location.href = "/login";
-      }
-      // If skipAuthRedirect is true, we let the caller handle the 401 (reject below)
+    // Requests عامة
+    if (error.config?.publicRequest) {
+      console.warn("🌍 Public request failed, skipping redirect");
+      return Promise.reject(error);
     }
+
+    // لو مفيش توكن من الأساس — ضيف رفض بدون حذف الكوكيز
+    if (status === 401 && !token) {
+      console.warn("🔸 401 with no token — guest user");
+      return Promise.reject(error);
+    }
+
+    // لو فيه توكن و الـ backend فعلاً رافض — نعتبرها session منتهية
+    if (status === 401 && token) {
+      console.warn("⚠️ 401 with token — session expired");
+      // ❌ ما تمسحش الكوكيز تلقائي هنا
+      // ممكن مستقبلاً تستخدم refresh token logic هنا
+    }
+
     return Promise.reject(error);
   }
 );

@@ -43,7 +43,8 @@ const Services = () => {
     <section className="my-7 md:my-14">
       <div className="container">
         <h1 className="font-bold text-48px mb-4 text-primary-dark text-center">
-          {t("comprehensive_title_part1")} <span className="text-primary">{t("comprehensive_title_part2")}</span>
+          {t("comprehensive_title_part1")}{" "}
+          <span className="text-primary">{t("comprehensive_title_part2")}</span>
         </h1>
 
         <p className="font-normal text-secondary-dark text-18px text-center mb-8">

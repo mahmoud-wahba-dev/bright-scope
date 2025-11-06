@@ -65,15 +65,8 @@ rounded-61px"
           >
             <img
               className="w-full rounded-[61px]"
-              src={
-                serviceDetails.hero_image &&
-                `${VITE_IMG_BASE_URL}${serviceDetails.hero_image}`
-              }
+              src={`${VITE_IMG_BASE_URL}${serviceDetails.hero_image}`}
               alt="service"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/assets/imgs/services/service_details_img.webp";
-              }}
             />
           </div>
         </div>

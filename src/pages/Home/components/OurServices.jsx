@@ -47,12 +47,14 @@ const servicesitems = [
 const OurServices = () => {
   const { services, loading } = useServices();
   const { t } = useTranslation();
-
   return (
     <>
       <section className="my-28">
         <h1 className="text-4xl font-semibold  text-center mb-2 " id="services">
-          {t("our_premium_services_part1")} <span className="text-primary">{t("our_premium_services_part2")}</span>
+          {t("our_premium_services_part1")}{" "}
+          <span className="text-primary">
+            {t("our_premium_services_part2")}
+          </span>
         </h1>
         <p className="font-normal text-center text-primary-dark mb-8">
           {t("our_services_description")}
@@ -68,7 +70,7 @@ const OurServices = () => {
                 <div className="flex items-center mb-6 gap-4">
                   <div className="bg-primary text-white rounded-lg p-4 size-[70px] ">
                     <span
-                      className={`${item.icon}   size-9.5 text-white font-normal`}
+                      className={`${item.icon} size-9.5 text-white font-normal`}
                     ></span>
                   </div>
                   <div>

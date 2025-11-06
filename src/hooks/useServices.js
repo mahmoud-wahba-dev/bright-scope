@@ -1,26 +1,25 @@
 import { useState, useEffect } from "react";
 import apiHelper from "../api/apiHelper";
 import { notyf } from "../utils/toast";
+import { useAuth } from "../context/AuthContext"; // ✅ أضف ده
 
 export const useServices = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { loading: authLoading } = useAuth(); // ✅ نستخدم حالة الـAuth
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        // Call services endpoint but skip automatic 401 redirect so guest users
-        // don't get redirected to /login by the global interceptor. The hook
-        // will handle unauthenticated responses gracefully.
         const response = await apiHelper.get("services/services/", {
-          skipAuthRedirect: true,
+          publicRequest: true,
         });
+
         setServices(response.data);
+        console.log("services:", response.data);
       } catch (err) {
         console.error("Error fetching services:", err);
-        // If the backend returned 401, show a friendly message to guest users
-        // asking them to sign in instead of the generic error.
         if (err.response?.status === 401) {
           notyf.error("Please sign in to view services.");
         } else {
@@ -32,8 +31,11 @@ export const useServices = () => {
       }
     };
 
-    fetchServices();
-  }, []);
+    // ✅ نمنع التنفيذ إلا بعد ما الـAuthContext يخلص تحميله
+    if (!authLoading) {
+      fetchServices();
+    }
+  }, [authLoading]);
 
   return { services, loading, error };
 };

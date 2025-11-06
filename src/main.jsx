@@ -22,6 +22,8 @@ import Checkout from "./pages/Checkout/Checkout.jsx";
 import Payment from "./pages/Payment/PaymentSuccess.jsx";
 import PaymentSuccess from "./pages/Payment/PaymentSuccess.jsx";
 import PaymentFailed from "./pages/Payment/PaymentFailed.jsx";
+import PrivateRoute from "./pages/PrivateRoute/PrivateRoute.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 const router = createBrowserRouter([
   {
     element: <MasterLayout />,
@@ -34,6 +36,7 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: <Checkout />,
       },
+
       {
         path: "/payment",
         element: <Payment />,
@@ -96,9 +99,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <ErrorBoundary>
+  <ErrorBoundary>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </ErrorBoundary>
-  </StrictMode>
+    </AuthProvider>
+  </ErrorBoundary>
 );

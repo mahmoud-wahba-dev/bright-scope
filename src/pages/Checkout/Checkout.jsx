@@ -5,11 +5,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import apiHelper from "../../api/apiHelper";
 import { notyf } from "../../utils/toast";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Checkout() {
   const { state } = useLocation();
   const navigate = useNavigate();
-
+ const {user}=useAuth()
+ console.log("user",user)
   // 🧩 Retrieve booking from state or session storage
   const sessionBooking = (() => {
     try {
