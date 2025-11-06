@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
-
+import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -212,13 +212,17 @@ const Navbar = () => {
               setIsMobileMenuOpen(!isMobileMenuOpen);
               setIsDropdownOpen(false);
             }}
-            className="text-primary"
+            className="text-primary transition-all"
           >
-            <span
-              className={`icon-[tabler--${
-                isMobileMenuOpen ? "x" : "menu-2"
-              }] size-9 transition-all mt-1`}
-            ></span>
+            {isMobileMenuOpen ? (
+              <X size={29} strokeWidth={2.2} className="transition-transform" />
+            ) : (
+              <Menu
+                size={29}
+                strokeWidth={2.2}
+                className="transition-transform"
+              />
+            )}
           </button>
         </div>
       </nav>
