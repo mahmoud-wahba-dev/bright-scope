@@ -18,7 +18,7 @@ const QuickContact = () => {
   } = useForm({
     defaultValues: {
       full_name: "",
-      phone_number: "",
+      phone_number: user?.phone || "",
       email: "",
       service_type: "",
       message: "",
@@ -92,7 +92,7 @@ const QuickContact = () => {
                   <input
                     id="full_name"
                     type="text"
-                    disabled
+                    readOnly={!!user}
                     placeholder={t("contact_page.quick.placeholder_full_name")}
                     value={user?.name}
                     className="input border-[#CBD5E1] h-10"
@@ -121,16 +121,16 @@ const QuickContact = () => {
                     render={({ field }) => (
                       <PhoneInput
                         {...field}
-                        country={"ae"}
-                        enableSearch={true}
-                       value={user?.phone}
-                       disabled
+                        country="ae"
+                        enableSearch
+                        inputProps={{ readOnly: !!user }}
                         inputClass="!w-full !h-10"
                         placeholder={t("contact_page.quick.placeholder_phone")}
                         onChange={(value) => field.onChange("+" + value)}
                       />
                     )}
                   />
+
                   {errors.phone_number && (
                     <p className="text-error text-sm mt-1">
                       {errors.phone_number.message}
@@ -150,8 +150,8 @@ const QuickContact = () => {
                 <input
                   id="email"
                   type="email"
-                 value={user?.email}
-                 disabled
+                  value={user?.email}
+                  readOnly ={!!user}
                   placeholder={t("contact_page.quick.placeholder_email")}
                   className="input border-[#CBD5E1] h-10"
                   {...register("email", {
