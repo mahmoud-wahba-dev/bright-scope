@@ -159,7 +159,7 @@ const HeroSlider = () => {
                         : "opacity-0 pointer-events-none"
                     }`}
                   >
-                    <p className="text-base font-normal text-white mb-4 max-sm:text-[13px] max-sm:mb-2">
+                    <p className="text-base font-normal text-white mb-6 max-sm:text-[13px] max-sm:mb-6">
                       {slide.category}
                     </p>
 

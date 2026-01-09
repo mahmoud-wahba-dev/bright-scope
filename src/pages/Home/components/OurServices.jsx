@@ -83,7 +83,7 @@ const OurServices = () => {
                       {item.hero_title}
                     </h3>
                     <p className="text-primary font-semibold text-base">
-                      Starting from {item.start_price}
+                      {t("starting_from")} {item.start_price}
                     </p>
                   </div>
                 </div>

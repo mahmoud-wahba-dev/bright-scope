@@ -6,7 +6,7 @@ const BrightScopeDifference = () => {
 
   return (
     <section className="bg-gradient-to-r from-[#0B7A3B] to-[#096732] rounded-20px mb-44">
-      <div className="px-6 md:px-32 py-14  flex gap-6 items-center max-md:flex-wrap">
+      <div className="px-6 md:px-32 py-14  flex gap-6 items-center max-md:flex-wrap max-sm:justify-center">
         <div className="min-w-[120px]">
           <img
             className=""

@@ -25,9 +25,8 @@
   "our_premium_services_part2": "Premium",
   "our_services_description": "Discover our comprehensive range of cleaning and pest control services, each designed to meet your specific needs with professional excellence.",
   "loading_services": "Loading services...",
-  "hero_title": "Dubai’s Trusted Cleaning & Pest Control Experts — Fresh Homes, Healthy Spaces.",
+  "hero_title": "Trusted Cleaning & Pest Control Experts in Dubai - Clean, sanitized, and safe homes — free from diseases and pests - Bright Scope – A shield that protects your family",
   "hero_subtitle": "WE LET YOUR HOME BREATHE SAFETY",
-
   "home_cleaning": "Home Cleaning",
   "pest_control": "Pest Control",
   "office_cleaning": "Office Cleaning",
@@ -61,9 +60,10 @@
   "feature_booking_highlight": "< 60 Seconds",
   "feature_booking_description": "Lightning-fast booking through our form or WhatsApp in just one minute",
 
-  "brightscope_difference_heading": "The Bright Scope Difference– Where Clean Meets Comfort",
-  "brightscope_difference_paragraph": "At Bright Scope, we go beyond cleaning — we bring clarity, comfort, and care into every home and office.",
-  "company_name": "Bright Scope UAE",
+  "brightscope_difference_heading": "Bright Scope – Cleaning That Protects, Pest Control That Creates Safety",
+  "brightscope_difference_paragraph": "At Bright Scope, we believe that a healthy environment cannot be achieved through cleaning alone, nor through pest control by itself. Our concept is built on combining professional cleaning with pest control to create a clean, safe, and healthy environment that protects your home and your family. We use approved materials and work according to strict safety standards because your comfort and health are the foundation of every service we provide.",
+  "company_name": "برايت سكوب UAE",
+
 
   "why_choose_us_title_prefix": "Why",
   "why_choose_us_title_highlight": "Choose Us?",
@@ -140,10 +140,22 @@
     "titlePrefix": "Our",
     "titleHighlight": "People",
     "subtitle": "The heart of Bright Scope - our professional, trained, and dedicated team members",
-    "item1": { "title": "Background Verified", "description": "Every team member undergoes thorough background checks" },
-    "item2": { "title": "Professionally Trained", "description": "Continuous training programs ensure expertise" },
-    "item3": { "title": "Eco-Conscious", "description": "Committed to sustainable and safe practices" },
-    "item4": { "title": "Customer-First", "description": "Dedicated to exceeding customer expectations" }
+    "item1": {
+      "title": "Background Verified",
+      "description": "Every team member undergoes thorough background checks"
+    },
+    "item2": {
+      "title": "Professionally Trained",
+      "description": "Continuous training programs ensure expertise"
+    },
+    "item3": {
+      "title": "Eco-Conscious",
+      "description": "Committed to sustainable and safe practices"
+    },
+    "item4": {
+      "title": "Customer-First",
+      "description": "Dedicated to exceeding customer expectations"
+    }
   },
 
   "peace": {
@@ -224,12 +236,10 @@
     "default_office_address": "Business Bay, Dubai, UAE Building XYZ, Office 123"
   },
 
-
   "social": {
     "titlePrefix": "Follow Us On",
     "titleHighlight": "Social Media"
-  }
-  ,
+  },
   "auth": {
     "login": {
       "title_prefix": "Welcome Back to",
@@ -295,5 +305,6 @@
     "back_to_login": "Back to Login",
     "show_password": "Show password",
     "hide_password": "Hide password"
-  }
+  },
+  "starting_from": "Starting from"
 }
