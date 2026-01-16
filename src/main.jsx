@@ -11,6 +11,7 @@ import Services from "./pages/Services/Services.jsx";
 import About from "./pages/About/About.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
+import BookingWizard from "./pages/Booking/BookingWizard.jsx";
 import ServiceDetails from "./pages/ServiceDetails/ServiceDetails.jsx";
 import AuthLayout from "./layout/AuthLayout.jsx";
 import Login from "./pages/Auth/Login.jsx";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         element: <Services />,
       },
       { path: "/services/:category?", element: <Services /> }, // ✅ from home to services category
+      {
+        path: "/booking/:serviceType?",
+        element: <BookingWizard />,
+      },
 
       {
         path: "/service/:id",
